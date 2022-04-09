@@ -1,0 +1,18 @@
+\documentclass{book}
+
+\usepackage{main}		%dołączenie pliku main.sty
+\usepackage{subfiles}	%pakiet do łączenia plików
+\usepackage{graphicx}	%pakiet do wstawiania obrazów
+\usepackage{float}		%pakiet m.in. możliwości lepszego formatowania obrazów
+\graphicspath{ {./images/} }
+\usepackage{wrapfig}
+
+
+\begin{document}
+\tableofcontents
+\addcontentsline{toc}{section}{Contents}
+
+\subfile{ch1/ch1}
+
+
+\end{document}
