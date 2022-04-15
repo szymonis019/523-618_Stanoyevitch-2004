@@ -85,7 +85,6 @@ $\triangle s\thickapprox \triangle x$
 
 \begin{equation}
 Tu_{xx}+q =\rho u_u ,u=u()x,t 
-\label{eq:eps}
 \end{equation}
 
 
@@ -151,6 +150,7 @@ $$u_x = u_\xi \xi_x + u_\eta \eta_x = u_\xi u_\eta$$
 u_t =u_\xi \xi_t +u_\eta \eta_t =-cu_\xi+cu_\eta
 \label{eq:eps}
 \end{equation}
+\\
 \\
 \\
 \\
@@ -1199,6 +1199,292 @@ end
 To see that the numerical solution is still badly unstable, we need only look at the 
 middle portion of the last six rows of the matrix (corresponding to the time range: 
 $0 \leqslant t \leqslant .5$):
+
+
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+        -45.2 & 416.8 & -842.8 & 1091.2 & -1008.8 & 920 & -1008.8 & 1091.2 & -842.8 & 416.8 & -45.2 \\ \hline
+        5 & -19.2 & 71 & -84.8 & 77.8 & -84.8 & 71 & -19.6 & 5 & 616 &-288\\ \hline
+        4 & 4.8 & -0/8 & 12.8 & -0.4 & 7.2 & -0.4 & 12.8 & -0.8 & 4.8 & 4  \\ \hline
+        3 & 3.6 & 4.2 & 3.2 & 4.6 & 4.4 & 4.6 & 3.2 & 4.2 & 3.6 & 3  \\ \hline
+        2 & 2.4 & 2.8 & 3.2 & 3.2 & 3.2 & 3.2 & 3.2 & 2.8 & 2.4 & 2 \\ \hline
+        1 & 1.2 & 1.4 & 1.6 & 1.8 & 2 & 1.8 & 1.6 & 1.4 & 1.2 & 1 \\ \hline
+    \end{tabular}
+\end{table}
+Indeed, this shows that even at time level t = 0.5, the profile oscillates rapidly 
+between $\pm$1000.
+\\
+\\
+Part (c): Since k is now half of h, we have $\mu = 1$, so that (23) takes the following form:  
+$$u_{i,j+1}=u_{i,j+1}+u_{i,j-1}-u_{i,j-1}$$
+Since $h = 1$, we get $x_0 = -12, x_{-l2} = 0, x_{25} = 12$ as in part (a), and from (10) (exact solution), we may write
+$u_{i,0}
+	\begin{cases}
+		2, ~~i=12 \\
+		0, ~~othervise
+	\end{cases}$ and
+$u_{i,0}
+	\begin{cases}
+		1, ~~i=12\pm 1 \\
+		0, ~~othervise
+	\end{cases}$
+Note that  by (23), the set of indices with nonzero w-values can advance only one index to the left/right with each new time level. The construction of the $11 \times 25$ matrix of u-values is done as before and the relevant entries are displayed below. 
+\begin{lstlisting}
+U=zeros(ll,25);U(11,12)=2; U(10,[11 13])=1; 
+for j=10:-l:2 
+	for i=2:24 
+		U(j-l,i)=U(j,i+l)+U(jf i-l)-U(j+l,i); 
+	end 
+end 
+\end{lstlisting}
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+       1&0&0&0&0&0&0&0&0&0&0&0&0&0&0&0&0&0&0&0&1\\ \hline
+       0&1&0&0&0&0&0&0&0&0&0&0&0&0&0&0&0&0&0&1&0\\ \hline
+       0&0&1&0&0&0&0&0&0&0&0&0&0&0&0&0&0&0&1&0&0\\ \hline
+       0&0&0&1&0&0&0&0&0&0&0&0&0&0&0&0&0&1&0&0&0\\ \hline
+       0&0&0&0&1&0&0&0&0&0&0&0&0&0&0&0&1&0&0&0&0\\ \hline
+       0&0&0&0&0&1&0&0&0&0&0&0&0&0&0&1&0&0&0&0&0\\ \hline
+       0&0&0&0&0&0&1&0&0&0&0&0&0&0&1&0&0&0&0&0&0\\ \hline
+       0&0&0&0&0&0&0&1&0&0&0&0&0&1&0&0&0&0&0&0&0\\ \hline
+       0&0&0&0&0&0&0&0&1&0&0&0&1&0&0&0&0&0&0&0&0\\ \hline
+       0&0&0&0&0&0&0&0&0&1&0&1&0&0&0&0&0&0&0&0&0\\ \hline
+       0&0&0&0&0&0&0&0&0&0&2&0&0&0&0&0&0&0&0&0&0\\ \hline
+    \end{tabular}
+\end{table}
+Note the rather surprising results! The result of part (c) quite well represents the actual solution (up to the resolution on the jc-grid). The results of parts (a) and (b) were totally unstable, and despite the fact that the grid of part (b) was much finer (in both variables) than that for part (c), the grid for part (c) turned out to give a much more stable method. It turns out that the relative ratio of $h$ and $k$, not their actual sizes, is what will make or break stability. Such remarkable phenomena did not occur when we applied finite difference methods to elliptic problems in the last chapter. 
+\\
+
+The finite difference methods shown above can be proved to converge to the 
+exact solution of the wave problem (11) (as the partitions become more and more 
+refined) provided that, in addition to the required differentiability assumptions, 
+the following Courant-Friedrichs-Levy (CFL) condition holds: 
+\begin{equation}
+	\mu \equiv ck/h\leqslant1.
+\end{equation}
+If this condition is violated (i.e., if $\mu > 1$), examples can be constructed where (as in Example 12.4), although all other differentiability assumptions are satisfied, the finite difference approximations will not converge to the exact solution, even as the mesh sizes of both variables tend to zero! In fact when $\mu > 1$, the method is unstable in the sense that errors made at each time stage of the process can significantly affect the subsequent time numerical values. For complete details and proofs on these matters we refer to Section 9.3.1 of [IsKe-66]. The exercises will include an outline of the proof and in the next section we will give some 
+details of the analogous theory for the heat equation.
+\\
+
+We give here a nontechnical explanation of why such instability can arise. From (23), the numerical values at a new time level at x. depend on those of previous two levels, which lie at most one horizontal step to the left and right of $x_i$. From this we can determine the "numerical interval of dependence" of a grid point $(x_i>t_{j+1})$, analogously to how we defined the interval of dependence of the exact solution (see Figure 12.12). From Figure 12.12, we can see how violation of the  condition can lead to instability of the numerical method. What this amounts to is that the size of the t-steps (= k) is too large relative to the size of the x-steps  h). This means that the numerical interval of dependence (shown by the black double arrowed segment) for ($x_i,y_{j+1}$) is smaller than the theoretical interval of dependence (green arrowed segment). We know from the theory in thelast section that the numerical interval of dependence thus does not take enough information into account to properly formulate the approximations. This can lead to catastrophic results, as we have seen. The diagonally upward black arrows indicate flows of information in the finite difference scheme.
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.6\textwidth]{ch12_12}
+   \caption{Illustration of the problem when the Courant-Friedrichs-Levy (CFL) condition is violated}
+   \label{fig:ch12_12}
+\end{figure}In both parts (a) and (b) of Example 12.4, we had $h = k$, so that (since $c = 2$),  $\mu= $ and the Courant-Friedrichs-Levy conditionis violated. We can see that the numerical wave profiles propagate at only $h$ units (to left and right) for each k unit time level increase. Thus, the numerical profiles cannot keep up with the actual wave propagation (two A units left and right of space for each k unit of time) and the scheme goes haywire. In part (c), however,$ k = h/2$ and now the numerical scheme can keep up, and it does so quite well in that example. It turns out that when the problem is a smooth one, taking step sizes so that $\mu = 1$ can greatly enhance the accuracy of the scheme. It seems quite surprising that for a given (stable) choice of A and $k$, fixing $h$ and decreasing $k$ can sometimes have a detrimental effect on the numerical solution. Shortly, we will introduce an implicit scheme that has better stability properties. 
+\\
+
+Recall that the finite difference scheme for elliptic PDEs that we used in the last chapter was implicit and very stable; also, in Part II, we saw that implicit schemes for ODE problems, although more difficult to work with, had better stability properties than explicit schemes. This is a general rule: Implicit schemes are more stable than explicit schemes in numerical differential equations. One advantage of explicit schemes, however, is that many are easily adapted to effectively solve nonlinear problems (provided stability requirements are met). Although we will not enter into any detailed discussion of stability issues for nonlinear PDEs, we will occasionally try to adapt some of our linear schemes to solving nonlinear problems. Often this is what is done in practice. Indeed, a nonlinear problem, when looked at locally (in a small portion of the domain), can be approximated by a linear problem and the latter one dealt with according to linear schemes. For more on nonlinear PDEs, we cite the reference [Log-94]. A more advanced treatment is given in [Smo-83].
+\\
+
+Numerical methods for nonlinear PDEs is an extremely active area of mathematical research. We caution the reader that many reasonable-looking finite difference schemes may do poorly for a given nonlinear problem. In general those that are based on conservation laws (physical principles) are the most successful. This seems to imply that a purely mathematical approach to the numerical solution of nonlinear PDEs is not sufficient; an additional requirement is a certain knowledge of the physical principles governing the phenomena that are modeled by the PDEs. For a detailed investigation of such issues, we refer to the two nvolume set [Tho-95a],[Tho-95b]. The book [Dur-99] gives a detailed treatment of various numerical methods for wave (hyperbolic) problems. A particular nonlinear one-dimensional wave equation with a conservation law based finite difference method is nicely examined in [StVa-78].
+\\
+
+We now proceed to write a function M-file that will apply the above finite difference scheme to solve a more general version of the wave problem (11) which allows a certain nonlinearity in the PDEs. Specifically, we allow the ends of the wave to have time-dependent variable heights and we allow the coefficient c (wave speed) to depend on /, JC, and/or u. The former conditions mean that we allow forced control on each of the string ends; the more general assumption on c corresponds physically to having a string whose characteristics are not uniform in x (e.g., it could be thicker in some places than in others), are time dependent (e.g., it could weaken or strengthen with time), and even depend on the current position and slope of the string (e.g., the properties of the string may weaken, depending on its composition, in areas where there is a steep slope stretch.) 
+\\
+\\
+In Program 12.1, the main change will be that when we use (29), we need take note of the fact that $\mu -ck/h$ is now no longer (necessarily) constant:  $\mu \mu_{i,j} =c(t_j,x_i,u_{ij},(u_x)_{ij})k/h$. 
+In the fourth argument of c we use the centered difference approximation: $(u_x)_{ij}\approx [u_{i,j}-u_{i-1,j}]/2h$. The resulting  (23) will still be an explicit one. 
+\\
+\\
+PROGRAM 12.1: Function M-file for solution of the following wave problem by the finite 
+difference method,
+\footnote{Although  we have not yet made explicit mention of the incorporation of boundary conditions into 
+finite difference schemes for the wave equation, this is a rather obvious extension of ideas presented in 
+the previous chapter. Program 12.1 provides an example of such a feature.}
+
+\begin{equation}
+	\begin{cases} 
+	(PDE) u_n=c(t,x,u,u_x)^2 u_{xx}, ~~0<x<L,~0<t< \infty, ~~u=u(x,t) \\ 
+	(BCs)
+	\begin{cases} 
+	u(x,0)=\phi (x), u_t(x,0)=v(x)\\
+	u(x,t)=A(t), ~u(L,t)=B(t)
+	\end{cases}
+	0<x<L, 0\leqslant t< \infty 
+\end{cases}
+\end{equation}
+This program uses the improved approximation (29) for the level-one time values that work better under greater differentiability hypotheses on the initial data. A more basic program, which uses (27) in place of (29), is left to the following exercise for the reader; it is recommended over this one in case the initial conditions possess singularities. The program assumes that the Courant-Friedrichs-Levy condition has been checked to be satisfied in the region under consideration. 
+
+\begin{lstlisting}
+function [x, t, U] = onedimwave(phi, nu, L, A, B, T, N, M, c) 
+solves the one-dimensional wave problem u tt - c(t,x,u,u x)N2*u 
+Input variables: phi-phi(x) - initial wave profilo function 
+nu=nu(x) = initial wave velocity function, L = length of string, 
+= Alt) height function of left end of .string u(0,t)=A(t), B=E(t) 
+he i gnt function for right end of string u(L, t)-B, T~ final time 
+which solution will be computed, N - number of internal x-grid 
+values, M - number of internal t-grid values, c -c(t,x,u,u x) -
+speed of wave. Functions of the indicated variables must be 
+stored as (either inline or M-file) functions with the same 
+variables, in the same order. 
+Output variables: t - time grid row vector (starts at t-0, ends 
+t^T, has M+2 equally spaced values) , x - space grid row vector, 
+(M*2) by (M*2) matrix of solution approximations at corresponding 
+grid points; y grid will correspond to first (row) indices of U, 
+grid values to second (column) indices of U. 
+CAUTION: For stability of the method, the Couiant-Friedrichs-Levy 
+condition should hold: c(x,t,u,u x)(T/L)(N+l)/(M+l)<1 
+
+h = L/(N+1); k = T/(M+1); 
+\end{lstlisting}
+
+\begin{lstlisting}
+U=zeros(M+2,N+2); x=0:h:L; t=0:k:T; 
+	 Recall matrix indices must start at 1. Thus the 
+	 matrix will always be one more than the corrospcn 
+	 were used in theoretical development. 
+	 
+	Assign 1 ef t. and r ight i;i r i.oh 1 et boundar y va 1 ues . 
+U(:,l)=feval(A,t)f ; U(:,N+2)=feval (B,t) '; 
+
+	Assign initial time t=0 values and next step t = k v 
+for i=2:(N+l) 
+	U(l,i)=feval(phi,x(i)); 
+	mu(i)=k*feval(c,0,x(i), U(l,i),(feval(phi,x(i+1)) 
+l)))/2/h)/h; 
+	U(2,i) = (l-mu(i) A2)*feval(phi,x(i) ) +mu (i) A 2/2* (feval(phi,x(i-1))+
+...
+	feval(phi,x(i+l))) + k*feval(nu,x(i));  	 
+end 
+
+	Assign values at interior grid points 
+for j=3:(M+2) 
+for i=2:(N+l) 
+	mu(i)=k*feval(c,t(j),x(i),U(j-l,i), (U (j-1, i + 1) -U ( 
+	First form needed tridiagonai matri 
+	Tri = diag(2*(l-mu(2:N+l).A 2)) + diag(mu(3:N+1).A 
+diag(mu(2:N). A 2 , 1) ; 
+	Now perform the matrix multiplications to iterat 
+	solution values for increasing time levels. 
+	U(j,2: (N+l))*(Tri*(U(j-l,2:(N+l)") ')) '-U(j-2,2: (N+ 
+	U(j,2)=U(j,2)+mu(2) A2*feval(A,t(j-1)) ; 
+	U(j,N+l)=U(j,N+l)+mu(N+l)A 2*feval(B,t(j-l)); 
+end 
+end 
+\end{lstlisting}
+As was implicit in Program 12.1, we point out that the Courant-Friedrichs-Levy (CFL) condition can be expressed using the input parameters in the above M-flle in the following way: 
+\begin{equation}
+	\mu=c(t,x,u,u_x)\dfrac{T}{•L}(\dfrac{N+1}{M+1})\leqslant 1
+\end{equation}
+The actual M-file is quite short. In the next example we will test both the accuracy  runtime of this program with a wave problem with nicely smooth input data and whose exact solution is available to compute errors. It will also demonstrate some interesting pathologies when played against the Courant-Friedrichs-Levy condition. 
+\\
+\\
+\textbf{EXAMPLE 12.5:} Use Program 12.1 to solve the following wave problem on the time interval $0 \leqslant t \leqslant 2$: 
+$$\begin{cases} 
+	(PDE) U_{tt}=u_{xx}, ~~~~~~~~~~~~~~~~~ 0<x\pi , 0<t<\infty, u=u(x,t)\\ 
+	(BCs)
+	\begin{cases} 
+	u(x,0)=sin x, u_t(x,0)=0\\
+	u(x,t)0, ~~ u(\pi , 0)=0
+	\end{cases}
+	0<x<\pi, 0\leqslant t< \infty 
+\end{cases}$$
+using the following grid sizes. In each case, compare the results with the actual solution $u(x,t) = cos t sin x$ on the indicated time levels. If the graphs are too close to discern differences, compute the maximum error numerically.
+\\
+(a) $N= 10, M= 15$. Note that this set of parameters slightly violates the Courant-Friedrichs-Levy condition. Compare the numerical solution with the exact solution at time levels $t = 0.5, t = 1, t = 1.5, t = 2$. 
+\\
+(b) $N = 10, M = 29$. Note that this set of parameters satisfies the Courant-Friedrichs-Levy condition. Compare numerical solution with exact solution at time 
+levels $t = 4$ and $t= 8$. 
+(c) $N = 100, M - 15$. Note that this set of parameters strongly violates the Courant-Friedrichs-Levy condition (31) $(\mu = 16.0746)$.
+\\
+\\
+SOLUTION: We create three sets of data for each of the three sets of parameters and label them differently for future use. 
+\\
+
+We first create inline functions for the initial data of this wave problem:
+
+ 
+\begin{lstlisting}
+>>phi = inline('sin(x)'); 
+>>nu= inline ('0'); A=nu; B=A; c=inline('1', 't,'x','u', 'ux'); 
+	nu = Inline function: 
+		nu(x) = 0
+\end{lstlisting}
+ 
+We now create the numerical solutions for each of the three parts: 
+\begin{lstlisting}
+>> (xl, tl, Ul] = onedimwave(phi, nu, pi, A, B, 8, 10, 15, c) ; 
+>> [x2, t2, U2] = onedimwave(phi, nu, pi, A, B, 8, 10, 29, c); 
+>> fx3, t3, U3] = onedimwave(phi, nu, pi, A, B, 8, 100, 15, c) ;
+\end{lstlisting}
+Part (a): To produce the desired snapshots, we take note of the general relationships between $t$ and $j$: $k=\dfrac{2}{M+1}, t_j=jk=\dfrac{2j}{M+1}$ so $j=\dfrac{(m+1)t_j}{2}$.
+Thus, when M = 15, we have y = 8ry, so the values f = 0.5, 1.0, 1.5, and 2.0 correspond respectively to the indices $y = 4, y = 8, y = 12$ and $j = 16$. Since the MATLAB indices are one greater than these actual indices, we may create and plot the desired numerical snapshots as follows: 
+
+\begin{lstlisting}
+>> subplot(1,4,1) 
+>> plot(xl, Ul(5, :)), axis([0 pi -1 l]),hold on 
+>> plot(xl, cos(2)*sin(xl),'r') 
+>> subplot(l,4,2) 
+>> plot(xl, Ul(9, :)), axis([0 pi -1 l]),hold on 
+>> plot(xl, cos(4)*sin(xl),'r') 
+>> subplot(l,4,3) 
+>> plot(xl, Ul(13, :)), axis([0 pi -1 l]),hold on 
+>> plot(xl, cos(6)*sin(xl),'r') 
+>> subplot(1,4,4) 
+>> plot(xl, Ul(17, :)), axis([0 pi -1 l]),hold on 
+>> plot(xl, cos(8)*sin(xl),'r') 
+\end{lstlisting}
+We have set the axes to an appropriate setting for comparisons and used the horizontal stacking of the subplot so as to make the vertical errors more detectable. 
+The resulting graphic is shown in Figure 12.13.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{ch12_13}
+	\caption{\textsf{Comparison of the computed finite difference solution's snapshots jagged) with the actual solution's snapshots (smooth) for the wave problem of Example 12.5. The four plots correspond to snapshots at  levels $t = 0.5, t = 1, t = 1.5, t = 2$, respectively. The numerical solution was obtained using $N=10$ interior grid points for x and M- 15 interior grid points for $x$, which resulted in a violation of the Courant-Friedrichs-Levy condition (31) with $\mu = 1.75... > 1$. All except the last profile show the numerical snapshots to be reasonably decent with only small errors that are  visible to the naked eye. At $t = 2$, however, the numerical graph starts to break its pattern and relative errors reach orders of magnitude of $100\%$. Time levels (from left to right) are $t = 0.5, t = 1, t = 1.5$, and $t =2$}}
+	\label{pfig:ch12_13}
+\end{figure}
+
+
+Part (b): In this case, if we plot (as in part (a)) and compare the numerical solution with the actual solution, the results are indistinguishable at both time levels / = 1 and t = 2. To compute the maximum absolute values of the differences, using again the index relation $j=\dfrac{(m+1)t_j}{2}$ (and adding one to j to get MATLAB's indices) we enter the following commands: 
+
+\begin{lstlisting}
+>> max(max(abs(U2(:,16)'-cos(4)*sin(x2)))) 
+->ans = 0.00131359012313 
+
+>>max(max(abs(U2(:,31)'-cos(8)*sin(x2)))) 
+->ans = 0.00343796574347 
+\end{lstlisting}
+The results are rather accurate considering the somewhat large step sizes (especially in t).
+\\
+Part (c): Plotting the numerical solution's snapshot at time level / = 2 is accomplished with the command:
+
+\begin{lstlisting}
+>>plot(x3 , U3(17, :)) 
+\end{lstlisting}
+
+The rather surprising result is shown in Figure 12.14.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{ch12_14}
+	\caption{\textsf{Plot of the snapshot of the numerical solution for part (c) of the wave problem of Example 12.5, using $N= 100$ interior grid points for $x$ and $M= 15$ interior grid points for t, which resulted in a serious violation of the Courant-Friedrichs-Levy condition (31) with $\mu = 16.07... > 1$. Note the amplitude of the graph is 31 orders of magnitude greater than the actual solution, so the result is quite meaningless. Note also that the grid used was actually finer than that used in part (a) (which gave much better results). Thus, blindly refining grids can lead to disastrous results that use more computing time, unless the Courant-Friedrichs-Levy condition is respected.}}
+	\label{pfig:ch12_14}
+\end{figure}
+
+
+The next exercise for the reader will show how, with a bit finer of a grid on the time axis (and keeping the same grid on the JC- axis) we can arrive at numerical  with the above program that are numerically indistinguishable from the actual solution. We also point out that the above program is able to handle grids for both x and t with over 1000 points in a reasonable amount of time (a few minutes). This is quite different from the situation for the finite difference methods for elliptic PDEs discussed in the previous chapter. Recall that in the algorithm for elliptic PDEs, it was required to solve a linear system of order roughly $N \cdot M$ to simultaneously solve for the numerical solution at all interior grid values. Numerically solving parabolic equations will also take far fewer computations than do elliptic equations with similar grids, and this is another reason we have grouped hyperbolic and parabolic PDEs together in this chapter. 
+\\
+\\
+EXERCISE FOR THE READER 12.7: 
+\\
+(a) Modify Program 12.1 into one that uses (27) in place of (29) for the approximation of the function on the level t = k time line. Call this modified function \texttt{onedimwavebasic} . 
+\\
+(b) Starting with N = 10 interior jt-grid points, begin with Af= 30 interior /-grid points and re-solve the wave problem of Example 12.5, with both the \texttt{onedimwave} program and your newly constructed \texttt{onedimwavebasic} program. Compare with the exact solution at / = 8. Continue to double M (keeping N fixed) until you have completed nine doublings of M Collect the graphs of the resulting errors (at $t = 8$) in a separate $5\times 2$ partitioned (by \texttt{subplot}) window. Repeat with N = 40. Compare and contrast the graphical results, and comment on any observed instability. 
+\\
+
+Physically, both hyperbolic and parabolic problems model time-dependent 
+. The main difference between them is that while parabolic phenomena are dissipative, solutions to hyperbolic PDEs are conservative. In particular, initial singularities are smoothed out and lost with time under a parabolic PDE and are preserved and propagated under a hyperbolic PDE. Since finite difference schemes tend to average things out (we saw a good example of this in the previous chapter when we showed maximum principles hold for elliptic finite difference schemes), this suggests that finite difference schemes may run into problems for hyperbolic problems with discontinuous data. This is indeed the case, and for this reason, there are other methods that are more suitable for hyperbolic problems with discontinuous data. Examples of alternative methods suitable for hyperbolic problems with singularities include the method of characteristics (the D' Alembert method of the previous section is a special case), and the method of lines. More can be found on such methods in [Abb-66], [Dur-99], and [Ame-77]. Discontinuous data is very natural in hyperbolic problems modeling events such as shocks, explosions, or earthquakes. Our next example will show some typical pathologies that can occur when the finite difference method is applied to a discontinuous problem. 
+
+
+
+
+
+
 
 
 
