@@ -26,7 +26,7 @@ wave equation has a time variable t and any number of space variables JC, y, z,.
 and takes the form
 
 \begin{equation}
-u_u=c^2 \vartriangle u=c^2(u_{xx}+u_{yy}+...) \label{eq:eps}
+u_u=c^2 \vartriangle u=c^2(u_{xx}+u_{yy}+...) 
 \end{equation}
 
 where c is a positive constant and the Laplace operator on the right is with respect
@@ -49,7 +49,7 @@ depth of the ocean at space coordinates (longitude and latitude) (JC, y) and at 
 The latter term corresponds to the changes in depth due to underwater landslides.
 For more on this and other applications of this variable media wave equation, we
 mention the text [Lan-99].
-\newpage
+
 Much of the general theory of hyperbolic PDEs is well represented by that for the \textbf{one-dimensional wave equation} $(u = u(x,t)$ depends on time / and one space
 variable x\ so we proceed now to introduce it through its historical model of a
 vibrating string and present some of the theory. At the end of the section we
@@ -97,7 +97,7 @@ of the equation) propagates. This will be made clear shortly. Intuitively, it ma
 sense that the speed of any disturbance on a string should increase along with the
 tension and decrease for heavier strings. For a derivation of wave equations for
 strings under more general hypotheses we refer to the article by S. Antman [Ant80] or Chapter 3 of the textbook by Kevorkian [Kev-00].
-\newpage
+
 
 \begin{wrapfigure}{l}{0.25\textwidth}
     \centering
@@ -156,7 +156,7 @@ u_t =u_\xi \xi_t +u_\eta \eta_t =-cu_\xi+cu_\eta
 \\
 In the same fashion, if we differentiate once again, we arrive at
 \begin{equation}
-u_{xx} =u{\xi \xi}+2u_{\xi \eta}+u_{\eta \eta} , u_u = c^2(u{\xi \xi}-2u_{\xi \eta}+ u_{\eta \eta})  
+u_{xx} =u_{\xi \xi}+2u_{\xi \eta}+u_{\eta \eta} , u_u = c^2(u{\xi \xi}-2u_{\xi \eta}+ u_{\eta \eta})  
 \label{eq:eps}
 \end{equation}
 When we substitute equations (5) into the one-dimensional wave equation (1), we
@@ -168,7 +168,7 @@ u_{\xi \eta}=0.
 \end{equation}
 This PDE is very easy to solve, by "integrating" twice. Since it says that $\partial /\partial \eta(u_\xi)=0,$ we can integrate with respect to $\eta$ to get $u_\xi=(F\xi)$,where
 
-\newpage
+
 $F(\xi)$  is an arbitrary function of $\xi$ Next we integrate again, this time with respect
 to $\xi$ , to conclude that
 
@@ -213,7 +213,7 @@ generally could be made up as a superposition of two waves each moving in
 different directions.If we specify both the initial wave profile $u(x,0)$ and its
 initial velocity $u_t(x,0)$ ) , then this together with the wave equation will give a well-
 
-\newpage
+
 posed problem. These initial boundary conditions are often referred to as \textbf{Cauchy
 boundary conditions}  (or \textbf{Cauchy boundary data}) Thus the \textbf{Cauchy problem
 for the wave equation} is summarized as follows: 
@@ -254,7 +254,6 @@ first derivative on the whole real line. Then the Cauchy problem (9) for the one
 
 \begin{equation}
 u(x,t)=\dfrac{1}{2} \phi(x+ct)+\phi(x-ct)+\dfrac{1}{2c} \int_{x-ct}^{x+ct} v(s)ds
-\label{eq:eps}
 \end{equation}
 Proof: Substitution of the general solution (8) into the BCs of (9) produces (put /
 = 0): 
@@ -265,7 +264,7 @@ constant of integration is zero.) This last equation together with the first of 
 original pair are easily solved to give:
 
 $$f(x)=\dfrac{1}{2}[\phi(x)-\dfrac{1}{c}] \int_{0}^{x} V(s)ds] , g(x)=\dfrac{1}{2}[\phi(x)+\dfrac{1}{c}] \int_{0}^{x} V(s)ds]$$
-\newpage
+
 Substituting these formulas into (8) now lets us write the solution as: 
 $$f(x-ct) + g(x + ct)=\dfrac{1}{2} [\phi(x+ct)+\phi(x-ct)]+\dfrac{1}{2c} [-\int_{0}^{x-ct} v(s)ds+\int_{0}^{x+ct} v(s)ds]'$$
 which equals the expression in (10). 
@@ -299,8 +298,8 @@ time $t = 0$, the three-finger plucked string is released with no initial veloci
 From Figure 12.4, we can write the initial profile of the string as
 
 $\phi(x)=
-\begin{cases} 2-2\vert x\vert,  for \vert x\vert \leqslant 1\\
-0, for  \vert x\vert\geqslant 1
+\begin{cases} 2-2\vert x\vert,  ~~~~for~ \vert x\vert \leqslant 1\\
+0, for  ~~~~~~~~~~~~~~~\vert x\vert\geqslant 1
 \end{cases}$
 It is not too difficult to analyze the resulting wave
 [0, for |JC| > 1
@@ -308,7 +307,7 @@ propagation analytically using Theorem 12.1, but a MATLAB code can be easily
 written to produce snapshots and/or movies of this and more complicated waves.
 Since an inline function construction is not appropriate for functions whose
 formulas change, we first construct an M-file for the function $\phi(x):$
-\newpage
+
 \begin{verbatim}
 function y = EX121(x)
 if abs(x)<l, y=2-2*abs(x);
@@ -341,7 +340,7 @@ movie in Section 7.2, get MATLAB to create a movie of the solution of the wave
 problem of Example 12.1 for the time range $0</<4$ . Play it back at varying
 speeds (and perhaps with varying repetitions).\\
 \\
-EXERCISE FOR THE READER 12.2: (a) Write a function M-file:
+EXERCISE FOR THE READER : (a) Write a function M-file:
 
 \begin{verbatim}
 function [] = dalembert(c,step, finaltime, phi, nu, range),  
@@ -366,7 +365,7 @@ $V(x)
 Create a series of snapshots of the solution from / = 0 to t = 5 in increments of / = 0.5.\\
 (d) Use your program to help you estimate the length of time it takes for the
 disturbances of the waves of both parts (b) and (c) above to reach an observer at
-\newpage
+
 position JC = 10. How do your answers fit in with the previously mentioned fact
 that the waves in making up d'Alembert's general solution of the wave equation
 travel at speed c (here c = 1)? 
@@ -390,7 +389,7 @@ Exercise for the Reader 12.2). It also follows from d'Alembert's solution that t
 value of the solution u of (9) at a certain point (x,t), i.e., the vertical disturbance of
 the string at location x and at time t, can only be affected by the initial data
 0?,vover the interval $[x-ct,x + ct]$. This interval is called the interval of 
-\newpage
+
  dependence of the "space-time" point (jt,f); and the corresponding triangle (see
 Figure 12.6) in the space-time plane is called the \textbf{domain of dependence} of (x, t).
 \begin{figure}[H]
@@ -436,7 +435,7 @@ whole real line, based on their values in the interval $ 0< x < L$  Labeling the
 extensions as $\hat{\phi}(x) and \hat{V}(x)$ ), respectively, they will be created so that they are
 odd functions across both of the boundary values $x = 0 and x = L$. Analytically,
 this means that
-\newpage
+
 \begin{equation}
 \hat{\phi}(-x)= -\hat{\phi}(x) ~~~and~~~ \hat{\phi}(2L - x) = -\hat{\phi}(x),~~~ -\infty < x<\infty
 \end{equation}
@@ -480,7 +479,732 @@ data the extended functions $\hat{\phi}(x)$ and $\hat{V}(x)$ d v(x) for boundary
 and x - L }}
 	\label{pfig:ch12_7}
 \end{figure}
-\newpage
+Some parts of this assertion are clear. Defining $u(x,t) = \hat{u} (u,t)$ for $ 0\leqslant \leqslant L$ and $ t\geq 0$  (i.e., take u to be the function ü restricted to the domain of the 
+problem (11)), it is clear that u{x,t) satisfies the wave equation and the first two 
+(initial) boundary conditions since $\hat{u}$ does. Because of the odd extension 
+properties of $\hat{\phi}$ and $ \hat{v} (x)$ 
+\\
+\\
+\textbf{EXAMPLE 12.2:} \textit{(A Plucked Guitar String)} 
+Consider what happens to a guitar string of length 4 units that is plucked with one finger as shown in Figure 12.8 and then released (at time  $t = 0$). Assume that the units are chosen so that wave speed $ c=(1/ \rho )^1/2 $ equals 1. By using the method of reflections, get MATLAB to create a series of snapshots of the wave profiles for each of the 12 times starting with time t = 0 and advancing to t = 6 in increments of 0.5. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{ch12_8}
+	\caption{\textsf{ The initial profile of the plucked guitar string of Example 12.2.}}
+	\label{pfig:ch12_8}
+\end{figure}
+SOLUTION: Looking at Figure 12.8, we can write: 
+\begin{equation}
+\phi(x) (\equiv u(x,0)) =
+\begin{cases}
+x/3, ~~~~~for~ 0 \leqslant x \leqslant 3 \\
+4 - x, ~for~ 0\leqslant x \leqslant 3 
+\end{cases} .
+\end{equation}
+Also $V(x)(\equiv W,(JC,0)) = 0$ ince the string is released without velocity. We first 
+create an M-file for $ \hat{\phi}(x)$ using a similar construction as was done in the solution 
+of Exercise for the Reader 12.3. 
+\begin{verbatim}
+function y = EX12_2phihat(x) 
+if (0 <= x)&(x <= 3), y=x/3; 
+elseif (x >=3)&(x<=4), y=4-x; 
+elseif (x<0)&(x>=-4), y = -EX12_2(-x); 
+else q=floor(<x+4)/8); y=EX12_2phihat(x-8*q); 
+end 
+\end{verbatim}
+We can now use MATLAB to create the desired snapshots. To make for a 
+convenient single graphic of all 41 plots, we use the subplo t command to 
+partition the plot window into smaller pieces. 
+\\
+\begin{lstlisting}
+function y = EX12_2phihat(x) 
+>> counter=l; 
+>> x=0:.01:4; 
+>> z=zeros (size (x) ) ; will be used to add axes to plots 
+>> elf Itreshon up the plot window 
+	for t=0:.2:8 
+	xl=x+t; x2=x-t; 
+		for i=l:401 
+		u(i)=.5*(EX12_2phihat(xl(i))+EX12_2phihat(x2(i))); 
+	end 
+	subplot(7,6,counter), plot(x,u), hold on 
+	plot (x, z, ' k ) adds a central axis to each 	plot 
+	axis((0 4 -1 1]) 
+	counter=counter+l; 
+	hold off 
+end
+\end{lstlisting}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{ch12_9}
+	\caption{\textsf{ The initial profile of the plucked guitar string of Example 12.2.}}
+	\label{pfig:ch12_9}
+\end{figure}
+\textbf{FIGURE 12.9}: Snapshots of the plucked guitar string of Example 12.2. (To be read from 
+left to right, and then top to bottom.) The speed of the wave is taken to be one unit length 
+per unit time. Each successive square represents an increment of 0.2 units of time. Notice 
+that the last frame corresponds to eight units of time and is exactly the initial profile. 
+\\
+\\
+Analytically, the waves that result on such finite strings are quite messy to 
+describe. Physically, what is happening is that two waves are still moving in 
+opposite directions at speeds equal to c. Each is constantly bouncing off the ends, 
+reflecting and superimposing with the other. To get a better idea of the properties of the solution, it is a good idea to create a MATLAB movie for it (Exercise 4). 
+Further details in this area can be found in Section 3.2 of [Str-92].
+\\
+\\
+EXERCISE FOR THE READER 12.4: Prove that the solution of the wave 
+problem on the finite string (11) is always periodic in the time variable with period 
+Lie.\\
+\\
+\textbf{Suggestion:} Use the solution arising from the method of reflections.\\
+EXERCISE FOR THE READER 12.5: {Single Pulse Wave on a Finite String) 
+Consider the wave problem (11) with c = 2, and initial profile $\phi(x)$ given as in 
+Figure 12.10. Obtain a series of snapshots from time / = 0 through t = 10 in 
+increments of 0.5 of the solution of the problem (11) under the hypotheses that:  
+\\
+(a) The impulse is moving to the right initially with speed 2 units per unit of time.
+\\ 
+(b) The impulse is moving to the right initially with speed 1 unit per unit of time.
+\\ 
+(c) The impulse is moving to the right initially with speed 4 units per unit of time.
+\\
+You need not worry about finding an extremely accurate analytical formula to 
+model the initial profile  $\phi(x)$(x); you can simply use polynomial interpolation (as in 
+Section 7.4) with or without derivative conditions. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{ch12_10}
+	\caption{\textsf{Initial profile for the impulse wave of Exercise for the Reader 12.5. The 
+impulse is moving to the right. }}
+	\label{pfig:ch12_10}
+\end{figure}
+Waves (i.e., solutions of the wave equation) satisfy a conservation of energy 
+principle that is very important in physics. We demonstrate this principle for the 
+one-dimensional wave equation written in physical form: $\rho u_u = Tu_{ss}$, where, we recall, $ \rho $ is the mass density of the string and $T$ is the tension. From physics, the 
+\textbf{kinetic energy} of a mass m, which is moving at a velocity $v$, is defined to be $\dfrac{1}{2}mv^2$. Breaking the wave into infinitesimal segments, this gives rise to the 
+definition: 
+\begin{equation}
+KE(t)=\dfrac{1}{2} \rho \int_a^b u_t (x,t)^2 dx ~~~~~~~~~~~~ t\geq 0, 
+\end{equation}
+for the kinetic energy of the string at time /. This improper integral will converge 
+under most reasonable physical assumptions. For example, if both of the initial 
+condition functions  $ \rho (x), V(x)$ ) vanish outside a finite interval, so will the 
+integrand (but with a larger interval determined by the intervals of dependence). If we differentiate this kinetic energy function with respect to /, we may differentiate 
+under the integral sign to obtain: 
+Using the PDE to substitute $ Tu_{xx}$for $\rho u_u$ in the above integral, and then 
+integrating by parts, we obtain: 
+\footnote{ Such differentiations are permissible under general circumstances. Here is a relevant theorem: 
+Suppose that $f(x,t)$ is a continuous function of two variables in some rectangular region in the xt-plane:$a\leqslant x\leqslant b, c\leqslant t \leqslant d$ Suppose also that the partial derivative $f,(x,t)$ is continuous in this same 
+. b b region. Then the following identity is valid for any t, $c\leqslant t \leqslant d : \dfrac{d}{dt} \int_{a}^{b} f(x,t)dx=\int_{a}^{b} f_t (x,t) dx$. Note that 
+although the integral in (14) is over the whole real line, if $\phi(x), V(x)$ vanish outside a finite interval, 
+the integral can be evaluated over a finite interval and the theorem can be applied. The theorem can 
+even be extended to certain improper integral settings and in cases where the continuity assumptions 
+break down at isolated singularities. See any good book on advanced calculus for details on this 
+theorem and related results, for example, [Rud-64], [Ros-96], or [Apo-74]. } 
+\begin{equation}
+\frac{d}{dt} KE(t)=\rho \int_{-\infty}^{\infty} u_t u_u dx ~~~~~~~~~~~~ t\geq 0
+\end{equation}
+Using the PDE to substitute $Tu_{xx} for \rho u_u$ in the above integral, and then 
+integrating by parts, we obtain:
+$$
+\frac{d}{dt} KE(t)=T \int_{-\infty}^{\infty} u_t u_{xx} dx=Tu_t u_x \int_{-\infty}^{\infty} -T \int_{-\infty}^{\infty} u_{tx} u_x dx =-T \int_{-\infty}^{\infty} u_{tx} u_x dx,
+$$
+the last equation being valid since the integrated term vanishes off a finite interval. Since $u_{tx} u_x = \partial / \partial t \frac{1}{2} u_x^2$ we may write (again using the differentiation under the 
+integral sign rule):
+\begin{equation}
+\dfrac{d}{dt} KE(t)= -\dfrac{d}{dt}  \dfrac{1}{•2} Tu_{x}^{2} dx, ~~~~~~t\geq 0.
+\end{equation}
+In basic physics, the \textbf{potential energy} of an object of mass m located at height h is 
+defined to be $mgh$, where $g$ is the gravitational constant. The basic conservation of 
+energy principle in elementary mechanical physics states that if no external forces 
+other than gravity are present, then the total energy $=$ kinetic energy $+$ potential 
+energy remains constant. (Think of when an object falls, its velocity increases so 
+its kinetic energy increases and its height decreases so its potential energy 
+decreases.) The analogue for the potential energy for the string is the following 
+integral: 
+\begin{equation}
+PE(t)=\dfrac{1}{2} T \int_{-\infty}^{\infty} u_x (x,t)^2 dx ~~~~~~t\geq 0
+\end{equation}
+and, correspondingly, the \textbf{total energy} is defined to be
+\begin{equation}
+E(t)=KE(t)+PE(t)=\dfrac{1}{2} \int_{-\infty}^{\infty} [\rho u_t^2 + Tu_x^2] dx ~~~~~~t\geq 0
+\end{equation}
+The identity (16) states that $\dfrac{d}{dt} KE(t)=-\dfrac{d}{dt} KE(t),$ and it follows from (18) that E'(t) = 0 (i.e., the total energy in the wave remains constant). This is the 
+conservation of energy. It is extremely important and noteworthy! Regardless of 
+how long we let the string propagate, the total energy E of the configuration will 
+remain unchanged. 
+\\
+\\
+\textbf{EXAMPLE 12.3:} (a) Compute the total energy of the plucked infinite string of 
+Example 12.1, and (b) of the plucked guitar string of Example 12.2. 
+\\
+\\
+SOLUTION: In light of the conservation of energy, we may simply use the initial 
+conditions to evaluate E(0) in each case. In both cases, $u_t(x,0)=v(x)=0$ and $u_t(x,0)=\phi '(x)$.
+\\
+\\
+Part (a):  $E= E(0)= \dfrac{T}{2} \int_{-\infty}^{\infty} u_x^2 dx=\dfrac{T}{2} \int_{-\infty}^{\infty}[\phi '(x)]^2 dx =\dfrac{T}{2}2^2 \cdot 2 =4T$. The tension T is  
+not specified in the example, so this is as far as we can take this answer
+Part (b): Here, since the string is finite, we similarly obtain:
+$$E=E(0)= \dfrac{T}{2} \int_{0}^{4} u_x^2 dx= \dfrac{T}{2} \phi '(x)dx=\dfrac{T}{2}[(1/3)^2 \cdot 3+1^2 \cdot 1]=2T/3$$
+There are some interesting similarities and differences of waves in one, two, three, 
+and higher dimensions. We first point out that future profiles of one-dimensional 
+waves will inherit symmetries in the initial conditions. Such results can be 
+obtained from d'Alembert's formula (see Exercise 10). The analogue in higher 
+dimensions of such symmetry would be \textbf{radially symmetric} waves. In n space 
+dimensions such a wave would be a solution of the wave equation (1): 
+$$u_n=c^2 \delta u=c^2(u_{x_1 x_1}+\cdots +u_{x_2 x_2}), ~~~~u=u(x_1,x_2, \cdots, x_n, t) \footnote{Most interesting applications of the wave equation occur in one, two or three space dimensions in 
+which cases the customary choices x, y, and z are used in place of $x_1, x_2$ and $x_3$ .}$$
+which is expressible in the form w(r,t), where $\sqrt{x_1^2 +x_2^2+ \cdots +x_n^2}$
+ is the 
+distance to the origin. Thus, a radially symmetric w-dimensional wave is not really 
+a function of n + 1 variables (as a general such wave might be) but actually just a 
+function of two variables. There are analytical techniques for finding formulas for 
+radially symmetric waves, but they involve special mathematical functions (such 
+as Bessel functions) and the analysis can get a bit complicated. See, for example, 
+[Str-92] for a nice treatment on radially symmetric waves. In two dimensions, 
+water ripples provide a nice and telling example of radially symmetric waves. In 
+three dimensions, sound waves and electromagnetic (e.g., radio) waves provide 
+prototypical examples. If a pebble is dropped in water, the water ripples continue 
+to propagate and reproduce themselves. In general, disturbances resulting from two-dimensional waves continue to propagate at a given point of space, once they 
+have reached this point. In one and three dimensions, once the disturbance of a 
+wave passes by a certain point, the wave is finished there and moves on. In three 
+dimensions, however, there is an important difference from one-dimensional 
+waves. The intensity of the wave decreases as we move away from the source. 
+This can be proved from the conservation of energy. (Once a disturbance from a 
+three-dimensional radially symmetric wave reaches a distance R from the source, 
+it must cover an entire sphere with the same amount of energy that the wave 
+packed on much smaller spheres, and the intensity will be decreased at each point 
+on these larger spheres. This argument can be made into a rigorous proof.) In 
+higher than three dimensions, radially symmetric waves turn out to have the same 
+distorted properties of two-dimensional waves. These facts make it clear that we 
+are very fortunate to live in a three-dimensional world. Indeed, if the dimension of 
+our world were two or higher than three, than anytime someone spoke, we would 
+never stop hearing them. In a one-dimensional world, anytime anyone spoke or a 
+noise was made, everyone would hear it and with the same intensity regardless of 
+how far away from the source they were! For a rigorous proof that radially 
+symmetric distortion-free waves are only possible in one and three dimensions, 
+and that only in one dimension are radially symmetric waves possible without loss 
+of intensity, we refer the reader to the article (with a rather presumptuous title) by 
+Morley [Mor-85] and [Mor-86].  
+\\
+\line(1,0){\textwidth}
+\\
+\textbf{EXERCISES 12.1}
+\\
+\\
+\begin{enumerate}
+ \item
+		(Making Snapshots of Vibrating Strings) For each of the following initial data sets, create a 
+series of snapshots of the solution of the wave problem (9): 
+$$
+\begin{cases} 
+(PDE) u_u=u_{xx}, ~~~~~~~ -\infty <x< \infty ,0<t< \infty , u=u(x,t)\\ 
+(BCs) u(x,0)=\phi (x) , u_t(x,0)=v(x) ~~~~~~~ -\infty <x <\infty ,0 \leqslant t< \infty '
+\end{cases}$$
+\\
+with c (wave speed) = 1
+\\
+\\
+(a) 
+$\phi(x)=
+\begin{cases} 
+sin(x), for~~ 0 \leqslant x\leqslant 2 \pi \\
+0, ~~~~~~~otherwise
+\end{cases}$, v(x)=0
+\\
+(b)
+$\phi(x)=
+\begin{cases} 
+sin(2x), for~~ 0\leqslant \leqslant x\leqslant 2 \pi \\
+0, ~~~~~~~~~otherwise
+\end{cases}$, v(x)=0
+\\
+(c)
+$\phi(x)=0 , ~~ v(x)
+\begin{cases} 
+1 , ~~~~~~for~~ 6 \pi  \leqslant 2\pi \leqslant 8\pi\\
+0, ~~~~~~~otherwise
+\end{cases}$.
+\\
+(d)
+$\phi(x)=0
+\begin{cases} 
+sin(x), for ~~0 \leqslant x\leqslant 2 \pi \\
+0, ~~~~~~~otherwise
+\end{cases}$.
+$\begin{cases} 
+1 , ~~~~~~for~~ 6 \pi \leqslant 2 \pi \leqslant 8\pi  \\
+0, ~~~~~~~otherwise
+\end{cases}$.
+\\
+Obtain snapshots for the time range $0\leqslant t \leqslant 14$ in increments of $\bigtriangleup t=2$ , and choose the axes 
+range so that the plots show all disturbances of the wave in an informative fashion. 
+	\item
+			(More snapshots of vibrating strings) For each of the following initial data sets, create a series 
+of snapshots of the solution of the wave problem (9): 
+$$\begin{cases} 
+(PDE) u_u=u_{xx}, ~~~~~~~ -\infty <x< \infty ,0<t< \infty , u=u(x,t)\\ 
+(BCs) u(x,0)=\phi (x) , u_t(x,0)=v(x) ~~~~~~~ -\infty <x <\infty ,0 \leqslant t< \infty '
+\end{cases}$$
+\\
+with c (wave speed) = 1. 
+\\
+(a)
+$\phi(x)=0
+\begin{cases} 
+sin(x), ~~ for~~ 0\leqslant x\leqslant \pi \\
+0, ~~~~~~~~~otherwise
+\end{cases}$,
+$v(x)
+\begin{cases} 
+-cos(x), ~~for ~~ 0\leqslant x \leqslant \pi \\
+0, ~~~~~~~~~~~~~otherwise
+\end{cases}$,
+\\
+(b)
+$\phi(x)=0
+\begin{cases} 
+sin(x), ~~ for~~ 0\leqslant x\leqslant \pi \\
+0, ~~~~~~~~~otherwise
+\end{cases}$,
+$v(x)
+\begin{cases} 
+-2cos(x), ~~for ~~ 0\leqslant x \leqslant \pi \\
+0, ~~~~~~~~~~~~~otherwise
+\end{cases}$,
+\\
+(c)
+$\phi(x)=0
+\begin{cases} 
+sin(x), ~~ for~~ 0\leqslant x\leqslant \pi \\
+0, ~~~~~~~~~otherwise
+\end{cases}$,
+$v(x)
+\begin{cases} 
+-0.5cos(x), ~~for ~~ 0\leqslant x \leqslant \pi \\
+0, ~~~~~~~~~~~~~otherwise
+\end{cases}$,
+\\
+(d)
+$\phi(x)=0
+\begin{cases} 
+sin(x), ~~ for~~ 0\leqslant x\leqslant \pi \\
+0, ~~~~~~~~~otherwise
+\end{cases}$,
+$v(x)
+\begin{cases} 
+-4cos(x), ~~for ~~ 0\leqslant x \leqslant \pi \\
+0, ~~~~~~~~~~~~~otherwise
+\end{cases}$,
+\\
+Obtain snapshots for the time range $0 \leqslant t \leqslant 20$ in unit increments. Physically, explain how the 
+four sets of initial conditions are related. 
+	\item
+		{\textit{(Making Movies of Vibrating Strings)}  For each of the vibrating string problems ((a) through (d)) 
+of Exercise 1, create a MATLAB movie of the vibrating string on the time range $0 \leqslant t \leqslant 14$. 
+View each at various speeds and repetitions. }
+	\item 
+		{\textit{(More Movies of Vibrating Strings)} For each of the vibrating string problems ((a) through (d)) 
+of Exercise 2, create a MATLAB movie of the vibrating string on the time range $0 \leqslant t \leqslant 20$. 
+View each at various speeds and repetitions}
+	\item
+		(a) Create a MATLAB movie for the guitar string wave of Example 12.2 from time t = 0 till 
+time / = 24. View it at various speeds and repetitions. 
+(b) Create a MATLAB movie for the single impulse wave of Exercise for the Reader 12.5 from 
+time / = 0 till time t = 40. View it at various speeds and repetitions. 
+	\item
+	{Snapshots of Vibrating Finite Strings) For each of the following initial data sets, create a series 
+of snapshots of the solution of the wave problem (11):\\
+$$\begin{cases} 
+	(PDE) u_u=u_{xx}, ~~~~~~~ 0< x< L, 0<t \infty , u=u(x,t) \\ 
+	(BCs) 
+\begin{cases}
+	u(x,0)=\phi(x) , u)t(x,0)=v(x)\\
+	u(x,t)=u(L,t)=0
+\end{cases}, 
+	0<x<L, 0\leqslant t< \infty '
+\end{cases}$$}
+with c (wave speed) = 1. 
+\\
+(a)
+$\phi(x)=
+\begin{cases} 
+	sin(x), for~~ 0\leqslant  x\leqslant 2 \pi \\
+	0, ~~~~~~~otherwise
+\end{cases}$, 
+	$v(x)=0 , L=4 \pi$.
+\\
+(b)
+$\phi(x)=
+\begin{cases} 
+	sin(x), for~~ 0\leqslant  x\leqslant 2 \pi \\
+	0, ~~~~~~~otherwise
+\end{cases}$, 
+	$v(x)=0 , L=3 \pi$.
+\\
+(c)
+$\phi(x)=
+\begin{cases} 
+	sin(x), for~~ 0\leqslant  x\leqslant  \pi \\
+	0, ~~~~~~~otherwise
+\end{cases}$, 
+	$\begin{cases} 
+		-2cos(x), ~~for~~ 0 \leqslant x \leqslant \pi \\	
+		0, ~~~~~~~~~~~~~~~otherwise
+	\end{cases}
+		L=3 \pi$.
+\\
+(d)
+$\phi(x)=
+\begin{cases} 
+	sin(x), for~~ 0\leqslant  x\leqslant 2 \pi \\
+	0, ~~~~~~~otherwise
+\end{cases}$, 
+	$\begin{cases} 
+		1, ~~for~~ 6\pi \leqslant x \leqslant 8\pi \\	
+		0, ~~~~~~~~~~~~~~~otherwise
+	\end{cases}
+		L=10 \pi$.
+\\
+\\
+Obtain snapshots for the time range $ \vartriangle \leqslant t \leqslant40$ in increments of $\vartriangle t=2$.
+	\item
+		 \textit{(Making movies of Vibrating Finite Strings)} For each of the vibrating string problems ((a) 
+through (d)) of Exercise 6, create a MATLAB movie of the vibrating string on the time range 
+$0 \leqslant t \leqslant 60$. View each at various speeds and repetitions.
+	\item 
+		Compute the total energies of each of the vibrating infinite strings in Exercise 1. 
+		\item 
+		Compute the total energies of each of the vibrating finite strings in Exercise 6.  
+		\item 
+		\textit{(Symmetry of Waves on an Infinite String}) Consider the solution of the wave problem (9): 
+ $$\begin{cases} 
+	(PDE) u_u=c^2 u_{uu}, ~~~~~~~ - \infty< x< \infty, 0<t \infty , u=u(x,t) \\ 
+	(BCs) u(x,0)=\phi (x), u_t(x,0)=v(x) ~~~~~~~
+	-\infty< x< \infty, 0\leqslant t< \infty 
+\end{cases}$$
+ Use d'AIembert's formula to prove the following symmetry inheritance results.
+ \\ 
+(a) If both of the initial data are even functions  of $x (i.e., \phi(-x) = \phi(x) and v(-x) - v(x)$ for 
+all x) then so will be the wave profile at any future time: $u(-x>t) = u(x,t)$ for all $x$ and $t \geq 0$ . 
+\\
+(b) If both of the initial data are odd functions of x $(i.e., \phi(-x) = -\phi(x) and V(-x) = -V(x)$ for 
+all x), then so will be the wave profile at any future time: $u(-x, t) = -w(x, t)$ for all $x$ and $t \geq 0$ .
+\\ 
+		\item 
+		\textit{(Waves on a Semi-infinite String)} Consider the solution of the following wave problem similar 
+to the finite-string problem (11) except that only one end of the string is held fixed. 
+$$\begin{cases} 
+	(PDE) u_u=u_{xx}, ~~~~~~~ 0< x< \infty, 0<t \infty , u=u(x,t) \\ 
+	(BCs)
+	\begin{cases} 
+	u(x,0)=\phi (x), u_t(x,0)=v(x)\\
+	u(x,t)=0
+	\end{cases}
+	0<x<\infty, 0\leqslant t< \infty 
+\end{cases}$$
+(a)Making use of d'AIembert's formula and an appropriate "method of reflections" technique 
+similar to that used in the text for the finite string, develop a program for solving this problem. 
+We point out that such a method will not be a numerical method, per se, since it will simply use 
+the computer to perform analytical computations (and the only errors are due to roundoff). 
+\\
+(b) Obtain snapshots of profiles of the solution to the above problem using the following initial conditions:
+$\phi(x)=
+\begin{cases}
+	sin(x) for~~ 0\leqslant x \leqslant2 \pi\\
+	0, ~~~~~~~otherwise
+\end{cases},
+	v(x)=0, c=1$
+(c) Obtain snapshots of profiles of the solution to the above problem using the following initial 
+conditions:
+$$\phi(x)=
+\begin{cases}
+	sin(x) for~~ 0\leqslant x \leqslant2 \pi\\
+	0, ~~~~~~~otherwise
+\end{cases},
+	v(x)=0
+	 \begin{cases}
+	 	1,~~for ~~~6\pi \leqslant x 8\pi
+	 	0,~~~~~~~otherwise
+	 \end{cases}
+	 	L=10\pi$$
+(d) Create a MATLAB movie of the propagation of the wave in part (b). 
+\\
+(e) Create a MATLAB movie of the propagation of the wave in part (c).
+\\
+	\item
+		\textit{(A Maximum Principle for the Wave Equation)} (a) Suppose that the hypotheses of d'AIembert's 
+theorem are satisfied for the Cauchy problem (9): 
+$$\begin{cases} 
+	(PDE) u_u=c^2 u_{uu}, ~~~~~~~ - \infty< x< \infty, 0<t \infty , u=u(x,t) \\ 
+	(BCs) u(x,0)=\phi (x), u_t(x,0)=v(x) ~~~~~~~
+	-\infty< x< \infty, 0\leqslant t< \infty
+\end{cases}$$
+\\
+and that $\vert \phi(x) \vert$  for all $x$ and that $\vert \int_{a}^{b} v(s)ds \vert \leqslant L$ for all numbers $a$ and $b$. Show that the solution $u(x,t)$ of the Cauchy problem satisfies the inequality: $\vert u)x,t) \vert \leqslant M+L/2c$  for all $x$ and t in the domain. 
+\\
+(b) Under what general circumstances can you conclude that the maximum amplitude of the wave is attained at time zero
+$(i.e., \vert u(x,t)\vert \leqslant max{\vert K(x,0) \vert: \infty < x < \infty} )$?
+\end{enumerate}
+\textbf{EXERCISES 12.2}
+We begin this section by developing finite difference schemes for the numerical 
+solution of the one-dimensional wave problem (11):
+$$\begin{cases} 
+	(PDE) u_u=c^2u_{xx}, ~~~~~~~ 
+	0< x< L, 0<t \infty , u=u(x,t) \\ 
+	(BCs)
+	\begin{cases} 
+	u(x,0)=\phi (x), u_t(x,0)=v(x)\\
+	u(x,t)=u(L,t)=0
+	\end{cases}
+	0 \leqslant x \leqslant\infty, 0\leqslant t< \infty 
+\end{cases}$$
+on a finite string. Our development works in general if we allow c to be a function 
+of $t$ and/or $x: c = c(x,t)$. Physically, this corresponds to modeling a vibrating string 
+where its characteristics can change depending on time and space. We have 
+already shown that in case c is a constant, d'Alembert's Theorem 12.1 coupled 
+with the method of reflections can lead to a practical numerical method for solving 
+this problem. Since the method simply evaluates the theoretical solution, it is 
+relatively error free and so completely adequate for solving (11) with any sets of 
+data. This will allow us to compute the errors of the numerical solutions we obtain 
+from the finite difference methods. D'Alembert's solution, however, is specific to 
+the wave equation, while the finite difference methods that we introduce can be 
+easily adapted to work for more general hyperbolic PDE problems. 
+\\
+\\
+At first glance, the similarity of the wave and Laplace's equation would make it 
+seem quite plausible that the same general finite difference discretization would 
+work nicely, as we witnessed in the case for elliptic boundary value problems. 
+The boundary conditions in (11), however, are different in two major ways: (i) 
+The region  
+$0 \leqslant x < L, 0 \leqslant t < \infty$
+> is no longer a bounded rectangle, but rather a half 
+strip extending to infinity in the positive /-direction, (ii) There are two boundary 
+conditions on the lower side of the strip rather than one. We will indeed discretize 
+the PDE in the analogous fashion to what was done to Laplace's equation (replace 
+each second derivative with its central difference approximation), but because of 
+(i), we will not be able to set up the problem as a finite linear system (there are 
+infinitely many nodes). Instead, we will do what is called a marching scheme, 
+where the nodal approximations are computed one time level at a time, moving up 
+from $t = 0$.At first glance, this may seem like a better situation, since the number 
+of variables and the size of the linear systems will be much smaller than if we 
+were to do it all at once, as with the elliptic method. For the most part it is true 
+that the computations will generally move faster, but one new issue that we will 
+need to confront with such marching schemes is the issue of stability. At each 
+step, the local truncation errors will still be very small, but they can compound 
+quite quickly to make the numerical solutions meaningless. Fortunately, there are 
+some stability criteria that give easy ways to arrange the relative step sizes so that 
+the schemes will be stable.
+\\
+\\
+All finite difference methods require that the variables be restricted to finite 
+intervals,
+\footnote{Thus, in terms of the original variables of the PDE, the regions on which finite difference methods 
+can be used to solve problems must be rectangular (if there are two variables, or n-dimensional box 
+shapes if there are n variables). Coordinate transforms (such as polar coordinates) can allow for other 
+sorts of shapes. One of the key advantages of the finite element methods that we will introduce in the 
+next chapter is that they allow the solution of PDE problems on more complicated geometrical 
+configurations.}
+so we will need to restrict time to some specified range, $0 \leqslant t\leqslant T$. As 
+in Chapter 11 (see Figure 11.11), we begin by introducing a grid of equally spaced 
+x- and /-coordinates for the rectangular region $0\leqslant x\leqslant L, 0\leqslant t \leqslant T$ :
+
+$$0=x_0 < x_1 <x_2< \cdots<x_{N+1} ~~~~\bigtriangleup x_i \equiv x_i-x_{i-1}=h $$
+\begin{equation}
+	0=t_0 < t_1 <t_2< \cdots<t_{M+1} ~~~~\bigtriangleup x_i \equiv t_i-t_{i-1}=k
+\end{equation}
+By using the central difference formulas (see Lemma 10.3) in the wave equation, 
+we get the following discretization of it: 
+\begin{equation}
+	\dfrac{u(x_i,t_{j+1})-2u(x_i,t_j)+u(x_i,t_{j-1})}{k^2}=
+	c^2 \dfrac{u(x_i,t_{j+1})-2u(x_i,t_j)+u(x_i,t_{j-1})}{h^2}
+\end{equation}
+We recall that the truncation errors here are 0($k^2$) and 0($h^2$), respectively. Using the notation: 
+$$u_{i,j}=u(x_i, t_j),$$
+and introducing the parameter
+ \begin{equation}
+	\mu =ck/h,
+\end{equation}
+we may express (20) in the following simplified form:
+ \begin{equation}
+	u_{i,j+1}-2u_{i,j}+u_{i,j-1}-\mu^2[u_{i,j+1}-2u_{i,j}+u_{i,j-1}]=0
+\end{equation}
+We next solve this equation for the unique term corresponding to the highest time value to obtain: 
+ \begin{equation}
+	u_{i,j+1}=2(l- \mu^2)u_{i,j}+ \mu^2[u_{i+l,j}+u_{i-l,j}]-u_{u,j-1}
+\end{equation}
+for $i = 1,2, ...,N,$ and $y = 1, 2, ..., M$. The endpoint boundary conditions tell us that: 
+ \begin{equation}
+	.u_{0.j}=0=u_{N,j}, ~~~~ for ~all~j
+\end{equation}
+It follows from (22) and (23) that we may represent the time level j + 1 functional values in terms of the previous two time level functional values by means of the following tridiagonal linear system: 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\linewidth]{ch12_11}
+	\caption{\textsf{Illustration of the computational stencil for the discretization (20), (21) of 
+the wave equation. The single point with largest time coordinate is emphasized, since the 
+finite difference method will solve for it using the values of the solution at the previously 
+found lower time grid points. }}
+	\label{pfig:ch12_11}
+\end{figure}
+
+
+
+
+
+
+
+
+Such a scheme is referred to as an explicit three-level scheme, explicit since the 
+highest $(t = (j + 1) l) $ level values are explicitly solved in terms of the lower level 
+values; three-level simply means that the nodal values involved in the scheme span 
+over three time levels $(t = (J -1)k,jk, (j + 1)k)$. This scheme will progress by 
+iterating as we march upward in time. In order to start this recursion, we will 
+need the functional values at the first two time levels $t = 0$ and $t = k( = t_1)$. These 
+are the two column vectors on the right when j = 1. At time / = 0, these values are specified by the initial condition $u(x,0) = \phi(x)$ (initial wave profile) of (11) and this gives us:
+ \begin{equation}
+	u_{i,0} =\phi(x_1) ~~for ~~i=1,2,\cdots,N.
+\end{equation}
+In order to get the required next time level functional values we will need to make 
+use of the initial wave velocity condition of (11): $u_t(x,0) = V(x)$. The fact that 
+this extra information is actually required (unlike in the elliptic case) is consistent with the fact that the wave problem (11) is well posed. To use this initial velocity to approximate the time level $t = k$ functional values, we will need another difference formula for approximation of derivatives; either the forward or backward difference formulas (Lemma 11.5) will give us what we need. For reasons that will soon be apparent, we choose to use the forward difference 
+formula here. 
+
+For a fixed value of JC, and treating u(x>t) as a function of/, the forward difference 
+formula implies that:
+$$v(x)=u_t(x,0)\thickapprox (u(x,k)-u(x,0))/k\Rightarrow u(x,k) \thickapprox u(x,0)+kv(x)$$
+(this is nothing more than the usual tangent line approximation). In terms of our 
+grid functional values this translates to: 
+\begin{equation}
+	u_{i,t} \thickapprox u{i,0}+kv(x_i) ~~for~~i=1,2,\cdots,N.
+\end{equation}
+Note that (viz. Lemma 11.5) the error of this approximation is $0(k)$, which is of lower order and hence potentially much greater than the $0(h^2+k^2)$ local truncation error for (23). Thus, this lower quality estimate for the / = k time level values (needed to start (23)) could contaminate the overall quality of (23). This problem can be avoided since the approximation can be improved to have error $0(k^2)$ (thus matching those in the foregoing development) if we furthermore assume that the wave equation is valid on the initial line and is sufficiently differentiate. Indeed, based on the differentiability assumption, (the onevariable) Taylor's theorem from Chapter 2 allows us to write: 
+$$
+u(x,k)=u(x_1,0)+ku_t(x_1,0)+\dfrac{k^2}{6}u_u(x_i,0)+\dfrac{k^3}{6} u_{ttt}(x_i, \hat{k},
+$$
+where $\hat{k}$ is a number between 0 and k. The assumption that the wave equation is 
+valid on the initial line tells us that$ u_u(x,0)=c^2u_{xx}(x,0)=c^2\phi^n(x) $and we are led to the following approximation
+\begin{equation}
+	u_{i,l}\thickapprox u_{i,0}+kv(x_i)+\dfrac{c^2k^2}{2}\phi^2(x_i) ~~for ~~~i=1,2,\cdots,N,
+\end{equation}
+with error bound $0(k^2)$.
+\footnote{This is the reason we choose to adopt the forward over the backward difference method. We would 
+not have been able to make such a local error truncation if we had used the backward difference 
+method.}
+To avoid computation of derivatives, we may approximate 
+$\phi(x_i)$ using the central difference formula: 
+$\phi^n(x_i)[\phi (x_{j+l} ) -2\phi(x_i)+\phi(x_{i-1})]/h^2$
+(with error $0(h^))$. Installing this approximation into (28) produces the following practical approximating formula for the time level $t = 1$ functional values: 
+\begin{equation}
+	u_{i,l}=(l-\mu^2)\phi(x_1)+\dfrac{\mu^2}{2}[\phi(x_{i-1})]+kv(x_1)
+	 ~~for ~~~i=1,2,\cdots,N,
+\end{equation}
+which has local truncation error $0(h^2+k^2)$. The next exercise for the reader gives us another way to arrive at the above $0(k^2)$ approximations for $u_{j,l}$ and show it to be valid under slightly different assumptions. 
+\\
+\\
+EXERCISE FOR THE READER 12.6: (a) Use Taylor's theorem to establish the following \textbf{centered difference approximation}: Suppose that $f(x)$ is a function having a continuous third derivative in the interval$ a-h\leqslant x \leqslant a + h$ then the following approximation for $f'(x)$ is valid: 	
+\begin{equation}
+	f'(x)\dfrac{f(x+h)-f(x-h)}{2h}+O(h^2).
+\end{equation}
+Note that this is a second-order approximation to $f'(x)$, whereas the forward and backward difference approximation are only first-order approximations. (b) Using the artifice of ghost nodes (introduced in Section 11.4), obtain estimate (29) (with local truncation error $0(h^2 +k^2))$ under the assumption that the solution $u(x,t)$ of the Cauchy problem (11)extends to have a continuous third order time derivative for $t \geq -k$.
+\\ 
+\textbf{Suggestion:} For part (b), introduce a line of nodes at level $t = -k$ and denote the ghost values of u on these nodes by $u_{i,l}$. The centered difference approximationgives the estimate $u_{i,l}-u_{i,-l}\thickapprox 2kv(x_i) $ that has error $0(k^2)$. 
+\\
+
+Even with all of the above attention to detail in developing a finite difference method with $0(h^2+k^2)$ local truncation error, stability issues can seriously corrupt the method. The next example will give good evidence of how badly 
+things can go. 
+\\
+\textbf{EXAMPLE 12.4:} \textit{(Illustration of Instability)} Consider the following Cauchy 
+problem of a long plucked string: 
+$$\begin{cases} 
+	(PDE)u_u=4u_{xx}, ~~~~~~~ - \infty< x< \infty, 0<t \infty , u=u(x,t) \\ 
+	(BCs) u(x,0)=\phi (x), u_t(x,0)=v(x) ~~~~~~~
+	-\infty< x< \infty, 0\leqslant t< \infty ' 
+\end{cases}$$
+where $\phi(x)$ is as in Example 12.1 (Figure 12.4). Note this problem is identical to the problem of Example 12.1 except that the wave speed has changed from $c = 1$ to $c = 2$. By D'Alembert's solution (Theorem 12.1), we know the exact solution of this problem is given by (from (10)):
+$$u(x,t)=\dfrac{1}{2}[\phi(x+2t)+\phi(x-2t)]$$ 
+and the solution will look just like the one shown in Figure 12.5, except now the speed is doubled. Thus, for any specified range of time values, we can view this problem as taking place on a finite string centered at $x = 0$ of sufficiently large length.
+\\
+(a) Apply the above finite difference scheme (22) with $h = k = 1$ up to time level $t = 5k(= 5)$, and $-12 \leqslant x \leqslant 2$ . To isolate just the effectiveness of (22), use the exact values for the time level $t = k$ values, as determined by D'Alembert's solution, in place of (28). Examine the u-values and compare with those of the exact solution (cf. Figure 12.5). 
+\\
+(b) Repeat Part (a) with $ = k = 0.1$ up to time level $t = 50k (= 5)$.
+\\ 
+(c) Repeat Part (a) with $h = 1, k = .5$ up to time level $t = 10k (= 5)$.
+\\
+\\
+SOLUTION: Part (a): With $c = 2$, we have, by (21), $\mu = ck/h = 2$ , so that (23) becomes: 
+$$u_{i,j+1}=-6u_{i,j}+4[u_{i+l,j}+u_{i-l,j}]-u_{i,j-1}$$
+Since $h = 1$, we get $x_0 = -12, x_{12} = 0, x_{25} = 12$ so by (10) (exact solution), we may write
+\\
+$u_{i,0}
+	\begin{cases}
+		2, ~~i=12\\
+		0, ~~othervise
+	\end{cases}$ and
+$u_{i,0}
+	\begin{cases}
+		1, ~~i=12\pm 2\\
+		0, ~~othervise
+	\end{cases}$. 
+Note that by (22), the of indices with nonzero w-values can advance only one index to the left/right with each new time level. The following MATLAB loop will produce the needed nonzero w-values up to time level $t = 5k$. The instability is so severe that it is  convenient to view the matrix of values. In creating the $6\times 25$ matrix of nodal values, we let the bottom row correspond to the time level zero values and so the top row corresponds to the $t = 5$ values. Note this requires us to modify the of (23) accordingly in our MATLAB code below: 
+\begin{lstlisting}
+>> U=zeros(6,25); U(6,12)=2 ; U(5,[1 0 14])=1 ; 
+>> for j=5:-l: 2 
+	   for i=2:2 4 
+		    U(j-l,i)=-6*U+4*[U(j,i+l)+U<j,i-l) ]-U(j+l,i);
+end 
+end 
+\end{lstlisting}
+The nonzero matrix values are shown below. Note that the actual solution has two 
+pulses of height 1 moving from left to right at speed two. The numerical solution 
+below is totally off and unstable, it oscillates out of control. Also, the disturbances 
+only propagate at speed one. \\
+\begin{table}[!ht]
+    \centering
+    \begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|c|c|}
+    \hline
+        256 & -1536 & 4432 & -8048 & 10373 & -10688 & 10424 & -10688 & 10373 & -8048 &4432 & -1536 & 256 \\ \hline
+        0 & 64 & -288 & 616 & -812 & 776 & -710 & 776 & -812 & 616 &-288 & 64 & 0\\ \hline
+        0 & 0 & 16 & -48 & 67 & -56 & 44 & -56 & 67 & -48 & 16 & 0 & 0\\ \hline
+        0 & 0 & 0 & 4 & -6 & 4 & -2 & 4 & -6 & 4 & 0 & 0 & 0 \\ \hline
+        0 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 1 & 0 & 0 & 0 & 0\\ \hline
+        0 & 0 & 0 & 0 & 0 & 0 & 2 & 0 & 0 & 0 & 0 & 0 & 0\\ \hline
+    \end{tabular}
+\end{table}
+\\
+Part (b): Since c and $ \mu$ are still 2, (22) takes the same form as in part (a), but 
+since $x_0 = -12, x_{120} = 0, x_{241} = 12$, and we have
+$$u_{i,0}
+	\begin{cases}
+		2, ~~\vert 120-i\vert /5, ~~ 110 \leqslant i \leqslant 130\\
+		0, ~~othervise
+	\end{cases}$$
+To get uiX, we note that (10) and the initial values give us (since h = k = 0.1) that $u_{i,t}=u_{i+2,0}+u_{i-2,0}$ It is most simple to use a MATLAB loop to compute these values before entering into the main loop based on (23). Using the matrix conventions of part (a), the construction of the matrix of values can be accomplished in MATLAB with the following commands:
+\begin{lstlisting}
+>>U=zeros(51,251); 
+for i=110:130 
+	U(51,i)=2-abs(i-120)/5; 
+end 
+	for i=108:132 
+	U(50,i)=U(51,i+2)+U(51,i-2); 
+end 
+for j=50:-l:2 
+	for i=2:250 
+		U(j-l,i)=-6*U(j,i)+4MU(j,i + l)+U<j,i-l)]-U(j + l,i); 
+	end 
+end  
+\end{lstlisting}
+To see that the numerical solution is still badly unstable, we need only look at the 
+middle portion of the last six rows of the matrix (corresponding to the time range: 
+$0 \leqslant t \leqslant .5$):
+
+
+
+
+
+
 
 
 
