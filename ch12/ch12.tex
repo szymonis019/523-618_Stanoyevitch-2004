@@ -148,7 +148,6 @@ gives the following:
 $$u_x = u_\xi \xi_x + u_\eta \eta_x = u_\xi u_\eta$$
 \begin{equation}
 u_t =u_\xi \xi_t +u_\eta \eta_t =-cu_\xi+cu_\eta
-\label{eq:eps}
 \end{equation}
 \\
 \\
@@ -157,31 +156,27 @@ u_t =u_\xi \xi_t +u_\eta \eta_t =-cu_\xi+cu_\eta
 In the same fashion, if we differentiate once again, we arrive at
 \begin{equation}
 u_{xx} =u_{\xi \xi}+2u_{\xi \eta}+u_{\eta \eta} , u_u = c^2(u{\xi \xi}-2u_{\xi \eta}+ u_{\eta \eta})  
-\label{eq:eps}
 \end{equation}
 When we substitute equations (5) into the one-dimensional wave equation (1), we
 obtain the following version of the wave equation in the new variables $(\xi ,\eta)$ : 
 
 \begin{equation}
 u_{\xi \eta}=0.
-\label{eq:eps}
 \end{equation}
 This PDE is very easy to solve, by "integrating" twice. Since it says that $\partial /\partial \eta(u_\xi)=0,$ we can integrate with respect to $\eta$ to get $u_\xi=(F\xi)$,where
-
-
+\\
+\\
 $F(\xi)$  is an arbitrary function of $\xi$ Next we integrate again, this time with respect
 to $\xi$ , to conclude that
 
 \begin{equation}
 u(\xi,\eta)=f(\xi)+g(\eta),
-\label{eq:eps}
 \end{equation}
 where $f(\xi)$ and $g(\eta)$ are arbitrary functions of the indicated variables. (Note  $f(\xi)$ is an antiderivative of $F(\xi)$) Translating back to the original variables
 using (3) gives us the following general solution of the wave equation:
 
 \begin{equation}
 u(x,t)=f(x-ct)+g(x + ct),
-\label{eq:eps}
 \end{equation}
 where $f$ and $g$ are arbitrary functions (with continuous second derivatives). We
 point out that each term in (8) represents a wave propagating along the x-axis with
@@ -223,7 +218,6 @@ for the wave equation} is summarized as follows:
 (PDE) u_\eta=c^2u_{xx}, -\infty<x<\infty, 0<t<\infty, u=u(x,t)\\
 (BC's) u(x,0)=\phi(x), u_t(x,0)=v(x)-\infty<x<\infty ,=\leqslant \infty
 \end{array} \right.
-\label{eq:eps}
 \end{equation}
 This highlights an important general difference between elliptic PDEs versus
 hyperbolic PDEs. Recall from the last chapter that for elliptic PDEs, simply
@@ -233,7 +227,7 @@ more information is needed for the problem to be well posed. We now state
 d'Alembert's solution of this Cauchy problem: 
 \\
 \\
-\textbf{THEOREM 12.1:}
+\subsubsection{THEOREM 12.1:}
 (\emph{D 'Alembert 's Solution of the Cauchy Problem?}\footnote
 { In applications, it is convenient to allow functions $\phi(x)$ and $v(x)$ for initial data which may violate
 the technical assumptions of having the required derivatives at all values of x. Often there are a finite
@@ -281,7 +275,7 @@ traveling waves. In the following example, we will get MATLAB to create a
 series of snapshots of a solution of a natural wave problem.
 \\
 \\ 
-\textbf{EXAMPLE 12.1:} (A Plucked Infinite String) Consider what happens to a long
+\subsubsection{EXAMPLE 12.1:} (A Plucked Infinite String) Consider what happens to a long
 string that is plucked with three fingers as shown in Figure 12.4 and then released
 (at time $t = 0$). Assume that the units are chosen so that wave speed $c=(T/ \phi)^1/2$ equals 1. Using d'Alembert's solution, get MATLAB to create a series of
 snapshots of the wave profiles for each of the seven times starting with time $t = 0$
@@ -318,8 +312,7 @@ Using this M-file in the following code, we create relevant vectors to produce t
 snapshots, and we use the \textit{subplot} command to conveniently collect all of the
 profiles in a single figure. The resulting MATLAB plot window is reproduced in
 Figure 12.5. 
-
-\begin{lstlisting}
+\begin{lstlisting}[numbers=none,frame=none]
 >> x=-5:.01:5;
 >> counter =1;
 >> for t=0:.5:3;
@@ -334,46 +327,27 @@ Figure 12.5.
 		counter=counter+l;
 	end 
 \end{lstlisting}
-
-EXERCISE FOR THE READER 12.1: Following the procedure for making a
-movie in Section 7.2, get MATLAB to create a movie of the solution of the wave
-problem of Example 12.1 for the time range $0</<4$ . Play it back at varying
-speeds (and perhaps with varying repetitions).\\
+EXERCISE FOR THE READER 12.1: Following the procedure for making amovie in Section 7.2, get MATLAB to create a movie of the solution of the waveproblem of Example 12.1 for the time range 
+$0</<4$ . Play it back at varyingspeeds (and perhaps with varying repetitions).\\
 \\
 EXERCISE FOR THE READER : (a) Write a function M-file:
-
-\begin{verbatim}
-function [] = dalembert(c,step, finaltime, phi, nu, range),  
-\end{verbatim}
-for creating a series of snapshots for the solution of the one-dimensional wave
-problem (9). The inputs should be: a positive number c for the wave speed, a
-positive number \texttt{step}  for the time steps of the snapshots, and another positive
-number \texttt{ finaltime } for the time limit of the snapshots. Also, the initial data of
-the problem will be inputted as two inline or M-file functions \textbf{phi} and \texttt{nu} The
-last input variable is a 4x1 vector \texttt{range} for the xy-axis range to use in the
-snapshots. There will be no output variables, but the program will produce a
-graphic of snapshots of the Cauchy problem (9) starting at time t = 0 and
-continuing in increments of \texttt{step} until \texttt{ finaltime } e is exceeded.\\
-(b) Run your program using the data of Example 12.1.\\
-(c) Run your program on the "hammer blow" problem that consists of the Cauchy
-problem (9) (for the wave equation) with c = 1, <p(x) = 0, and
+\\
+\\
+\texttt{function [] = dalembert(c,step, finaltime, phi, nu, range), }
+\\
+\\
+for creating a series of snapshots for the solution of the one-dimensional waveproblem (9). The inputs should be: a positive number c for the wave speed, apositive number \texttt{step}  for the time steps of the snapshots, and another positivenumber \texttt{ finaltime } for the time limit of the snapshots. Also, the initial data ofthe problem will be inputted as two inline or M-file functions \textbf{phi} and \texttt{nu} Thelast input variable is a 4x1 vector \texttt{range} for the xy-axis range to use in thesnapshots. There will be no output variables, but the program will produce agraphic of snapshots of the Cauchy problem (9)starting at time t = 0 andcontinuing in increments of \texttt{step} until \texttt{ finaltime } e is exceeded.\\(b) Run your program using the data of Example 12.1.\\(c) Run your program on the "hammer blow" problem that consists of the Cauchyproblem (9) (for the wave equation) with c = 1, <p(x) = 0, and
 $V(x)
 \begin{cases} 
 1, for \vert x \vert \leqslant 1\\
 0, for  \vert x\vert\geqslant 1
 \end{cases}$
-Create a series of snapshots of the solution from / = 0 to t = 5 in increments of / = 0.5.\\
-(d) Use your program to help you estimate the length of time it takes for the
-disturbances of the waves of both parts (b) and (c) above to reach an observer at
-
-position JC = 10. How do your answers fit in with the previously mentioned fact
-that the waves in making up d'Alembert's general solution of the wave equation
-travel at speed c (here c = 1)? 
+Create a series of snapshots of the solution from / = 0 to t = 5 in increments of / = 0.5.\\(d) Use your program to help you estimate the length ofn time it takes for the of the waves of both parts (b) and (c) above to reach an observer atposition x = 10. How do your answers fit in with the previously mentioned factthat the waves in making up d'Alembert's general solution of the wave equationtravel at speed c (here c = 1)? 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.6\linewidth]{ch12_5}
+	\includegraphics[width=0.5\linewidth]{ch12_5}
 	\caption{\textsf{ Progressive snapshots of the solution of the Cauchy problem for the
-plucked string of Example 12.1, at times / = 0, / = 0.5, t = 1, ..., t = 3. Note that the initial
+plucked string of Example 12.1, at times t = 0, t = 0.5, t = 1, ..., t = 3. Note that the initial
 disturbance separates into two disturbances that eventually take on the same shape but each
 having half the size of the original. The function u(x,t) could also be graphed in three
 dimensions as a function of two variables. The snapshots, which are merely "slices** of the
@@ -389,8 +363,7 @@ Exercise for the Reader 12.2). It also follows from d'Alembert's solution that t
 value of the solution u of (9) at a certain point (x,t), i.e., the vertical disturbance of
 the string at location x and at time t, can only be affected by the initial data
 0?,vover the interval $[x-ct,x + ct]$. This interval is called the interval of 
-
- dependence of the "space-time" point (jt,f); and the corresponding triangle (see
+dependence of the "space-time" point (jt,f); and the corresponding triangle (see
 Figure 12.6) in the space-time plane is called the \textbf{domain of dependence} of (x, t).
 \begin{figure}[H]
 	\centering
@@ -453,7 +426,7 @@ string would be broken). }
 	\begin{cases} 
 \phi (x)   ~~~ if~~~ 0< x< L\\
 -\phi (-x) ~~~ if ~~~ -L < x <0\\
-Extend to be periodic of period 2L\\
+$Extend to be periodic of period 2L$\\
 \end{cases}		
 ,0 < x < L, 0\leqslant t  < \infty	
 \end{equation}
@@ -485,7 +458,9 @@ problem (11)), it is clear that u{x,t) satisfies the wave equation and the first
 properties of $\hat{\phi}$ and $ \hat{v} (x)$ 
 \\
 \\
-\textbf{EXAMPLE 12.2:} \textit{(A Plucked Guitar String)} 
+\subsubsection{EXAMPLE 12.2:}
+
+\textit{(A Plucked Guitar String)} 
 Consider what happens to a guitar string of length 4 units that is plucked with one finger as shown in Figure 12.8 and then released (at time  $t = 0$). Assume that the units are chosen so that wave speed $ c=(1/ \rho )^1/2 $ equals 1. By using the method of reflections, get MATLAB to create a series of snapshots of the wave profiles for each of the 12 times starting with time t = 0 and advancing to t = 6 in increments of 0.5. 
 \begin{figure}[H]
 	\centering
@@ -494,13 +469,13 @@ Consider what happens to a guitar string of length 4 units that is plucked with 
 	\label{pfig:ch12_8}
 \end{figure}
 SOLUTION: Looking at Figure 12.8, we can write: 
-\begin{equation}
+$$
 \phi(x) (\equiv u(x,0)) =
 \begin{cases}
 x/3, ~~~~~for~ 0 \leqslant x \leqslant 3 \\
 4 - x, ~for~ 0\leqslant x \leqslant 3 
 \end{cases} .
-\end{equation}
+$$
 Also $V(x)(\equiv W,(JC,0)) = 0$ ince the string is released without velocity. We first 
 create an M-file for $ \hat{\phi}(x)$ using a similar construction as was done in the solution 
 of Exercise for the Reader 12.3. 
@@ -516,7 +491,7 @@ We can now use MATLAB to create the desired snapshots. To make for a
 convenient single graphic of all 41 plots, we use the subplo t command to 
 partition the plot window into smaller pieces. 
 \\
-\begin{lstlisting}
+\begin{lstlisting}[numbers=none,frame=none]
 function y = EX12_2phihat(x) 
 >> counter=l; 
 >> x=0:.01:4; 
@@ -536,7 +511,7 @@ end
 \end{lstlisting}
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\linewidth]{ch12_9}
+	\includegraphics[width=0.6\linewidth]{ch12_9}
 	\caption{\textsf{ The initial profile of the plucked guitar string of Example 12.2.}}
 	\label{pfig:ch12_9}
 \end{figure}
@@ -636,7 +611,7 @@ how long we let the string propagate, the total energy E of the configuration wi
 remain unchanged. 
 \\
 \\
-\textbf{EXAMPLE 12.3:} (a) Compute the total energy of the plucked infinite string of 
+\subsubsection{EXAMPLE 12.3:} (a) Compute the total energy of the plucked infinite string of 
 Example 12.1, and (b) of the plucked guitar string of Example 12.2. 
 \\
 \\
@@ -690,10 +665,9 @@ of intensity, we refer the reader to the article (with a rather presumptuous tit
 Morley [Mor-85] and [Mor-86].  
 \\
 \line(1,0){\textwidth}
-\\
-\textbf{EXERCISES 12.1}
-\\
-\\
+\subsubsection{EXERCISES 12.1:}
+
+
 \begin{enumerate}
  \item
 		(Making Snapshots of Vibrating Strings) For each of the following initial data sets, create a 
@@ -948,7 +922,7 @@ and that $\vert \phi(x) \vert$  for all $x$ and that $\vert \int_{a}^{b} v(s)ds 
 (b) Under what general circumstances can you conclude that the maximum amplitude of the wave is attained at time zero
 $(i.e., \vert u(x,t)\vert \leqslant max{\vert K(x,0) \vert: \infty < x < \infty} )$?
 \end{enumerate}
-\textbf{EXERCISES 12.2}
+\subsubsection{EXERCISES 12.2:}
 We begin this section by developing finite difference schemes for the numerical 
 solution of the one-dimensional wave problem (11):
 $$\begin{cases} 
@@ -1049,13 +1023,36 @@ finite difference method will solve for it using the values of the solution at t
 found lower time grid points. }}
 	\label{pfig:ch12_11}
 \end{figure}
-
-
-
-
-
-
-
+\begin{equation}
+\left[\begin{array}{c}
+u_{1,j+1}\\
+u_{2,j+1}\\
+\vdots\\
+u_{N-1,j+1}\\
+u_{N,j+1} \\
+\end{array}\right]=
+\left[\begin{array}{ccccc}
+2(l-\mu^2)&\mu^2&0&\cdots&0\\
+\mu^2&2(l-\mu^2)&\mu^2&\ddots&\vdots\\
+0&\ddots&\ddots&\ddots&0\\
+\vdots&\ddots& & &\mu^2\\
+0&\cdots&0&\mu^2&2(l-\mu^2)\\
+\end{array}\right]
+\left[\begin{array}{c}
+u_{1,j}\\
+u_{2,j}\\
+\vdots\\
+u_{N-1,j}\\
+u_{N,j} \\
+\end{array}\right]-
+\left[\begin{array}{c}
+u_{1,j-1}\\
+u_{2,j-1}\\
+\vdots\\
+u_{N-1,j-1}\\
+u_{N,j-1} \\
+\end{array}\right] \cdots
+\end{equation}
 
 Such a scheme is referred to as an explicit three-level scheme, explicit since the 
 highest $(t = (j + 1) l) $ level values are explicitly solved in terms of the lower level 
@@ -1116,7 +1113,8 @@ Note that this is a second-order approximation to $f'(x)$, whereas the forward a
 Even with all of the above attention to detail in developing a finite difference method with $0(h^2+k^2)$ local truncation error, stability issues can seriously corrupt the method. The next example will give good evidence of how badly 
 things can go. 
 \\
-\textbf{EXAMPLE 12.4:} \textit{(Illustration of Instability)} Consider the following Cauchy 
+\subsubsection{EXAMPLE 12.4:}
+ \textit{(Illustration of Instability)} Consider the following Cauchy 
 problem of a long plucked string: 
 $$\begin{cases} 
 	(PDE)u_u=4u_{xx}, ~~~~~~~ - \infty< x< \infty, 0<t \infty , u=u(x,t) \\ 
@@ -1149,7 +1147,7 @@ $u_{i,0}
 		0, ~~othervise
 	\end{cases}$. 
 Note that by (22), the of indices with nonzero w-values can advance only one index to the left/right with each new time level. The following MATLAB loop will produce the needed nonzero w-values up to time level $t = 5k$. The instability is so severe that it is  convenient to view the matrix of values. In creating the $6\times 25$ matrix of nodal values, we let the bottom row correspond to the time level zero values and so the top row corresponds to the $t = 5$ values. Note this requires us to modify the of (23) accordingly in our MATLAB code below: 
-\begin{lstlisting}
+\begin{lstlisting}[numbers=none,frame=none]
 >> U=zeros(6,25); U(6,12)=2 ; U(5,[1 0 14])=1 ; 
 >> for j=5:-l: 2 
 	   for i=2:2 4 
@@ -1182,7 +1180,7 @@ $$u_{i,0}
 		0, ~~othervise
 	\end{cases}$$
 To get uiX, we note that (10) and the initial values give us (since h = k = 0.1) that $u_{i,t}=u_{i+2,0}+u_{i-2,0}$ It is most simple to use a MATLAB loop to compute these values before entering into the main loop based on (23). Using the matrix conventions of part (a), the construction of the matrix of values can be accomplished in MATLAB with the following commands:
-\begin{lstlisting}
+\begin{lstlisting}[numbers=none,frame=none]
 >>U=zeros(51,251); 
 for i=110:130 
 	U(51,i)=2-abs(i-120)/5; 
@@ -1231,7 +1229,7 @@ $u_{i,0}
 		0, ~~othervise
 	\end{cases}$
 Note that  by (23), the set of indices with nonzero w-values can advance only one index to the left/right with each new time level. The construction of the $11 \times 25$ matrix of u-values is done as before and the relevant entries are displayed below. 
-\begin{lstlisting}
+\begin{lstlisting}[numbers=none,frame=none]
 U=zeros(ll,25);U(11,12)=2; U(10,[11 13])=1; 
 for j=10:-l:2 
 	for i=2:24 
@@ -1375,7 +1373,7 @@ As was implicit in Program 12.1, we point out that the Courant-Friedrichs-Levy (
 The actual M-file is quite short. In the next example we will test both the accuracy  runtime of this program with a wave problem with nicely smooth input data and whose exact solution is available to compute errors. It will also demonstrate some interesting pathologies when played against the Courant-Friedrichs-Levy condition. 
 \\
 \\
-\textbf{EXAMPLE 12.5:} Use Program 12.1 to solve the following wave problem on the time interval $0 \leqslant t \leqslant 2$: 
+\subsubsection{EXAMPLE 12.5:} Use Program 12.1 to solve the following wave problem on the time interval $0 \leqslant t \leqslant 2$: 
 $$\begin{cases} 
 	(PDE) U_{tt}=u_{xx}, ~~~~~~~~~~~~~~~~~ 0<x\pi , 0<t<\infty, u=u(x,t)\\ 
 	(BCs)
@@ -1400,15 +1398,15 @@ SOLUTION: We create three sets of data for each of the three sets of parameters 
 We first create inline functions for the initial data of this wave problem:
 
  
-\begin{lstlisting}
->>phi = inline('sin(x)'); 
->>nu= inline ('0'); A=nu; B=A; c=inline('1', 't,'x','u', 'ux'); 
-	nu = Inline function: 
-		nu(x) = 0
+\begin{lstlisting} [numbers=none,frame=none]
+>> phi = inline('sin(x)'); 
+>> nu= inline ('0'); A=nu; B=A; c=inline('1', 't,'x','u', 'ux'); 
+-> nu = Inline function: 
+	  nu(x) = 0
 \end{lstlisting}
  
 We now create the numerical solutions for each of the three parts: 
-\begin{lstlisting}
+\begin{lstlisting} [numbers=none,frame=none]
 >> (xl, tl, Ul] = onedimwave(phi, nu, pi, A, B, 8, 10, 15, c) ; 
 >> [x2, t2, U2] = onedimwave(phi, nu, pi, A, B, 8, 10, 29, c); 
 >> fx3, t3, U3] = onedimwave(phi, nu, pi, A, B, 8, 100, 15, c) ;
@@ -1416,7 +1414,7 @@ We now create the numerical solutions for each of the three parts:
 Part (a): To produce the desired snapshots, we take note of the general relationships between $t$ and $j$: $k=\dfrac{2}{M+1}, t_j=jk=\dfrac{2j}{M+1}$ so $j=\dfrac{(m+1)t_j}{2}$.
 Thus, when M = 15, we have y = 8ry, so the values f = 0.5, 1.0, 1.5, and 2.0 correspond respectively to the indices $y = 4, y = 8, y = 12$ and $j = 16$. Since the MATLAB indices are one greater than these actual indices, we may create and plot the desired numerical snapshots as follows: 
 
-\begin{lstlisting}
+\begin{lstlisting}[numbers=none,frame=none]
 >> subplot(1,4,1) 
 >> plot(xl, Ul(5, :)), axis([0 pi -1 l]),hold on 
 >> plot(xl, cos(2)*sin(xl),'r') 
@@ -1439,11 +1437,9 @@ The resulting graphic is shown in Figure 12.13.
 	\caption{\textsf{Comparison of the computed finite difference solution's snapshots jagged) with the actual solution's snapshots (smooth) for the wave problem of Example 12.5. The four plots correspond to snapshots at  levels $t = 0.5, t = 1, t = 1.5, t = 2$, respectively. The numerical solution was obtained using $N=10$ interior grid points for x and M- 15 interior grid points for $x$, which resulted in a violation of the Courant-Friedrichs-Levy condition (31) with $\mu = 1.75... > 1$. All except the last profile show the numerical snapshots to be reasonably decent with only small errors that are  visible to the naked eye. At $t = 2$, however, the numerical graph starts to break its pattern and relative errors reach orders of magnitude of $100\%$. Time levels (from left to right) are $t = 0.5, t = 1, t = 1.5$, and $t =2$}}
 	\label{pfig:ch12_13}
 \end{figure}
-
-
 Part (b): In this case, if we plot (as in part (a)) and compare the numerical solution with the actual solution, the results are indistinguishable at both time levels / = 1 and t = 2. To compute the maximum absolute values of the differences, using again the index relation $j=\dfrac{(m+1)t_j}{2}$ (and adding one to j to get MATLAB's indices) we enter the following commands: 
 
-\begin{lstlisting}
+\begin{lstlisting}[numbers=none,frame=none]
 >> max(max(abs(U2(:,16)'-cos(4)*sin(x2)))) 
 ->ans = 0.00131359012313 
 
@@ -1453,11 +1449,11 @@ Part (b): In this case, if we plot (as in part (a)) and compare the numerical so
 The results are rather accurate considering the somewhat large step sizes (especially in t).
 \\
 Part (c): Plotting the numerical solution's snapshot at time level / = 2 is accomplished with the command:
-
-\begin{lstlisting}
->>plot(x3 , U3(17, :)) 
-\end{lstlisting}
-
+\\
+\\
+\texttt{>>plot(x3 , U3(17, :))}
+\\
+\\
 The rather surprising result is shown in Figure 12.14.
 \begin{figure}[H]
 	\centering
@@ -1479,20 +1475,806 @@ EXERCISE FOR THE READER 12.7:
 
 Physically, both hyperbolic and parabolic problems model time-dependent 
 . The main difference between them is that while parabolic phenomena are dissipative, solutions to hyperbolic PDEs are conservative. In particular, initial singularities are smoothed out and lost with time under a parabolic PDE and are preserved and propagated under a hyperbolic PDE. Since finite difference schemes tend to average things out (we saw a good example of this in the previous chapter when we showed maximum principles hold for elliptic finite difference schemes), this suggests that finite difference schemes may run into problems for hyperbolic problems with discontinuous data. This is indeed the case, and for this reason, there are other methods that are more suitable for hyperbolic problems with discontinuous data. Examples of alternative methods suitable for hyperbolic problems with singularities include the method of characteristics (the D' Alembert method of the previous section is a special case), and the method of lines. More can be found on such methods in [Abb-66], [Dur-99], and [Ame-77]. Discontinuous data is very natural in hyperbolic problems modeling events such as shocks, explosions, or earthquakes. Our next example will show some typical pathologies that can occur when the finite difference method is applied to a discontinuous problem. 
+\\
+\\
+\subsubsection{EXAMPLE 12.6:} Consider the following wave problem: 
+$$\begin{cases} 
+	(PDE) u_u=c^2u_{xx}, ~~~~~~~ 
+	0< x< 5, 0<t \infty , u=u(x,t) \\ 
+	(BCs)
+	\begin{cases} 
+	u(x,0)=0 (x), u_t(x,0)=v(x)\\
+	u(0,t)=A(t),~~u(L,t)=0
+	\end{cases},
+	0 < x<5,~~ 0\leqslant t< \infty 
+\end{cases}$$
+where $c(x)\begin{cases}
+			2, ~~if~0\leqslant x\leqslant 3\\
+			1, ~~if~x\geq 3
+			\end{cases}$
+and$A(t)\begin{cases} 
+			sin(5t), ~~if~0\leqslant t\leqslant \pi/5 \\
+			0, ~~~~~~~~~~if~t> \pi/5
+			\end{cases}$.
+Physically this wave problem can be thought of as that of a string of length 5 that is made up of two materials which are glued together at x = 3. The right portion is more dense than the left (recall c is inversely proportional to $1/\sqrt{\rho}, \rho$ mass density of string). The string is initially at rest, and for a short period of time the left end is "moved" upward and then back down to the original position and held there. The right end of the string remains pinned down. Use the above program onedimwave, respecting the Courant-Friedrichs-Levy condition, to numerically solve this problem on the time range $0 \leqslant t \leqslant 5$ using finer and finer grids until the solutions become visually consistent Plot a series of snapshots of the wave profiles.
+\\
+\\
+SOLUTION: In cases where the wave speed c is nonconstant, we must replace c with its maximum value (worst-case scenario) in the CFL condition (33). This tells us that we should have 
+$$M+1\geq 2(N+1)$$
+We create M-files for $c(x)$ and $A(t)$, and inline functions for the remaining data: 
+\begin{lstlisting}
+function y =c EG12 5(t,x,u,ux) 
+  for i = 1:length(x) 
+	if (0<=x(i))&(x(i)<=3) 
+		y(i)=2; 
+	elseif (3<x(i))&(x(i)<=5) 
+		y(i)=1; 
+	else 
+		y(i)=0; 
+	end 
+end 
+\end{lstlisting}
+
+\begin{lstlisting}
+function y = Apulse_EG12_5 (t) , 
+  for i * 1:length(t) 
+	if (0<=t(i))&(t(i)<=pi/5) 
+		y(i)=sin(5*t(i)); 
+	else 
+		y(i)=0; 
+	end 
+end 
+\end{lstlisting}
+\texttt{>> phi=inline('0'); nu=phi; B=nu;}
+\\
+\\
+After some experimentation with increasing resolution, the patterns of the solutions become clear. The code below produced the series of snapshots shown in Figure 12.15.
+
+\begin{lstlisting}[numbers=none,frame=none]
+>> [x, t, U] = onedimwaveiphi, nu, 5, @Apulse_EG12_5, B, 5, 350,... 
+   800, @c_EG12_5); 
+>> count=l; 
+>> for k=l:80:800 
+	subplot(10,1,count) 
+	plot(x,U(k,:)), hold on, axis([0 5 -1.1 1.1]); 
+	text(5.1,0, [*t = ',num2str((k-l)/800*5),]) 
+	count=count+l; 
+end 
+\end{lstlisting}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{ch12_15}
+	\caption{\textsf{Series of snapshots for the solution of the "glued string" problem of Example 12.6. The interface at x = 3 (where the heavier string on the right meets the lighter one on the left) is emphasized with a grid. Note that when the wave reaches the heavier portion of the string, a secondary reflection takes place, and the original wavefront gets smaller and slows down. 
+}}
+	\label{pfig:ch12_15}
+\end{figure}
+We point out the very large numbers ofN= 350 and M= 500 that were used. The discontinuities in the data necessitated this. Indeed, Figure 12.5 shows a single plot of a snapshot of the above numerical solution at a late time \texttt{plot (x,U(780,:))}. This is in sharp contrast to the results of part (b) of the Example 12.5 (a wave problem with smooth data), where we got excellent accuracy with a very rough grid on the finite difference method. The general rule is that for hyperbolic problems with discontinuous data, finite difference methods will require a lot of work to get decent results. Even (many) nonlinear hyperbolic problems take less work if the data is smooth. The exercises will further explore these issues.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{ch12_16}
+	\caption{\textsf{Wave profile near the end of the time interval $0 \leqslant t \leqslant 5$ of the numerical solution of Example 12.6. Note the small (secondary) oscillations. This type of numerical noise is not part of the exact solution; it arises since the finite difference method tries to 
+smooth out certain discontinuities in the data of the problem. 
+}}
+	\label{pfig:ch12_16}
+\end{figure}
+EXERCISE FOR THE READER 12.8: The reader may observe that becauseof the discontinuities in the data, it would have been more appropriate to use the less restrictive version of the finite difference method \texttt{onedimwavebasic}  of Exercise for the Reader 12.7. Check that with this M-file, the results will be quite 
+identical to those of the above example. 
 
 
+We turn now to briefly describe implicit finite difference methods. For simplicity, we describe them only for the basic wave equation $u_u = c^2u_{xx}$ of (11). Their main advantage of allowing a more flexible choice of time step sizes is not so crucial here since the Courant-Friedrichs-Levy condition does not pose too stringent (small) a step size requirement on t. When we move on to parabolic equations in the next section, however, we will see that the stability of explicit methods requires a much smaller time step and so implicit methods will be a more attractive alternative. A family of such methods can be obtained by approximating utl with the centered difference:$u_u(x,t)\approx[u_{i,j}+2u_{i,j}+u_{i,j-1}]/k^2$  but for $u_{xx}$ we 558 use a weighted average of the centered difference approximations at the three levels: $t=t_{j-1},t_{j},t_{j+1}$
+\begin{equation}
+u_{xx}(x_i,t_j)\approx \omega[u_{i+1,j-1}-2u_{i,j-1}+u_{i-1,j-1}]/h^2 +(1-2 \omega)[u_{i+1,j}-2u_{i,j}+u_{i-1,j}]/h^2+ \omega [u_{i+1,j+1}-2u_{i,j+1}+u_{i-1,j+1}]/h^2
+\end{equation}
+\\
+where the parameter $\omega$ satisfies $0 < \omega< 1$. The choices $\omega= 1/2$ and $\omega = 1 / 4$ are the most popular since they lead to symmetric stencils. It can be shown that this scheme is unconditionally stable as long as $\omega> 1/4$ . We caution the reader that  the unconditional stability, the scheme may produce poor results if we use too large a time step size (relative to the space step size). For brevity, it is helpful to use the following notations for centered difference approximations: 
+\begin{equation}
+\delta_{x}^2 u_{i,j} \equiv \dfrac{u_{i+1,j}-2u_{i,j}+u_{i-1,j}}{h^2},
+\delta_{l}^2 u_{i,j} \equiv \dfrac{u_{i,j+1}-2u_{i,j}+u_{i,j-1}}{k^2},
+\end{equation}
+Thus with these notations, the general \textbf{implicit (three-level) finite difference scheme} for the wave equation $u_u = c^2 u_{xx}$ can be expressed as:
+\begin{equation}
+\delta_{x}^2 u_{i,j} =c^2 [\omega \delta_x^2 u_{i,j-1}+(1-2\omega) \delta_x^2 u_{i,j}+\omega \delta_x^2 u_{i,j+1}]
+\end{equation}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{ch12_17}
+	\caption{\textsf{FIGURE 12.17: Stencil the implicit finite difference method (36) for the wave equation. At each iteration in the upward marching scheme, the hollow nodal values need to be determined. In the case where the parameter $\omega$ is $1/2$, the central row of nodes (time level $t_j$) is not present in the stencil. 
+}}
+	\label{pfig:ch12_17}
+\end{figure}
+When translated into a linear system, at each iteration, the scheme (36) leads to a tridiagonal system in the variables $u_{i,j+1} (1\leqslant i \leqslant M)$ so the Thomas method can be used. 
+\\
+\\
+EXERCISE FOR THE READER 12.9: (a) Write a function M-file for applying the implicit finite difference method (36) with parameter $\omega = 1/4$. The syntax should be as follows: 
+\\
+\\
+\texttt{[x, t, U] =onedimawaveimpl(phi, nu, L, A, B, T, N, M, c)}
+where the variables and functionality should be just as with Program 12.1. 
+\\
+(b) Do some experiments on the problem of Example 12.6 comparing the performance of the implicit finite difference method of part (a) with the explicit method of Program 12.1 using values of $N$ and $M$ that would make the latter 
+unstable.
+\\
+(c) How fine a resolution is needed in the implicit finite difference method of part (a) to obtain graphical results of the quality of the numerical solution created in Example 12.6? Do the results seem better when the CFL condition is satisfied? Do some experiments.
+\\
 
 
+A wave problem, or for that matter, any PDE problem with two space variables (and the time variable) would require four dimensions to represent the graph of the solution. Snapshots, however, obtained by fixing the time at a certain level, can be graphed in three dimensions, and from these movies of wave propagation can be put together and viewed. Since such graphical investigations are particularly useful for understanding wave propagation, we proceed now to develop a finite difference method for solving wave equations in two space variables.
+\\
+
+We consider the following two-dimensional wave problem on a rectangular 
+domain:
+\begin{equation}
+	\begin{cases} 
+	(PDE) u_u=c^2 (u_{xx}+u_{yy}),~~~~0<x<a, 0<y<b,0<t<\infty,u=(x,y,t)\\
+(BC's)
+		\begin{cases}
+		u(x,y,0)=\phi(x,y), ~~~~ 0\leqslant x \leqslant a,0\leqslant y \leqslant b, 0 \leqslant t< \infty \\
+		u_t(x,y,0)=v(x,y), ~~~~ 0\leqslant x \leqslant a,0\leqslant y \leqslant b, 0 \leqslant t< \infty \\
+		 u(x, y, t) = 0, $for all (x, y) on theboundary of the rectangle:$\\
+		 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ R= \lbrace 0\leqslant x\leqslant a, 0\leqslant y \leqslant b \rbrace
+		\end{cases} 
+	\end{cases}
+\end{equation}
 
 
+For simplicity we have kept the edges of the wave fixed at height zero. We may visualize (37) as a problem for the vibrations of a flexible membrane of elastic material that has been stretched over the edges of the rectangular frame R, much like a drumhead. The initial conditions will produce a vibration of the drumhead, which will be governed by the wave PDE in (37). With this interpretation, it can be shown using physical principles that $ = T/ \varrho$, where T is the tension of the membrane 
+\footnote{ The stretching of the membrane results from the boundary forces. It is assumed that the membrane is 
+stretched uniformly in all directions.}
+and $\rho$ is the mass per unit area of the membrane. 
+\\
+\\
+\\
+We restrict time to be bounded on some fixed interval: $Q \leqslant t \leqslant T$ (apologies for using the letter T for two different purposes; the distinction should be clear from the context). We introduce a grid for each variable under thefollowing notation: 
+$$0 = x_0 < x_1 < x_2< \cdots <x_{N_x +1}=a, ~~~~\bigtriangleup x_i-x_{i-1}=h$$
+\begin{equation}
+	0 =yx_0 < y_1 < y_2< \cdots <y_{N_x +1}=b, ~~~~\bigtriangleup y_i-y_{i-1}=h
+\end{equation}
+$$0= t_0 < t_1 < t_2 <t<_{M+1}=T, \bigtriangleup t_i \equiv t_i-t_{i-1}=k$$
+We have specialized to using the same step size $h$ for $x-$ and y-coordinates. This, of course, is not always possible, depending on the dimensions of the rectangle $R$, but it will keep the notation more manageable. To keep the notation somewhat streamlined, we use superscripts to denote indices for time levels, and subscripts to indicate indices of space variables: 
+$$U_{i,j}^t=u(x_i,y_j,t_t).$$
+Using this notation and applying the central difference formulas for approximating the PDE in (37), as we did in the one-dimensional case, we arrive at the following discretization of the two-dimensional wave equation:
+\begin{equation}
+	u_{i,j}^{t+l}=2(l-2 \mu^2)u_{i,j}^t+\mu^2[u_{i+1,j}^2+u_{i-1,j}^2+u_{i,j+1}^2+u_{i+1,j-1}^2]-u_{i,j}^{t-1},
+\end{equation}
+We are now faced with a new difficulty. Namely, in order to store all of the functional values of our numerical solution, standard matrices are no longer feasible. Fortunately, MATLAB can handle higher-dimensional arrays or matrices. We digress momentarily to introduce them. A three-dimensional matrix will have three coordinates that specify each of its entries. For example, to create a three-dimensional matrix of size $2\times 2 \times 2$ all of whose entries are zeros, we 
+could enter:
+\\
+\texttt{>> A=zeros(2,2,2 )}
+\\
+This object can be thought of as two $2 \times 2$ matrices stacked on top of one another. When displaying such a matrix, as above, MATLAB will display each "layer" matrix in order starting from the lowest (final) index and moving on. All of the matrix manipulation tricks that we have learned, as well as all of the MATLAB functions that make sense for such higher-dimensional matrices, can be used for these general arrays. There is no limit to the dimension of the matrices that MATLAB can handle. For example, we could create a $3\times 2 \times 2\times 2$ all of whose entries are 5's as follows:
+\\
+\\
+\texttt{>> A=5*ones(3,2 , 2,2) )}
+\\
 
 
+\begin{lstlisting} [numbers=none,frame=none]
+->A(:,:,1,1) = 	5	5	A(:,:,1,2) = 5	5
+							  5 5			     		 5	5
+							  5	5 				 	   5	5
+   A(:,:,1,2) = 5 5 A(:,:,2,2) = 5	5
+							  5 5			     		 5	5
+							  5	5 				 	   5	5
+\end{lstlisting}
+Geometrically, we can visualize a three-dimensional matrix as simply a three-dimensional array of numbers, as, for example, a discretization of the heat distribution of a three-dimensional object. Algebraically, it is helpful to think of higher-dimensional matrices as simply being indexed sets of ordinary (two-dimensional) matrices. This is how MATLAB treats them; the first two-indices will always denote the indices of the displayed two-dimensional constituent matrices of a higher-dimensional matrix. Higher-dimensional matrices are ideal for storing numerical values for functions of more than two variables. 
+\\
+
+As in the one-dimensional case, the Courant-Friedrichs-Levy condition now takes on the form \\
+$\mu^2 \equiv (ck/h)^2\leqslant 1/2$.
+\footnote{In general, if we wanted to allow different step sizes $h_x,h_y$ for the x- and y-grids, the Courant-Friedrichs-Levy stability condition takes the form: $\mu^2 \equiv c^2k^2(h_x^{-2}+h_y^{-2})\leqslant t$ , see [IsKe-6].}
+Under the sufficient differentiability assumptions, Taylor's theorem (Chapter 2) can be used, once again, to produce the following $0(h^2 + k^2)$ approximation for the time level $t = k$ values: 
+\begin{equation}
+u_{i,j}\equiv(1-2\mu^2) \phi(x_i, y_j)+\dfrac{\mu^2}{2}[\phi(x_{i+1},y_j)+\phi(x_{i-1},y_j)+\phi(x_{i},y_j+1)]
+\end{equation}
+$$
++\phi(x_i,y_{j-1})+kv(x_i,y_j)~~for~~i=1,2,
+\cdots,N_x~~and~~j=1,2,\cdots,N_y.
+$$
+EXERCISE FOR THE READER 12.10: Justify the OQi2 +A2) error quality of the approximation (41).
+\\
+ 
+In order to turn the above formulas into an M-file, it is not feasible to incorporate (or even try to make sense of) higher-dimensional matrix multiplication. MATLAB's versatile features for manipulating arrays, however, will allow us to again write a rather short (and efficient) M-file for theabove finite difference scheme. For smooth problems, it will no longer be true that taking $\mu$ to be its maximal value for stability will yield zero truncation errors (see Exercises 19 and 22 and the note preceding Exercise 19), but nonetheless, for smooth problems, this choice is usually a good one and further it simplifies the formulas. In our M-file below, we thus take $\mu = 1 / 2$. 
+\\
+\\
+\subsubsection{PROGRAM 12.2:} Function M-file for solution of the two-dimensional wave problem (37) 
+by the finite difference method:
+\begin{equation}
+	\begin{cases} 
+	(PDE) u_u=c^2 (u_{xx}+u_{yy}),~~~~0<x<a, 0<y<b,0<t<\infty,u=(x,y,t)\\
+(BC's)
+		\begin{cases}
+		u(x,y,0)=\phi(x,y), ~~~~ 0\leqslant x \leqslant a,0\leqslant y \leqslant b, 0 \leqslant t< \infty \\
+		u_t(x,y,0)=v(x,y), ~~~~ 0\leqslant x \leqslant a,0\leqslant y \leqslant b, 0 \leqslant t< \infty \\
+		 u(x, y, t) = 0, $for all (x, y) on theboundary of the rectangle:$\\
+		 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ R= \lbrace 0\leqslant x\leqslant a, 0\leqslant y \leqslant b \rbrace
+		\end{cases} 
+	\end{cases}
+\end{equation}
+\begin{lstlisting}[numbers=none] 
+ function [x, y, t, U]=twodimwavedirbc(phi, nu ,a ,b, T,h ,c)
+ 	solves the two-dimensional wave probl;em u_tt = c^2(u_xx, u_yy)
+ 	on the rectangle (0<= x <= a, 0<= y <= b), with u(x,y)=0
+ 	on the boundary of the rectangle. 
+	input variables: pYti ^initial wave profile function 
+	nu initial wave velocity function, both should be functions of 
+	(x,y). a= right endpoint of x, b = upper endpoint of y, 
+	 T = final time solution will be computed. h=common gap on 
+	 x, y-grids, c = speed of wave. 
+	 Output variables: x - row vector for first space variable, y .- y
+	 row vector for second space variable, t - time grid row vector 
+	 (starts at t=0, ends at t=T, has Nt equally spaced values), 
+	 U = (Nx)by(Ny)by(Nt) matrix of solution approximations at 
+	 corresponding grid points (where Ny - number of y-grid points) 
+	 x grid will correspond to first entries of U, y grid 
+	 values to second entries of U, and t grid to third entries of U. 
+	 CAUTION: This method will only work if h is chosen so that the x 
+	 and y grids can have a common gap size, i.e., if h = a/h and 
+	  b / h mu s t be i n tege i s . 
+	 The time gtid gap is chosen so that mu'2 - 1/2; this guarantees the 
+	 Courant-fc'riedrichs-Levy condition holds and simplifies the 
+	 main finite d i f f c- r e n c e for mu 1 a
+	 
+k=h/sqrt (2) /c; f* k is determined from muA 2 = 1/2 
+MaxRatio=max([b/h a/h 1]); 
+if ((abs(b/h-round(b/h))>MaxRatio*eps)I(abs(a/h-
+round(a/h))>MaxRatio*eps)  
+fprintf('Space grid gap h must divide evenly into both a and b \r') 
+fprintf ( Either try another input or modify the algorithm') 
+error('M-file will exit') 
+end 
+Nx - round(a/h)+1; number of points on x-grid 
+Ny - round(b/h)+1; number of points on y-grid 
+Nt - f loor (T/k) +1; number of points on t-grid 
+U=zeros(Nx, Ny, Nt) ; x=0:h:a; y=0:h:b; t=0:k:T;
+	Recall matrix indices must start at 1. Thus the indices of the 
+	matrix will always be one more than the corresponding indices that 
+	were used in theoretical development. 
+	Note that by default, zero boundary values have been assigned to 
+	all grid points on the edges of the rectangle (and, for the time 
+	being, at all. grid points
+	
+	Assign initial time t-^ values and next step t^k values. 
+for i=2:(Nx-1) 
+	  for j=2:(Ny-1) 
+	U(i,j,l)=feval(phi,x(i),y(j)); 
+	U(i,j,2)=.25*(feval(phi,x(i-l),y(j))+... 
+	  feval(phi/x(i + l)/y(j))+feval(phi,x(i),y(j-l))+.. . 
+	  feval(phi,x(i),y(j + l))) + k*feval(nu,x(i), y(j)) ; 
+end 
+end 
+
+	Assign values at interior grid points 
+for ell=3:Nt ^letter ell looks too much like number one 
+
+	U(2:(Nx-1),2:(Ny-1), ell) = ... 
+	 + .5*(U(3:Nx,2: (Ny-1), ell-1)+ U(1:(Nx-2),2:(Ny-1), ell-1)... 
+	 + U(2:(Nx-l),3:Ny, ell-1) + U(2:(Nx-1),1:(Ny-2), ell-1))... 
+	 - U(2:(Nx-1),2:(Ny-1), ell-2); 
+end 
+\end{lstlisting}
+\subsubsection{EXAMPLE 12.7:} (a) Make a (color) movie of the wave that solves the following 
+problem: 
+$$\begin{cases} 
+	(PDE) u_u=c^2 u_{xx}+u_{yy},~~~~0<x<\pi, 0<y<\pi,0<t<\infty,u=(x,y,t)\\
+(BC's)
+		\begin{cases}
+		u(x,y,0)=sin 2x sin2y, ~~~~ 0\leqslant x \leqslant \pi,0\leqslant y \leqslant \pi, 0 \leqslant t< \infty \\
+		u_t(x,y,0)=v(x,y), ~~~~ 0\leqslant x \leqslant \pi,0\leqslant y \leqslant \pi, 0 \leqslant t< \infty \\
+		 u(x, y, t) = 0, $for all (x, y) on theboundary of the rectangle:$\\
+		 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ R= \lbrace 0\leqslant x\leqslant \pi, 0\leqslant y \leqslant \pi \rbrace
+		\end{cases} 
+	\end{cases}$$
+for the time interval $0 \leqslant T \leqslant 4$. Divide the JC- and v-ranges into 25 equally spaced 
+intervals for the grid.
+(b) The exact solution of this problem is $u(x,y,t) = cos(2\sqrt{2t})sin(2x)sin(2y)$ , as 
+is easily verified. Measure the maximum value of the errors of the computed 
+solution above versus the exact solution at four time values that are close to the 
+values $t= 1,2,3,4$. 
+\\
+\\
+SOLUTION: We first construct inline functions for the boundary conditions. It is 
+important that they be made functions of x and y (in this order).
+\begin{lstlisting}[numbers=none,frame=none] 
+>>phi=inline('sin(2*x ) *sin(2*y) ' , 'x' , 'y') 
+->phi =lnline function: 
+	phi(x.y) = sin(2*x)*sin(2*y) 
+	
+>>nu=inline('0','x' , 'y') 
+->nu = Inline function: 
+	nu(x.y) = 0 
+\end{lstlisting}
+The remaining input parameters for the above M-file are as follows: $a = b = \pi ,T = 4, h = \pi/25,$ and $c= 1$
+
+\begin{lstlisting}[numbers=none,frame=none] 
+ >>[x, y, t, U] = twodimwavedirbc(phi, nu, pi, pi, 4, pi/25, 1) 
+>> size(U) 
+->ans = 26 26 46
+ 
+>> for ell=l:26 
+surf (x,y,U(:, :,ell)) ; 
+axis([0 pi 0 pi -1.5 1.5]); 
+M{:,:,ell)=getframe; %see footnote below 
+end 
+>> movie(M, 2, 4)
+\end{lstlisting}\footnote{Note that the movie matrix M for three-dimensional graphics is set up as a three-dimensional array. For versions earlier than Version 7 in MATLAB, the usual (two-dimensional) syntax \textit{M(:, ell)} =get frame; should be used.}
+Several representative snapshots of the movie are displayed in Figure 12.18; the reader is urged to run the code on his or her machine and view the actual movie. 
+\\
+\\
+Part (b): We first create an inline function for the exact solution:
+\begin{lstlisting}[numbers=none,frame=none] 
+>> exact=inline('cos(2*sqrt(2)*t).*sin(2*x).*sin(2*y)','x' , 'y', 't; ) 
+	->exact = Inline function: 
+			exact(x,y,t) = cos(2*sqrt(2)*t).*sin(2*x).*sin(2*y)
+\end{lstlisting}
+By viewing the vector t, we see that a good set of representative times would be: 
+\begin{lstlisting}[numbers=none,frame=none] 
+>> t([1 3 24 35 46]) 
+->ans =1.0663 2.0437 3.0212 3.9986 
+
+>> for i=l:2 6 
+f or j=l:2 6 
+UexactMi , j)=exact( (i-l)*pi/25 , (j-1)*pi/25,t(13)) ; 
+end 
+end 
+>> max(max (U(:,:,13)-Uexactl) ) 
+->ans=1.3323e-015 y)
+\end{lstlisting}
+Repeating this for the other three listed time levels gives the following errors (in order): 1.7764e-015, 1.6653e-015, 1.8319e-015! The results are astoundingly pleasing; not only is the numerical solution graphically indistinguishable from the exact solution, but they are still identical up to MATLAB's working precision! In general, whenever the solution of the wave problem (11) or (37) has a "smooth"  solution, then the finite difference solution (with appropriate value of $\mu$) coincides with the exact solution! See Exercise 19 for a precise statement and outline of the proof in the case of (11). 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{ch12_18}
+	\caption{\textsf{Slides from the movie of Example 12.7 of a wave on a square membrane. 
+MATLAB's default colormap is set up so that highest values of the graph are colored red 
+(hot) and lowest values are colored blue (cold). The movie must be seen!}}
+	\label{pfig:ch12_18}
+\end{figure}
+\line(1,0){\textwidth}
+\subsubsection{EXERCISES 12.2:}
+
+\begin{enumerate}
+ \item 
+ 		a) Use finite difference methods to create a series of snapshots of the solution of the following 
+vibrating string problem:
+$$	\begin{cases} 
+	(PDE) u_u=2u_{xx},
+	~~~~0<x<\pi, 0<t<\infty,u=(x,t)\\
+(BC's)
+		\begin{cases}
+		u(x,0)=sin x, u_t(x,0)=0,\\
+		u_t(0,t)=u(\pi ,t),
+		\end{cases}
+		0<x<\pi, 0\leqslant t< \infty 
+	\end{cases}$$
+
+Have your snapshots range from $t = 0$ through $t = 6$.
+\\ 
+(b) Compute the maximum errors of the snapshots at six time levels close to $t = 1, 2, 3, 4, 5, 6$ 
+by comparing with the exact solution $u(x,t) = cos(\sqrt{2t})sin x$. 
+(c) Are there moderate values of TV (- number of interior jc-grid points) and $N$(= number of 
+interior t-grid points) for which the finite difference solution would be accurate essentially to 
+machine precision? Take moderate to mean less than 100, and machine precision to be 
+approximately $10^{15}$.
+\\
+(d) Do the answers to these questions change significantly depending on whether we use Program 
+onedimwave as the solver or the program onedimwavebasi c of Exercise for the Reader 
+12.7? 
+	\item
+		Make a movie, as distortion-free as possible, of the wave in Exercise 1 in the range $t = 0$ 
+through $t = 6$ . 
+	\item
+		Repeat all parts of Exercise 1 for the following vibrating string problems:
+\\
+\\
+$	(a)\begin{cases} 
+	(PDE) u_u=u_{xx},
+	~~~~0<x<\pi, 0<t<\infty,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=sin x, u_t(x,0)=sin(x),\\
+		u_t(0,t)=u(\pi ,t)=0,
+		\end{cases}
+		0<x<\pi, 0\leqslant t< \infty 
+	\end{cases}$
+\\
+\\
+The exact solution is $u(x,t)=sin(x)(cos(xt)+sin(t))$
+\\
+\\
+$	(a)\begin{cases} 
+	(PDE) u_u=9u_{xx},
+	~~~~0<x<\pi, 0<t<\infty,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=0, u_t(x,0)=sin^3(x),\\
+		u_t(0,t)=u(\pi ,t)=0,
+		\end{cases}
+		0<x<\pi, 0\leqslant t< \infty 
+	\end{cases}$
+\\
+\\
+The exact solution is $u(x, t) = [9 sin x sin 3t - sin 3x sin 3at] / 36 $.
+\\
+\\
+$	(a)\begin{cases} 
+	(PDE) u_u=4u_{xx},
+	~~~~0<x<\pi, 0<t<\infty,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=x(x-1), u_t(x,0)=0,\\
+		u_t(0,t)=u(\pi ,t)=0,
+		\end{cases}
+		0<x<\pi, 0\leqslant t< \infty 
+	\end{cases}$
+\\
+\\
+The exact solution $ u?(x,t)=\dfrac{8}{n^3}\sum_{n=1}^{\infty}\dfrac{1}{(2n-1)^2}sin[(2n-1)\pi x]cos[(4n-2)\pi t]$. 
+\\
+\textbf{Suggestion:} For part (c), when computing the exact solution, use a finite sum that approximates 
+the infinite sum to within machine precision. See Section 5.3 for related approximations. 
+	\item 
+		Make movies, as distortion-free as possible, for each of the waves in parts (a) through (c) of 
+Exercise 3. Use the time range $0 \leqslant t \leqslant 6$. 
+	\item
+		Consider the moving wave problem modeled by the basic wave equation $u_u = u_{xx} $on the string 
+$0 \leqslant x \leqslant 10$ with initial profi
+$	u(x,0) = \phi (x)\begin{cases} 
+		x/2, ~~~~~~~~~~~$if$~0\leqslant x \leqslant 2\\
+		(x-3)^2, ~~~~$if$~ 2\leqslant x \leqslant 3\\
+		0, ~~~~~~~~~~~~~~~$otherwise$
+	\end{cases}$
+and moving to the right at  speed one; see Figure 12.17. (a) Use the finite difference method (with sufficiently fine grids) to solve this problem from $t = 0$ through $t = 20$, and plot some snapshots of the numerical solution.	Do the results change significantly depending on whether we use Program 12.1 \texttt{onedimwave}  as the solver or the program \texttt{onedimwavebasic} of  for the Reader 12.7? (b) Create a MATLAB movie of this wave motion, (c) Use the implicit finite difference method (of Exercise for the Reader 12.9) so re-solve part (a) with grids comparable to those that were used in part (a). How do the results compare? (d) Make a movie of the motion of the wave, from $t = 0$ through $t = 12$.
+\\	
+\textbf{Suggestion:} To get the initial velocity $u_t(x,0)$, use D'Alembert's theorem to get the analytical 
+solution (for $t$ less than 7) and differentiate with respect to $t$). Note that this initial velocity will be 
+discontinuous. 	
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{ch12_19}
+	\caption{\textsf{Initial wave profile for Exercise 5.}}
+	\label{pfig:ch12_19}
+\end{figure}
+	\item
+		The wave problem of Exercise 5 involved a nonsmooth wave. Repeat all parts of Exercise 5 for 
+the corresponding wave problem with initial pulse $u(x,0)$ = $BS(x-2)$, where $BS(x)$ is the 
+cubic spline given by equation (51) of Chapter 10. The initial pulse is still moving to the right at 
+speed one. Because of the smoothness of the data, the finite difference methods should perform 
+much better than for Exercise 5. 
+	\item
+		Use finite difference methods to solve the following vibrating string problem where one end is in 
+sustained motion:
+$$	(a)\begin{cases} 
+	(PDE) u_u=u_{xx},
+	~~~~0<x<\pi, 0<t<\infty,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=0, u_t(x,0)=0,\\
+		u(0,t)=sin t, u(\pi, t)='
+		\end{cases}
+		0<x<\pi, 0\leqslant t< \infty 
+	\end{cases}$$
+(a) Display the results graphically as a series of snapshots. 
+\\
+(b) Create a MATLAB movie of this vibrating string. 
+\\
+(c) According to your data, does the solution eventually become a periodic function? If it seems 
+so, can this be precisely confirmed? 
+\\
+(d) Compare the performance of explicit finite difference methods versus the implicit method of 
+Exercise for the Reader 12.9 (using grids that obey the CFL stability criterion).	
+	\item
+		For each wave problem below, do the following: (i) Use an explicit finite difference method to 
+create a series of snapshots of the wave propagation from time $t = 0$ up through (at least) $t = 10$. 
+Try successively refining the resolutions until the numerical results stabilize (graphically at 
+least), (ii) Create a MATLAB movie of the solution of (i). (iii) Repeat (i) using the implicit 
+finite difference method of Exercise for the Reader 12.9. 
+\\
+\\
+$	(a)\begin{cases} 
+	(PDE) u_u=(1+x/2)u_{xx},
+	~~~~0<x<\pi, 0<t<\infty,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=sin x, u_t(x,0)=sin(x),\\
+		u(0,t)=u(\pi ,t)=0,
+		\end{cases}
+		0<x<\pi, 0\leqslant t< \infty 
+	\end{cases}$
+\\
+\\
+$	(b)\begin{cases} 
+	(PDE) u_u=(1+x^2)^{1/2}u_{xx},
+	~~~~0<x<\pi, 0<t<\infty,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=0, u_t(x,0)=0,\\
+		u(0,t)=sin(4x), u(\pi,t)=0'
+		\end{cases}
+		0<x<\pi, 0\leqslant t< \infty 
+	\end{cases}$
+\\
+\\
+$	(c)\begin{cases} 
+	(PDE) u_u=(1+x^2)^{1/2}u_{xx},
+	~~~~0<x<\pi, 0<t<\infty,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=0, u_t(x,0)=0,\\
+		u(0,t)=sin(4x), u(\pi,t)=(1/4)sin(10x)'
+		\end{cases}
+		0<x<\pi, 0\leqslant t< \infty 
+	\end{cases}$
+\\
+\\
+	\item 
+		(a) Write a function M-file for applying the implicit finite difference method (36) with parameter 
+$\omega = 1 / 2$. The syntax should be as follows:
+\\
+\\
+\texttt{[x ,t, U] = onedimwaveimpl$\_$2(phi, nu, L, A, B, T, N, M, c) }
+\\
+\\
+where the variables and functionality should be just as in 
+the program \texttt{onedimwaveimpl$\_$4}  of Exercise for the Reader 12.9.
+\\
+(b) Do some experiments on the problem of Example 12.6 comparing the performance of the implicit finite difference method of part (a) with the explicit method of Program 12.1, using values of N and M that would make the latter unstable.Compare with the performance of \texttt{onedimwaveimpl$\_$4} as was seen in Exercise for the Reader 12.9. 
+\\
+(c) How fine a resolution is needed to get the implicit finite difference method of part (a) to 
+obtain graphical results of the quality of the numerical solution created in Example 12.6? Do the 
+results seem better when the CFL condition is satisfied? Do some experiments. Compare with 
+the performance of \texttt{onedimwaveimpl$\_$4} as was seen in Exercise for the Reader 12.9. 
+	\item 
+		\textit{(Another M-file for Two-Dimensional Waves)} (a) Write another M-file with the following 
+syntax: 
+\\
+\\
+	\texttt{( x, y, t , UJ = twodimwavedirbcV2(phi, nu, a, b , T, h, k, c) }
+\\
+\\
+that is designed to solve the two-dimensional wave problem (34). The variables and functionality are similar to the \texttt{twodimwavedirbc} M-file of Program 12.2 but there is one new input variable, k, which is the time step size. Thus this new program gives more flexibility in choosing time step in that it is no longer determined by forcing $\mu ^22 =1/2$ (the maximum value allowed in the stability condition). 
+\\
+(a) Run the program on the problem of Example 12.7 to reproduce the results ofthat example. In other words, choose k to be the value that was internally computed = $t(1)$ by the previous M-file, and check if the $U$ matrix is identical, modulo roundoff, to the one in obtained in Example 12.7. (They should be if your program is correctly written.) 
+\\
+(b) Keeping $h$ the same as in part (c), successively halve the it-step size from its value there, rerun the program, and compute the errors (at the same four /-values) of the numerical solution of your program with that in part (a). Do things get better, worse, or stay about the same? Comment on your findings. 
+\\
+(c) Can you find a two-dimensional wave BVP where the \texttt{twodimwavedirbcV2} seems (with appropriate choices of k) to do a better job than \texttt{twodimwavedirbcV2} ? This may take a good deal of numerical experimentation.
+	\item
+		For each of the following two-dimensional wave problems do the following: (i) Create a series of snapshots of the wave motion, (ii) Create a movie of the 	wave motion, (iii) If an exact solution is given, compute the (maximum) errors of the finite difference solutions at several different time values. The problems all fall under the umbrella of the following Dirichlet BVP: 
+$$	\begin{cases} 
+	(PDE) u_u=c^2 (u_{xx}+u_{yy}),~~~~0<x<a, 0<y<b,0<t<\infty,u=(x,y,t)\\
+(BC's)
+		\begin{cases}
+		u(x,y,0)=\phi(x,y), ~~~~ 0\leqslant x \leqslant a,0\leqslant y \leqslant b, 0 \leqslant t< \infty \\
+		u_t(x,y,0)=v(x,y), ~~~~ 0\leqslant x \leqslant a,0\leqslant y \leqslant b, 0 \leqslant t< \infty \\
+		 u(x, y, t) = 0, $for all (x, y) on theboundary of the rectangle:$\\
+		 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ R= \lbrace 0\leqslant x\leqslant a, 0\leqslant y \leqslant b \rbrace
+		\end{cases} 
+	\end{cases}$$
+(a) \emph{(Two-Dimensional Hammer Blow)} Take $ a = b = 3,  c = 1$ , $\phi(x,y)=0$ and 
+$c(x,y)=\begin{cases}
+5,1\leqslant x,y \leqslant 2\\
+0, otherwise
+\end{cases}$
+Run your computations on the time interval $t = 0$ through $t = $5. 
+\\
+(b) Take $ a = b = 1,  c = 2$ , $\phi(x,y)=x(1-x), y(1-y)$ and $x(x,y)=0$ Exact solution
+$$u(x,y,t)=\dfrac{64}{\pi^6} \sum_{N=0}^{\infty}\sum_{N=0}^{\infty} \dfrac{1}{(2N+1)^3(2M+1)^3} \cdot sin((2n+1) \pi x)sin((2m+1)\pi y)cos(\pi \sqrt{(2n+1)^2+(2m+1)^2}$$
+
+(c) Data as in part (b) but $v(x,y)=2 sin (2\pi x)sin(\pi y$. Exact solution: Solution of part (b) 
+plus $(2\sqrt{5})sin(2\pi x)sin(\pi y)sin(\sqrt{5}\pi t)$.
+\\
+Suggestion: The exact solutions of parts (b) and (c), so-called double Fourier series, can be estimated by finite sums of the form 
+$u(x,y,t)=\dfrac{64}{\pi^6} \sum_{n=0}^{K} \sum_{n=0}^{K} \cdots$
+where the integer K is chosen sufficiently large so that the series is accurate to MATLAB precision (i.e., maximum error $< 10^{15}$). Try to estimate mathematically how large K should be for this accuracy. See Section 5.3 for similar estimates.
+	\item
+		(a) \textit{Pinch-Gripped Membrane}) Suppose a membrane that occupies the square $0 \leqslant x,y \leqslant 4$ has initial position given by a pyramid with height 1 at $(xy) = (2,2)$, and initial velocity equal to zero; see Figure 12.20(a). Create a movie of the resulting motion of the membrane if the wave 
+speed is $c = 1$.
+\\
+(b) (\textit{Smooth Bumped Membrane})
+Suppose a membrane that occupies the square $-2 \leqslant x,y \leqslant 2 $
+has initial position given by the graph z = BS(r); where $r = \sqrt{x^2+ y^2}$ is the distance to the origin and BS is the cubic spline function (51) of Chapter 10, see Figure 12.20(b). The initial velocity is equal to zero. Create a movie of the resulting motion of the membrane if the wave speed is $c = 1$.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{ch12_20}
+	\caption{\textsf{Initial membrane profiles for the wave problems of Exercise 12 (a) (left) and (b) 
+(right).}}
+	\label{pfig:ch12_2=}
+\end{figure}
+	\item
+		Write a function M-file for solution of the following two-dimensional wave problem by the 
+finite difference method. 
+$$\begin{cases} 
+	(PDE) u_u=c^2 u_{xx}+u_{yy},~~~~0<x<a,0, 0<y<b,0<t<\infty,u=(x,y,t)\\
+(BCs)
+		\begin{cases}
+		u(x,y,0)=\phi(x,y), ~~~~ 0\leqslant x \leqslant a,0\leqslant y \leqslant b, 0 \leqslant t< \infty \\
+		u_t(x,y,0)=v(x,y), ~~~~ 0\leqslant x \leqslant a,0\leqslant y \leqslant b, 0 \leqslant t< \infty \\
+		 u(0,y,t)=L(x,t),~~u/(a,y,t)=R(y,t),\\
+		 u(0,y,t)=B(x,t),~~u/(b,x,t)=R(x,t),\\
+		\end{cases} 
+	\end{cases}$$
+The syntax should be as follows: 
+\\
+\\
+\texttt{[x,y,t,U] = twodimwavedirbc2(phi, nuf a, b, T, h, c, Lr R, B, T) }
+\\
+\\
+where the variables (all but the last four input variables) and functionality are as in Program 
+12.2. The last four input variables are the boundary value functions. 
+\\
+(a) Use the program to solve the problem above with the following data: 
+$$x=1,a=b= \pi, \phi=v=L=T=R=0, B(x,t)=sin t sin(x) $$
 
 
+Create both snapshots and a movie of the wave propagation.
 
 
+b) Repeat part (a) but change $T(x,t/) = (1/ 4)sin(5t)sin(3x)$. 
+\\
+\\
+NOTE: The next exercise will outline a proof of the necessity of the Courant-Friedrichs-Levy 
+condition for the stability of the finite difference method in solving the wave equation. The proof will 
+rely on finding exact solutions of the difference equation. As was the case with difference schemes for 
+ODE in Part II, the theory of finding a solution of a finite difference scheme for a PDE closely parallels 
+the theory of analytical solutions. Since we do not discuss this analytical theory, we will only start with 
+a suitable form for a solution of the difference equation without discussing the motivation for this 
+choice. The proofs will run more smoothly if we use complex numbers and, in particular, Euler's 
+identity: $e^{i\theta} - cos(\theta) + /sin(\theta)$, where $i = \sqrt{-1}$ is the complex unit
+	\item
+		Use Euler's identity to show that $cos(\theta) = (e^{i\theta}+ e^{-i\theta})/2 and sin(\theta) = (e^{i\theta}+ e^{-i\theta})/2i$. 
+		\item
+			(\textit{Stability Analysis}) This exercise will outline a proof that the Courant-Friedrichs-Levy 
+condition (31) $\mu = ck / h \leqslant 1$ is necessary for the stability of the finite difference scheme (23)
+$$u_{n,j+1}=2(l-\mu^2)u_{n,j}+\mu^2[u_{n+1,j}+u_{n-1,j}]-u_{n,j-1}$$
+for the wave equation $u_u = c^2u_{xx}$. Since the proof will invoke complex number notation, we have changed the index $i$ to $n$ in (23) to avoid any confusion.
+\\ 
+(a) We begin by looking at functions (of $n$ and $j$) of the form: $U_{n,j} = a^je^{i\beta n h}$ (here $\alpha$ and $\beta$ are parameters and h is the grid spacing on the x-axis). Substitute this function into (23) and show that it solves it if and only if $\alpha +1 /\alpha-2 = \mu(2(\eta-2 + 1/\eta$) 
+\footnote{For readers who are familiar with the method of separation of variables for finding solutions of PDEs, this form of the discrete problem can be derived by a similar discrete approach, i.e., we assume that the solution of the discrete equation can beseparated as a product A(j)B(n), substitute it into the difference equation, and then determine the form of A and B. For more details on this interesting analogy (as well as a full account of the relevant analytical theory) we refer the reader to [DuCZa-89], }
+\\(b) Show that the equation obtained in part (a) can be rewritten in the form $\alpha^2 +2(2\mu^2 sin^2(\beta h/2)- l)\alpha + 1 = 0$. The reason that we wrote the equation as a quadratic in the variable $\alpha$ (rather than emphasizing $\beta$ ) is that in the solution form $U_{n,j} = \alpha^j e^{i\beta n h}$, the factor depending on $\beta$ always has bounded absolute value, in fact $\vert e^{i\beta n h} \vert=1$ regardless of the values of $\beta$ , n, and h. The a-dependent factor $\alpha^j$ can blow up (cause instability) if $\vert\alpha \vert > 1$, but will remain stable if | a|< 1.
+\\
+(c) Introduce the parameter $\varrho = 2\mu^2sin^2(\beta h/2)-1$ so the equation in part (b) can be expressed as $a^2 + \sqrt{\varrho^2} + 1 = 0$. Use the quadratic formula to show the roots are $\alpha=-\varrho \pm \sqrt{\varrho}^2-1$ . Show that both roots will have absolute values less than one if $\varrho \leqslant 1$ .
+\\ 
+(d) Show that if $\mu \leqslant 1$ , then both roots of the equation in part (b) have absolute values less than or equal to one, and hence conclude the stability of the finite difference method, i.e., conclude that the solutions of part (a) will remain bounded independent ofj and n. 
+\\
+\textbf{Suggestions:} For part (b) use a half angle formula from trig. 
+\\
+\\
+NOTE: If we impose Neumann and Robin boundary conditions at the ends of a wave problem (for a finite string): 
+$$u_u=u_{xx}, a<x<b, 0<t<\infty, u=u(x,t),$$
+the result will be a well-posed problem. The standard Neumann boundary condition (at the right end $x = b$) $u_x(b,t) = 0$ corresponds to the end of the string being a \textbf{free end}, perhaps being glued to a ring that is free to move up and down on a frictionless vertical rod. The Robin boundary condition $(\alpha u(b,t) +\beta u_x(b,t) = \gamma)$ can be viewed physically as (Hooke's Law) having a spring attached to the end of the string (with one end of the spring fixed). In general, the wave problem on a finite string will be well posed if there is specified any combination of Dirichlet, Neumann, or Robin boundary conditions at the two ends. This is physically quite reasonable; for a mathematical proof, see 
+[Wei-65].
+	\item
+		(\textit{M-filefor a Dirichlet-Neumann mixed Wave Problem}) (a) Write a MATLAB function M-file 
+that will employ the finite difference method to solve the following wave problem: 
+$$	\begin{cases} 
+	(PDE) u_u=c(t,x,u,u_x)^2u_{xx}),
+	~~~~0<x<L, 0<t<\infty,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=\phi(x), ~~u_t(x,0)=v(x),\\
+		u(0,t)=A(t), ~~~u_x(L,t)=B(t)
+		\end{cases},
+		0<x<L, 0\leqslant t< \infty 
+	\end{cases}$$
+The syntax of the M-file should be similar to that of Program 12.1:
+\\
+\\ 
+\texttt{[x, t, Ü] = onedimwavedirneu(phi, nu, L, A, B, T, N, M, c)}
+\\
+\\
+(b) Use the program of part (a) to solve the BVP above with the following data: $c = 1, L = 5, \phi= v = B = 0$ , and A(t) as in Example 12.6. Display the solution as a series of snapshots. 
+ \\
+(c) Repeat part (b), but change c to be as in Example 12.6.. 
+	\item
+		(\textit{Conservation Laws}) A one-dimensional PDE that models numerous physical conservation phenomena is the following first-order PDE: $u_t + c(t,x,u)u_x = 0, u = u(x,t)$. For applications, such as to highway traffic flow and fluid flow, we refer to [DuCZa-89] or [Log-94]. (a) Write a function M-file that will use finite difference methods to solve the above PDE on a finite segment $0 \leqslant x \leqslant L$ with initial profile u(xy0) $u(x,0)= \phi(x)$ and Dirichlet boundary conditions $u/(0,t) = A(t),  u(L,t) = B(t)$ (because the equation is only first-order we do not need to specify the initial wave velocity to make the problem well-posed). The syntax and functionality should be as in Program 12.1. Use centered difference (second-order) schemes on both the time and space derivative discretizations. 
+\\
+(b) Use your M-file of part (a) to solve the above BVP with data: $c(t,x,u) =x, L = 6, \phi(x) = exp(-2(x- 2)^2)$ and $A = \phi(0), B = \phi(L)$ . Plot a series of snapshots of the solution over the time range $0 \leqslant t \leqslant 10$ . Experiment with different resolution parameters until the numerical solutions tend to stabilize. 
+\\
+c) In case $c(t,x,u) = c$ is constant, the resulting PDE $u_t +cu_x = 0, u = u(x,t)$ is often known 
+as the \textbf{one-way wave equation}. Show that the solution of the resulting Dirichlet problem is 
+given by $u(x,t) = \phi(x- ct)$, and interpret in terms of moving waves. 
+\\
+(d) Apply the program of part (a) to solve the one-way wave problem with data $c = 1, \phi(x)$ as in Figure 12.19, L - 10. How fine a resolution is needed so as to get a decent approximation to the exact solution as specified in part (c)? 
+	\item
+	(Some Nonlinear Shock Wave Problems) For each nonlinear wave problem do the following: (i) Use explicit finite difference methods to create a series of snapshots of the wave propagation from time $t = 0$ up through (if possible) $t = 10$. Try successively refining the resolutions until the numerical results stabilize (graphically at least), (ii) Create a MATLAB movie of the solution of (i). (iii) Repeat (i) using the implicit finite difference method of Exercise for the Reader 12.9. 
+\\
+\\
+$	(a)\begin{cases} 
+	(PDE) u_u=(1+u^2)^{1/2}u_{xx},
+	~~~~0<x<\pi, 0<t<\infty,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=sin(x), u_t(x,0)=0,\\
+		u(0,t)=u(\pi,t)=0,
+		\end{cases}
+		0<x<\pi, 0\leqslant t< \infty 
+	\end{cases}$
+\\
+\\
+$	(b)\begin{cases} 
+	(PDE) u_u=(1+u^2)^{1/2}u_{xx},
+	~~~~-10<x<\pi, 10<t<\infty,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=f(x), u_t(x,0)=0,\\
+		u(0,t)=0,u(\pi,t)=0,
+		\end{cases}
+		-10<x<\pi, -10\leqslant t< \infty 
+	\end{cases}\\
+	$where$ f(x)= \begin{cases}
+	1-\vert x \vert, ~~~~if\vert x\vert<1\\
+	0,~~~~~~~~ótherwise
+	\end{cases}$
+\\
+\\
+$	(a)\begin{cases} 
+	(PDE) u_u=(1+u^2)^{1/2}u_{xx},
+	~~~~0<x<6\pi, 0<t<\infty,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=0, u_t(x,0)=0,\\
+		u(0,t)=sin(4t),u(\pi, t)=0,
+		\end{cases}
+		0<x<6\pi, 0\leqslant t< \infty 
+	\end{cases}$
+\\
+\\Note: The PDE here represents a wave equation where the speed of the wave depends on the amplitude, with higher (in absolute value) portions moving faster than lower portions. It would thus seem that high parts of the wave would catch up and overpass the lower parts that are ahead. This would seem to indicate that eventually the profiles would no longer be functions of x. (Think of the surface of an ocean wave as it begins to break.) See Figure 12.21 for an illustration. Such nonlinear BVPs thus do not have ordinary single-valued functions as solutions but rather what are called multivalued waveforms. For more on this interesting phenomenon see Chapter 3 of [Log-94]. Of course, the finite difference methods we developed are not set up to deal with such multivalued wave forms. In this exercise you should simply carry out the finite difference methods for a time interval stretching until the results no longer seem meaningful. Do your numerical results allow you to detect such shocking phenomena? 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\linewidth]{ch12_21}
+	\caption{\textsf{The shock-wave phenomena of the nonlinear wave equation of Exercise 18. Higher 
+parts of the wave propagate faster than lower parts, eventually causing the wave profile to "break" from 
+being a function of x.}}
+	\label{pfig:ch12_21=}
+\end{figure}
+NOTE: A general mathematical principle of partial differential equations roughly states that if the "data" of a boundary value problem has a certain amount of "smoothness," then the solution of the problem will enjoy the same amount of "smoothness."
+\footnote{The language here is admittedly quite vague, since it is not feasible to rigorously state a general result. To clarify things a bit: "Data" simply refers to the known functions in the problem, i.e., functions appearing as coefficients in the PDE or in the boundary conditions. "Smoothness" has to do with the order of differentiability of a given function. Such theorems are referred to as \textbf{regularity theorems}, and often require quite advanced mathematical methods to prove (and even to precisely state). }
+Often, numerical methods require certain smoothness assumptions on the solution that is not usually known, so such smoothness results can be of great practical value in deciding in advance on a numerical method and predicting its success. The next exercise gives a wonderful yet rare situation where the numerical method gives the exact result. 
+	\item
+		In this exercise we will show that if the solution to the wave problem (11)
+$$\begin{cases} 
+	(PDE) u_u=c^2 u_{xx},~~~~0<x<L,0, 0<t<\infty,u=(x,y,t)\\
+(BCs)
+		\begin{cases}
+		 u(x,0)=u(x,0)=\phi(x),u_t(x,0)=v(x),\\
+		 u(0,t)=u(0,t),~u(L,t)=0,\\
+		\end{cases} 
+		, 0\leqslant x L, 0 \leqslant t <\infty
+	\end{cases}$$
+is infinitely differentiable, then the finite difference scheme (23):
+$$u_{i,j+1}=2(l-\mu^2)u_{i,j}+\mu^2[u_{i+1,j}+u_{i-1,j}]-u_{i,j-1}$$	
+will be exact provided that we take $\mu=1$ (the maximum value allowed by the Courant-Friedrichs-Levy stability condition). Thus in applying this explicit finite difference scheme to the wave problem (11), the only errors that will arise will be either roundoff errors or errors in the (needed) level $t = k$ values $w_i,l$ (perhaps obtained from (29)). Proceed through the following outline to establish this result. The method being used here is the so-called \textbf{bootstrapping technique}. 	
+\\
+(a) Use Taylor's theorem to obtain the following expansions of finite difference quotients: 
+$$\bigtriangleup_t \equiv \dfrac{u(x_i,t_{j+1}-2u(x_i,t_j)+y(x_i,t_{j-1})}{k^2}
+=u_u(x_i,t_j)+2[\dfrac{k^2}{4!}\partial_t^4u(x_i,t_j)+\dfrac{k^4}{6!}\partial_t^6u(x_i,t_j)+\cdots],$$ and
+$$\bigtriangleup_t \equiv \dfrac{u(x_{i+1},t_{j})-2u(x_i,t_j)+y(x_{i-1},t_{j})}{k^2}
+=u_u(x_{i},t_j)+2[\dfrac{k^2}{4!}\partial_t^4u(x_i,t_j)+\dfrac{k^4}{6!}\partial_t^6u(x_i,t_j)+\cdots],$$
+(The symbols $\bigtriangleup_x , \bigtriangleup_y$ have been introduced as shorthand for what remains.) 
+\\
+(b) Use part (a) and the fact that u satisfies the PDE of (11) to show that: 	
+$$\bigtriangleup_t-c^2\bigtriangleup_x=\dfrac{2}{4!}[k^2\partial_t^2u(x_i,y_j)-c^2h^4\partial_x^6u(x_i,y_j)]
+=\dfrac{2}{6!}[k^4\partial_t^6u(x_i,y_j)-c^2h^2\partial_x^4u(x_i,y_j)]+\cdots.$$	
+\\
+(c) In the expansion of part (b), use the PDE and to show that
+$$k^2\partial_i^4u(x_i,y_j)=
+k^2\partial_t^2[\partial_t^2u(x_i,y_j)]=
+k^2\partial_t^2[c^2\partial_t^2u(x_i,y_j)]=$$
+$$
+c^2k^2\partial_x^2[\partial_t^2u(x_i,y_j)]=
+c^2k^2\partial_x^2[c^2\partial_x^2u(x_i, y_j)]=k^2c^4\partial_x^4u(x_i,y_j).
+$$
+Use this to show that under the assumption $\mu=1$, the first term on the right side of the expansion in part (b) is zero.
+\\ 
+(d) Repeating the argument in part (c), show that the second term on the right side of the 
+expansion in part (b) is zero.
+\\ 
+(e) Go on to show that all of the remaining (infinitely many) terms on the right side of the 
+expansion in part (b) are zero, and hence the local truncation error of the finite difference 
+scheme (23) is zero.
+	
+	
+	
+	
 
-
-
-
+\end{enumerate}
 \end{document}
