@@ -3,6 +3,7 @@
 \usepackage{listings}
 \usepackage{setspace}
 
+
 \begin{document}
 
 \chapter{Hyperbolic and Parabolic Partial
@@ -45,7 +46,7 @@ $f(x,y)$ , $\nabla f=\nabla  f(x,y)=(f_x(x,y), f_y(x,y))$
 $\nabla \cdot [H(x,y,t)\nabla u]= (\partial_x, \partial_y)\cdot (Hu_x, Hu_y)=\partial_x (Hu_x)+\partial(Hu_y)$. In particular, when  $H\equiv 1$ we have $\nabla \cdot [\nabla u]=\partial_x (u_x)+ \partial_y(u_y)=u_{xx}+u_{yy}=\triangle u $, another way to write the Laplacian of u. Such notations
 are very common in the literature for partial differential equations involving several space variables.}
 In such an application, the function H is the
-depth of the ocean at space coordinates (longitude and latitude) (JC, y) and at time /.
+depth of the ocean at space coordinates (longitude and latitude) (x, y) and at time /.
 The latter term corresponds to the changes in depth due to underwater landslides.
 For more on this and other applications of this variable media wave equation, we
 mention the text [Lan-99].
@@ -134,7 +135,6 @@ introducing the new variables:
 
 \begin{equation}
 \xi=x-ct, \eta=x+ct 
-\label{eq:eps}
 \end{equation}
 
 We may now think of u as either a function of (x,t)
@@ -313,22 +313,23 @@ snapshots, and we use the \textit{subplot} command to conveniently collect all o
 profiles in a single figure. The resulting MATLAB plot window is reproduced in
 Figure 12.5. 
 \begin{lstlisting}[numbers=none,frame=none]
->> x=-5:.01:5;
->> counter =1;
->> for t=0:.5:3;
-		xl=x+t; x2=x-t;
-		for i=l:1001
-			u(i)=.5*(EX12_l(xl(i))+EX12_l(x2(i)));
-		end
-		subplot(7,1,counter)
-		plot(x,u)
-		hold on
-		axis ([-5 5 -1 3]) rsWo fix a good axis range.
-		counter=counter+l;
+>> x=-5:.01:5; 
+>> counter =1; 
+>> for t=0:.5:3; 
+xl=x+t; x2=x-t; 
+	for i=l:1001 
+		u(i)=.5*(EX12_l(xl(i))+EX12_l(x2(i))); 
 	end 
+	subplot(7,1,counter) 
+	plot(x,u) 
+	hold on 
+	axis ([-5 5 -1 3]) rsWo fix a good axis range. 
+	counter=counter+l; 
+end  
 \end{lstlisting}
 EXERCISE FOR THE READER 12.1: Following the procedure for making amovie in Section 7.2, get MATLAB to create a movie of the solution of the waveproblem of Example 12.1 for the time range 
-$0</<4$ . Play it back at varyingspeeds (and perhaps with varying repetitions).\\
+$0</<4$ . Play it back at varyingspeeds (and perhaps with varying repetitions).
+\\
 \\
 EXERCISE FOR THE READER : (a) Write a function M-file:
 \\
@@ -922,7 +923,8 @@ and that $\vert \phi(x) \vert$  for all $x$ and that $\vert \int_{a}^{b} v(s)ds 
 (b) Under what general circumstances can you conclude that the maximum amplitude of the wave is attained at time zero
 $(i.e., \vert u(x,t)\vert \leqslant max{\vert K(x,0) \vert: \infty < x < \infty} )$?
 \end{enumerate}
-\subsubsection{EXERCISES 12.2:}
+
+\section{FINITE DIFFERENCE METHODS FOR HYPERBOLIC PDE'S}
 We begin this section by developing finite difference schemes for the numerical 
 solution of the one-dimensional wave problem (11):
 $$\begin{cases} 
@@ -2077,7 +2079,7 @@ has initial position given by the graph z = BS(r); where $r = \sqrt{x^2+ y^2}$ i
 	\includegraphics[width=0.6\linewidth]{ch12_20}
 	\caption{\textsf{Initial membrane profiles for the wave problems of Exercise 12 (a) (left) and (b) 
 (right).}}
-	\label{pfig:ch12_2=}
+	\label{pfig:ch12_20}
 \end{figure}
 	\item
 		Write a function M-file for solution of the following two-dimensional wave problem by the 
@@ -2271,11 +2273,415 @@ expansion in part (b) is zero.
 (e) Go on to show that all of the remaining (infinitely many) terms on the right side of the 
 expansion in part (b) are zero, and hence the local truncation error of the finite difference 
 scheme (23) is zero.
-	
-	
-	
-	
-
+	\item
+		To what extent (if any) does result of Exercise 19 still continue to hold if we allow the wave speed in the PDE to depend on any of the variables $t, x, u$? Assume (if you need to) that the 
+function c is infinitely differentiate. 
+	\item
+		(a) Explain why the argument of Exercise 19 does not hold for the corresponding wave problem 
+in two variables (34) with $\mu = 1/2$ being the maximal allowable value for stability. 
+\\
+	(b) Choose from this section (or one of the previous exercises) a particular instance of the 
+problem (34) where an exact solution is known. Use the exact solution to determine the seed 
+values $\mu_{i,j}^l$ , and do some numerical experiments with the finite difference scheme given in the 
+text (with $\mu = 1 / 2$ ) to demonstrate that the scheme is not exact
 \end{enumerate}
+
+\section{FINITE DIFFERENCE METHODS FOR PARABOLIC PDE'S}
+
+As a prototypical problem for this section, we will use the one-dimensional heat equation on a finite interval with (possible) internal heat source and (possibly time-dependent) Dirichlet boundary conditions at both ends:
+\footnote{Notice that we have changed the notation a bit from Chapter 11. The diffusivity constant used to be labeled as "£", but we have changed this parameter to " $\alpha$ " so that we may continue to use $"k"$ as the time step for finite difference methods. }
+\begin{equation}
+\begin{cases} 
+	(PDE) u_t=\alpha u_{xx}+q(x,t),~~~~0<x<L,0, 0<t<\infty,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		 u(x,0)=\phi(x)\\
+		 u(0,t)=A(t),~u(L,t)=B(t),\\
+		\end{cases} 
+		, 0< x L, 0 < l, 0\leqslant t < \infty
+	\end{cases}
+\end{equation}
+
+As was explained in Section 11.2, this boundary value problem models the heat distribution $u(x,t)$ on a thin rod of length L whose ends are maintained at the specified temperatures $A(t)$ and $B(t)$ whose initial temperature distribution is specified by $\phi(x)$, and with an internal heat source $q(x,t)$. Note that for simplicity we initially assume the difrusivity $\alpha$ is constant, but this restriction can be easily lifted later. We will numerically solve this problem for all time values up to some predetermined value $T$. With our experience of finite difference methods for elliptic and hyperbolic problems behind us, we have developed essentially all of the methods required for parabolic problems. As with hyperbolic problems, stability will be a serious issue here. For explicit methods, stability puts a rather severe restriction on the size of the time steps, so implicit methods tend to be more practical for parabolic problems. Because of their dissipative nature, parabolic problems do tend to be more amenable to finite difference schemes than were hyperbolic problems, especially when discontinuous data is concerned. 
+
+
+Following the notation of our previous finite difference schemes, we introduce grids of equally spaced $x$- and $t$-coordinates for the rectangular region $0 \leqslant x \leqslant L, 0\leqslant t \leqslant T$:
+
+$$0 = x_0 < x_1 < x_2 < \cdots < x_{N+1} =L,~~  \bigtriangleup x_i \equiv x_i - x_{i-1} = h,  $$
+\begin{equation}
+0 = t_0 < t_1 < t_2 < \cdots < t_{N+1} =T,~~  \bigtriangleup t_i \equiv t_i - t_{i-1} = k.
+\end{equation}
+If we discretize the PDE of (42) by using the forward difference formula (Lemma 11.5) for ut and the central difference formulas (Lemma 10.3) for $_{xx}$, we get the \textbf{forward-time central-space scheme}: 
+\begin{equation}
+\dfrac{u(x_i,t_{j+1})-u(x_i,t_{j})}{k•}=\alpha 
+ \dfrac{u(x_{i+1},t_{j}-2u(x_{i},t_{j})+u(x_{i-1},t_{j})}{h^2}+q(x_,t_j)
+\end{equation}
+the stencil for which is shown in Figure 12.23(a). We recall that the truncation  here are $0(k)$ and $0(h^2)$, respectively, and so the local truncation error of this method is $0(k + h^2)$. Using the notation:
+$$u_{i,j}=u(x_i,t_j), ~~q_{i,j}=q(x_i, t_j)$$
+and introducing the parameter 
+$$\mu=\alpha k/h^2$$
+allows us to express (44) in the following simplified form: 
+\begin{equation}
+u_{i,j+1}=(1/2\mu)u_{i,j}+\mu[u_{i+1,j}+u_{i-1,j}]+kq_{i,j}
+\end{equation}
+For $i= 1,2, ...,N$, and $j= 1,2, ...M$ The stencil for (45) is shown in Figure 12.23(a). It can be shown that the forward-time central-space method is stable, 
+provided that the following \textbf{stability condition} is met:
+\begin{equation}
+\mu=\alpha \dfrac{k}{h^2}\leqslant\dfrac{1}{2}.
+\end{equation}
+Recall that stability means that any errors introduced in any particular stage of (44) (e.g., truncation errors) remain under control in all future iterations and that if the initial data is sufficiently differentiable, then the global error of the method will have the same quality bound as the local truncation error: $0(k + h^2)$. A complete proof of this stability result can be found in Section 9.4 of [KeIs-66]; some elements will be given in the exercises. To see that (46) often makes the method impractical, for example, with $\alpha = 1$, if we wanted to use a space step size of $h= 0.05$, the stability condition (46) would force us to take a much smaller time step 
+size $k\leqslant 0.00125$. 
+
+By using instead the backward-time discretization (Lemma 11.5), we get the following \textbf{backward-time central-space scheme} (see Figure 12.23(b)), which is implicit but unconditionally stable:
+\begin{equation}
+\dfrac{u(x_i,t_{j+1})-u(x_i,t_{j})}{k•}=\alpha 
+ \dfrac{u(x_{i+1},t_{j}-2u(x_{i},t_{j})+u(x_{i-1},t_{j})}{h^2}+q(x_,t_j)
+\end{equation}
+Using the parameter $\mu \alpha k.h^2$ this scheme can be expressed as:
+\begin{equation}
+-\mu u_{i-1,j+1}+(1+2\mu)u_{i,j+1}-\mu u_{u+1,j+1}=u_{i,j}+kq_{i,j}
+\end{equation}
+By the underlying finite difference approxim-ations, both of the above schemes have local truncation errors of order $0(k + h^2)$ so unless $k$ is $0(h^2)$ (i.e., small enough so that the stability condition (46) holds), then the local truncation error  be first-order $( \approx O(k))$. Experience might lead us to believe using a centered  difference (second-order) discretization of w, would lead to a more effective scheme. The resulting finite difference method, known as \textbf{Richardson's method} (see Exercises 12 and 13), indeed has local truncation order $0(k^2+h^2)$ but unfortunately has serious stability problems. 
+\\%obrazek
+An interesting second order implicit scheme can be obtained by averaging the forward-time centralspace scheme and the backward-time centralspace scheme (at corresponding time levels). This scheme is known as the \textbf{Crank-Nicolson method}
+\footnote{The English school was quite involved with finite difference methods for evolution equations. Back in 1910, Lewis Richardson (1881-1953) had introduced his method andused it and other finite difference methods in numerous applications ranging from meteorology to eddy-diffusion in the atmosphere, and even (at the start of the Cold War) foreign policy and arms control. The stability problems with Richardson's method were not really recognized until the 1940s, when Crank, Nicolson, and others, with the aid of simple mechanical desk computing machines, performed lengthy computations. Crank and Nicolson's work culminated in a 1947 paper [CrNi-47] in which they introduced their unconditionally stable second-order method. This history brings up an important point regarding finite difference methods. It is easy to invent finite difference methods for any PDE. Getting efficient methods which actually converge with good stability and small truncation errors often requires a much more detailed investigation.}
+and runs follows:
+
+\begin{equation}\dfrac{u_{i,j+1}-u_{i,j}}{k}
+\dfrac{\alpha}{2}[\dfrac{u_{i,j+1}-2u_{i,j}-u_{i-1,j}}{h^2}]
++[\dfrac{u_{+1i,j+1}-2u_{i,j+1}-u_{i-1,j+1}}{h^2}]
+ +\dfrac{1}{2}[q(x_i,t_j)+q(x_i,t_{j+1})]
+\end{equation}
+\\
+EXERCISE FOR THE READER 12.11: Show that the local truncation error for the Crank-Nicolson method is $0(k^2 +h^2)$ provided that the solution is sufficiently differentiable.
+\footnote{The proof is rather technical, so this exercise for the reader may well be skipped by less theoretically 
+oriented readers.}
+\\
+\\
+The stencil for the method is shown in Figure 12.23(c). As before, we let  $\mu- ak/h^2$,, which allows us to rewrite (51) in the form:
+\begin{equation}
+-\mu u_{i-1,j+1}+2(1+\mu)u_{i,j+1}-\mu u_{i+1,j+1}=
+\mu u_{i-1,j}+2(1+\mu)u_{i,j}+\mu u_{u+1,j}+k[q_{i,j+1}]
+\end{equation}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.95\linewidth]{ch12_23}
+	\caption{\textsf{Stencils for three finite difference methods for the parabolic BVP (42): (a) (left) The forward-time central-space scheme, an explicit method, (b) (middle) The backward-time central-space scheme, an implicit unconditionally stable method, (c) (right) The Crank-Nicolson scheme. .}}
+	\label{pfig:ch12_23}
+\end{figure}
+
+We will revisit stability issues in more detail later in this section as well as in the exercises; for now we pass to the task of developing M-files for the above methods and then illustrate and compare them with some examples. The M-file constructions are similar to those in the last section; we outline now the construction only for the Crank-Nicolson method and leave the other two as exercises.
+
+
+We can convert (50) into matrix form quite naturally. Before we do this, let us first observe what happens in (50) when one of the terms involves a boundary value (i.e., either when $i = 1$ or $i = N$. In case $i = 1$, we then have $u_{i-1,j(+1)}=u(0,t_{j(+1))}=A(t_{j(+1)})$, and similarly in case $i = N$, $u_{i-1,j(+1)}=u(L,t_{j(+1)})=B(t_{j(+1)})$ . This, for example, in case $i = 1$, (50) should be rewritten in the form:
+
+$$
+2(l+\mu)u_{j,j+1}-\mu u_{j+1,j+1}=
+2(l+\mu)u_{j,j}-\mu u_{j+1,j}+\mu (A(t_j) +A(t_{t+1}))+k[q_{i,j}+q_{i,j+1}]
+$$
+
+Borrowing from MATLAB's notation by letting U$/(:, j)$ denote the y'th column vector of $U: [u_{1,j}~~u_{2,j}~~\cdots~~u_{N,j}]'$ the equation (50) can be written in the form: 
+
+\begin{equation}
+TU(:,j+1)= SU(:,j)+\mu V_j +Qk_j,
+\end{equation}
+
+where the Tand 5 are the following tridiagonal matrices:
+
+$$ T= 
+\left[\begin{array}{ccccc}
+2(l+\mu) & -\mu & 0 & \cdots & 0\\
+-\mu & 2(l+\mu) & -\mu & \ddots & \vdots\\
+0 & \ddots & \ddots & \ddots & 0\\
+\vdots & \ddots &  &  & -\mu\\
+0 & \cdots & 0 & -\mu & 2(l+\mu) 
+\end{array}\right],$$
+$$ S= 
+\left[\begin{array}{ccccc}
+2(l+\mu) & -\mu & 0 & \cdots & 0\\
+-\mu & 2(l+\mu) & -\mu & \ddots & \vdots\\
+0 & \ddots & \ddots & \ddots & 0\\
+\vdots & \ddots &  &  & \mu\\
+0 & \cdots & 0 & \mu & 2(l+\mu) 
+\end{array}\right],$$
+and the vectors $V_j$ and $Q_j$ are: $V_j = [A(t_j)+A(t_{j+1}),0 \cdots,0,B(t_j)+B(t_{j+1})]'$ and $Q_j =[q_{1,j}+q_{1,j+1},\cdots,q_{N,j}+q_{N,j+1}]'$; Making use of MATLAB's matrix handling capabilities will now make coding the Crank-Nicolson method a simple task. The following program does this on a slightly more general version of the BVP (42). 
+\\
+\\
+\subsubsection{PROGRAM 12.3:}
+Function M-file for solution of the following parabolic BVP by the 
+Crank-Nicolson method
+\footnote{ Since we are now allowing a to be variable, (49) takes on the following slightly more general form:
+$\dfrac{u_{i,j+1}-u_{i,j}}{k}=
+[\dfrac{\alpha_{i,j}}{2}
+\dfrac{u_{i+1,j}-2u_{i,j}+u_{i-1,j}}{h^2}+
+\dfrac{\alpha_{i,j+1}}{2}
+\dfrac{u_{i+1,j+1}-2u_{i,j+1}+u_{i-1,j+1}}{h^2}]
++\dfrac{1}{2}[q(x_i,y_j)+q(x_i,t_{j+1})],$
+where $\alpha_{i,j} = \alpha(x_j,t_j,u(x_i t_j))$. The obvious problem, of course, is that we will not be able to evaluate the coefficients $\alpha{i,j+}$, in cases where $\alpha$ depends on u (or $u_x$ ). We circumvent this problem in such cases by setting $\alpha_{i,j+1} \approx \alpha(x_j,t_{j+1},u(x_i t_j))$. The other formulas are modified accordingly, and this is how the M-file is constructed; see Exercise 16. }
+
+\begin{equation}
+	\begin{cases} 
+	(PDE) u_t= \alpha(x,t,u) u_{xx}+q(x,t),
+	~~~~0<x<L, 0<t<\infty,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=\phi(x),\\
+		u(0,t)=A(t), ~~u(L,t) = B(t),
+		\end{cases}
+		0 < x < L, 0 \leqslant t < \infty 
+	\end{cases}
+\end{equation}
+
+The Thomas algorithm is used to solve the tridiagonal systems which arise. 
+
+\begin{lstlisting}[numbers=none]
+function [x, t, U] = cranknicolson(phi, L, A, B, T, N, M, alpha, q)
+	solves the one-dimens heat problem
+	u_t = alpha(t,x,u)*u_xx+q(x,t) 
+	using the Crank-Nicolson method. 
+	Input variables: phi-phi(x) - initial wave profits function  
+	L - lennth of rod, A =A(t) -temperature of left end of rod
+	u(0, t)-A(t) , B-B(t) - temperature of right end of rod u (L,t) - B(t)
+	T- final time for which solution will be 
+	computed, N = number of internal x-grid values, M = number
+	of internal t-grid values, alpha = alpha(x,t,u) = diffusivity of rod.
+	q - q(x,t) - internal heat source function 
+	Output vaiiabl.es: t. - time grid row vector (starts at t=0, ends at
+	t-T, has M+2 equally spacced values), x - space grid row vector,
+	U = (M+2) by (N>+12) matrix of solution approximations at
+	corresponding grid points. x grid will correspond to second 
+	column)entries of U, y grid values to first (row) entries of U. 
+	Row 1 of U correspond s to t - 0.
+	
+h = L/(N+1); k = T/(M+1); 
+1 U=zeros(M+2,N+2); x=0:h :L; t=0:k:T;
+
+	Recall matrix indices must start at 1. Thus the indices of the
+	matrix will always be one more than the corresponding indices that
+	were used in theoretical development. 
+
+VAssign left and right Dirichlet boundary values.
+U(:,l)=feval (A,t) '; U(:,N+1)=feval(B,t)'; 
+
+	Assign initial time t-0 values.
+	for i=2:(N+1) 
+		U(l,i)=feval(phi,x( i));
+end 
+	Assign values at interior grid points 
+	for j=2:(M+2) 
+		for i=2:(N+l) 
+			mu(i)=k*feval(alpha,t(j-l),x(i),U(j-1, i))/hA
+2; 
+			mu2(i)=k*feval(alpha,t(j),x(i),U(j-l,i))/h ^ 2; 
+			ql(i)=feval(q,x(i),t(j-l)); q2 (i) =feval (q, x (i) , t (j ) ); 
+		end 
+	First form needed vectors and matrices, because we will be using 
+	the thonvas M-file, we do not need to construct, the coefficient 
+	matrix T.
+	 
+	S = diag(2*(l-mu2(2:N+1))) + diag(mu2(3:N+1), -1) + diag(mu(2:N), 
+1); 
+	V = zeros(N,l); V(1)=mu(2)*U(j-1,1)+mu2(2)*U(j, 1); 
+V(N)=mu(N+l)*U(j-l,N+2)+mu2(N+l)*U(j,N+2); 
+Q = k*(ql(2:N+l)+q2(2:N+l) ) '; 
+
+	Now perform the matrix multiplications to iteratively obtain 
+	solution values for increasing time levels. 
+		c=S*((U(j-1,2:(N+l)))')+V+Q; 
+		  a=-mu2(2:N+l); b=a; a(N)=0; b(l)=0; 
+		  U(j,2:N+l)=thomas(a,2*(l+mu2(2:N+l)),b,c); 
+		end		
+\end{lstlisting}
+
+EXERCISE FOR THE READER 12.12: (a) Write a corresponding M-file for the problem (52) that applies the forward-time central-space scheme. The syntax should be as follows:
+\\
+\\
+\texttt{[x, t, U] = fwdtimecentspace(phi, L, A, B, T, N, M, alpha,q) }
+\\
+\\
+where the input variables, output variables, and functionality are just as in Program 12.3. If possible, avoid any square matrix multiplication in your program. 
+\\
+(b) Write a corresponding M-file for the problem (52) that applies the backwardtime central-space scheme. The syntax should be as follows: 
+\\
+\\
+\texttt{[ x, t, Ul = backwdtimecentspace(phi, L, A, B, T, N, M, alpha,q)}
+\\
+\\
+where the input variables, output variables, and functionality are just as in Program 12.3. 
+
+
+The reader is encouraged to compare the performances of the above two programs with the Crank-Nicolson method results of the next example. Another such comparison will be called for in Exercise for the Reader 12.13. 
+
+\subsubsection{EXAMPLE 12.8:}Consider the heat problem:
+
+$$\begin{cases} 
+	(PDE) u_t= \alpha(x,t,u) u_{xx}+q(x,t),
+	~~~~0<x<L, 0<t<\infty,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=\phi(x),\\
+		u(0,t)=A(t), ~~u(L,t) = B(t),
+		\end{cases}
+		0 < x < L, 0 \leqslant t < \infty 
+	\end{cases}$$
+where $\phi(x)\begin{cases}
+	x,~~~~~~~~~~$if$~~x < \pi/2\\
+	\pi-x,~~~$if$~~x > \pi/2
+\end{cases}$
+(a) Use the Crank-Nicolson method to create a mesh plot of the solution for $0 \leqslant t \leqslant 3$ with 25 interior space grid points and 92 interior time grid points. Then obtain a simultaneous two-dimensional plot of several temperature profiles of this numerical solution for various times in this range. 
+\\
+\\
+(b) The exact solution is given by $u(x,0) = \sum_{n=1}^{\infty}\dfrac{(-1)^{n+1}}{\pi(2n+1)^2} sin[(2n+1)x]e^{-(2n+1)^2t}$(see, e.g., [Asm-00]). How large a value of N can be used so that the corresponding partial sum
+
+$$
+u_N(x,0) = \sum_{n=1}^{\infty}\dfrac{(-1)^{n+1}}{\pi(2n+1)^2} sin[(2n+1)x]e^{-(2n+1)^2t}
+$$
+approximates the exact solution with error less than $10^15$, i.e., $\vert u(x,t)-u_N(x,t) \vert < 10^15$ for all values of $x$ and $t$
+\\
+(c) Use the "exact solution" of part (b) to plot a surface graph of the error of the Crank-Nicolson solution of part (a). 
+\\
+(d) Using the same number of space grid points, use two different numbers of interior time grid points to illustrate the stability condition (46) for this example with the forward-time central-space method. 
+\\
+\\
+SOLUTION: Part (a): We first create an M-file for the initial temperature distribution and then use Program 12.3. 
+
+\begin{lstlisting}[numbers=none,frame=none]
+function y = phi_EG12_8(x) 
+ for i = 1:length(x); 
+	if (0<=x(i))&(x(i)<=pi/2) 
+		y(i)=x(i); 
+	else 
+	  y (i)=pi-x(i) ; 
+	end 
+end 
+>> alpha=inline('I','x', t','u') ; 
+>> A=inline('0') ; B=A; q=inline ( 0 ', 'x','t') ;
+ 
+>> [x, t, UCN) = cranknicolson(@phi_EG12_8, pi , A, B, 3, 25, 92, 
+alpha,q); 
+\end{lstlisting}
+To create the surface plot we simply enter: 
+\begin{lstlisting}[numbers=none,frame=none]
+>> surf(x,t,UCN) 
+>> xlabel('space'), ylabel('time'), zlabel('temperature')
+\end{lstlisting}
+The result is shown in Figure 12.24(a). The temperature profile plot shown in Figure 12.24(b) can be obtained by continuing to enter commands similar to the following:
+\begin{lstlisting}[numbers=none,frame=none]
+>> plot(x,UCR(l,:)), hold on 
+>> xlabel('space'), ylabel('temperature') 
+>> gtext('t=0') use nouse to plcice text 
+>> plot(x,UCR(5,:)), gtext ('t=.323') %continue 
+\end{lstlisting}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\linewidth]{ch12_24}
+	\caption{\textsf{(a) (left) Surface graph of the (Crank-Nicolson) solution to the heat problem of Example 12.8. (b) (right) Individual temperature profiles of this solution for some particular values of /. The individual curves in (b) are simply "slices" of the surface in (a) with planes perpendicular to the time axis}}
+	\label{pfig:ch12_24}
+\end{figure}
+
+(b) We estimate the error by using a standard idea from calculus (see Chapter 5):
+
+$$\vert u(x,t)-u_N(x,t)\vert <\vert \sum_{n=N+1}^{\infty}\dfrac{(-1)^{n+1}}{\pi(2n+1)^2}sin[(2n+1)x]e^{-2+1^2t}\vert 
+<\dfrac{1}{\pi(2n+1)^2}\leqslant \dfrac{1}{pi} \int_{2N+1}^{\infty}  \dfrac{du}{u^2}=\dfrac{1}{8\pi(N+1)}
+$$
+Thus, the error will always be less than 1e-15 (regardless of $x$ and $t$) provided that $1/(8\pi(N+1)^3)) < 1e-15$. Solving for N gives N > 34,139. Thus, we may take the finite sum $u_N(x,t)$ as the exact solution provided $N \geq 34,140$.
+\\
+\\
+(c) We may now create a matrix \texttt{Uexact}, of exact solution values on the spacetime grid of part (a). Rather than perform the entire sum for each point, the following code takes advantage of the separated nature of the summands: 
+
+\begin{lstlisting}[numbers=none,frame=none]
+>> Uexact=zeros(92+2,25+2); 
+>> for n=0:34140 
+	V=sin((2*n+l)*x); W=exp(-(2*n+l)A
+2*t); 
+
+	for i=l:length(t ) 
+	 Uexac t (i , O^Uexact (i,:) + (-1)^ (n) *4/pi /(2*n+l)A2*V*W (i) ; 
+	end 
+end 
+>> mesh(x,t,Uexact-UCN) 
+>> xlabel('space'), ylabel('time'), zlabel('temperature') 
+\end{lstlisting}
+The result is shown in Figure 12.25.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{ch12_25}
+	\caption{\textsf{: Surface plot of the error for the Crank-Nicolson approximation in part (a) of Example 12.8. Notice how the initially large error (due to the singularity of the boundary data) tends to dissipate very rapidly as time increases. }}
+	\label{pfig:ch12_25}
+\end{figure}
+
+Part (d): For future reference, we first rewrite the stability condition (46) in terms of the input variables for our M-file solvers:
+
+ \begin{equation}
+\mu \equiv \dfrac{T(N+1)^2}{L^2(M+1)}\leq\dfrac{1}{2}.
+\end{equation}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{ch12_26}
+	\caption{\textsf{Illustration of instability when the forward-time central-space method is used with $\mu \approx .513...$ in the heat problem of Example 12.8. (a) (left) Mesh plot of the forward-time central-space showing the large-scale instability, (b) (right) Simultaneous plots of some heat profiles showing small-scale evolution of instability. }}
+	\label{pfig:ch12_26}
+\end{figure}
+The parameter in part (a) would give a value $\mu \approx 2.23...$ which would result in the forward-time central-space method being quite unstable. We will look at what happens with the forward-time central-space scheme with some values of $\mu$ that are much closer to the stability barrier. Using the same number of internal space
+grid points ($N = 25$), and with $M = 400$ internal time grid points, we would have $\mu \approx .513...$which slightly violates the stability condition. If we run the M-file f \texttt{wdtimecentspace} , just as in part (a), we can analogously obtain the mesh and two-dimensional plots shown in Figure 12.26, which illustrate the instability. If instead we used $M= 500$, which results in a stable value of $\mu \approx .410...$, we get a surface graph identical to the one in Figure 12.24(a). 
+
+
+The initial temperature in the last example was continuous but not differentiable, and for such problems, both the backward-time central-space and Crank-Nicolson methods perform admirably well. In general, errors tend to decay with time as they did in the last example. When the initial data is discontinuous, however, the Crank-Nicolson method will sometimes introduce some unwanted oscillations and the backward-time central-space method is usually a better choice for such problems. Of course, the oscillations can be mitigated by using smaller time step sizes, but this might entail significantly more computation than with the backwardtime central-space method. For some theoretical explanations of such pathologies, see Section 9.1 of [Epp-02]. The next exercise for the reader gives an illustration. 
+\\
+\\
+EXERCISE FOR THE READER 12.13: Consider the following heat problem:
+$$\begin{cases} 
+	(PDE) u_t=u_{xx},
+	~~~~0<x<\pi, 0<t<\infty,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=\phi(x),\\
+		u(0,t)=u(L,t)=0,
+		\end{cases}
+		0 < x < L, 0 \leqslant t < \infty 
+	\end{cases}$$
+where $\phi(x)\begin{cases}
+	x,~~~~~~~~~~$if$~~x < \pi/2\\
+	\pi-x,~~~$if$~~x > \pi/2
+\end{cases}$
+(a) Run both the Crank-Nicolson method and the backward-time central-space method with an equivalent set of grids to obtain plots of the resulting numerical solutions as shown in Figure 12.27. 
+\\
+(b) Obtain also mesh plots of these two numerical solutions. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{ch12_27}
+	\caption{\textsf{With any given grid sizes, the (a) (left) backward-time central-space method usually outperforms the (b) (right) Crank-Nicolson method when the parabolic problem has discontinuous data, as is demonstrated from these two snapshots of the two methods on the problem of Exercise for the Reader 12.13. The oscillations in (b) are not part of the actual solution; using finer time grids will cause them to fade away.}}
+	\label{pfig:ch12_27}
+\end{figure}
+We next move on to boundary conditions involving derivatives. Previously we have separated these sorts of boundary conditions into two kinds: Neumann and Robin. For a physical interpretation in terms of our heated-rod problem, it is helpful to consider both of these conditions as special cases of the following general condition: 
+
+\begin{equation}
+\partial u/\partial n= -\gamma(u-\eta).
+\end{equation}
+
+In general the parameters $\gamma$ and $\eta$ are allowed to be functions of other variables, e.g., $\eta = \eta(x,t,W)$, but we have written them as constants for simplicity. In case $\gamma = 0$, we get the basic Neumann boundary condition corresponding to an insulated end of the rod. The general Neumann BC is gotten by taking  $\eta= \eta(x) = u(x) +1$ (so (54) becomes $\partial u/\partial n= \gamma$), which corresponds to heat being lost or absorbed by the end of the rod at a specified rate. The general form of (54) with $\gamma \neq 0$ gives Robin BCs that physically correspond to heat being radiated into or out of the rod at a rate proportional to the difference of $u$ and some specified temperature $\eta$.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \end{document}
