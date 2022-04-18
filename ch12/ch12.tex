@@ -2665,23 +2665,674 @@ We next move on to boundary conditions involving derivatives. Previously we have
 
 In general the parameters $\gamma$ and $\eta$ are allowed to be functions of other variables, e.g., $\eta = \eta(x,t,W)$, but we have written them as constants for simplicity. In case $\gamma = 0$, we get the basic Neumann boundary condition corresponding to an insulated end of the rod. The general Neumann BC is gotten by taking  $\eta= \eta(x) = u(x) +1$ (so (54) becomes $\partial u/\partial n= \gamma$), which corresponds to heat being lost or absorbed by the end of the rod at a specified rate. The general form of (54) with $\gamma \neq 0$ gives Robin BCs that physically correspond to heat being radiated into or out of the rod at a rate proportional to the difference of $u$ and some specified temperature $\eta$.
 
+\subsubsection{EXAMPLE 12.9:}
+Consider the heat problem:
+
+$$\begin{cases} 
+	(PDE) u_t=u_{xx},
+	~~~~0<x<\pi, 0<t<\infty,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=100,\\
+		u(0,t)=u(0,t), u_(1,t), =-u(1,y)
+		\end{cases}
+		0 < x < 1, 0 \leqslant t < \infty 
+	\end{cases}$$
+This corresponds to a laterally insulated rod that is initially uniformly heated to a temperature of 100 and for which heat is being radiated from both ends at a rate equal to the current temperature of the end. Adapt the forward-time central-space method to solve this problem on the time range $0 \leqslant t \leqslant 1$ using a stable grid, and give plots of some temperature profiles.
+\\
+\\
+SOLUTION: Part (a): In order to maintain the 0(h2) quality portion of the local truncation error, we should approximate both derivative boundary conditions using (second-order) central differences. This will require the use of "ghost nodes" at both left and right ends. We modify our indexing scheme for the space variables accordingly as follows: 
+
+$$x_i=(i-1)h~~(0\leqslant i \leqslant N+1)$$
+Thus the unknown grid values are still indexed as $x_l,\cdots,x_N$ and $x_0=-h$ and $x_{N+l} =L + h$ correspond to the ghost nodes, but now $L = (N - 1 )h$. In this notation, we discretize the left boundary condition (at each time level) with the central difference approximation:
+
+$$[u_{2,j}-u_{0,j}/2h]=u_{1,j}$$
+where $u_{0,j}$ is the ghost node value. We can eliminate the ghost node in the system (45) by assuming that this discretization is valid at the left end, i.e.,
+
+$$[u_{1,j+1}=(1-2\mu)u_{1,j}+\mu[u_{2,j}+u_{0,j}].$$
+Eliminating the ghost node value using the two preceding equations leads us to
+
+$$[u_{1,j+1}=(1-2\mu)u_{1,j}+2\mu[u_{2,j}+u_{1,j}].$$
+In the same fashion, we obtain the following formula for $u_{N,j+1}$ corresponding to the right boundary: 
+
+$$[u_{N,j+1}=(1-2\mu)u_{N,j}+2\mu[u_{N-1,j}+u_{N,j}].$$
+To move to the next time level we use these in conjunction with (45) to compute all of the remaining $u_{i,j+1} (1 <i<N$):
+
+$$[u_{i,j+1}=(1-2\mu)u_{i,j}+2\mu[u_{i+1,j}+u_{i-1,j}].$$
+We can specialize the code of \texttt{fwdtimecentspac} e with the above modifications to create a matrix of numerical values for the numerical solution as follows. Below we are using $h = 1/20$ and $k = 1/1850$. This gives a stable value for $\mu = \alpha k/h2 = 1\dot(1/1850)/(1/20)^2 = 0.2162...< 1/2$.
+
+\begin{lstlisting}[numbers=none,frame=none]
+h=l/20; k=l/1850; mu=k/hA
+2; 
+N=21; M=1851; 
+U=zeros(M+l,N); x=0:h:l; t=0:k:l; 
+;A3sign initial time t-0 values and next step t-k values. 
+for i=l:N, U(l,i)=100; end 
+Assign values Rt intorior grid points 
+for j=2:M+l 
+	U(j,2:N-l) = (l-2*niu) *U (j-1, 2 :N-l) +mu* (U (j-1, 3 :N) +U (j-1, l:N-2) ) ; 
+	U(j,l)= (l-2*mu)*U(j-l,l)+2*mu*(U(j-l,2)-h* U(j-l,l)); 
+	U(j,N)= (l-2*mu)*U(j-l,N)+2*mu*(-h*U(j-l,N)+U(j-1,N-l)); 
+end 
+\end{lstlisting}
+The simultaneous plots of some temperature profiles, shown in Figure 12.28(a), 
+are now obtained just as in the previous example.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.9\linewidth]{ch12_28}
+	\caption{\textsf{(a) (left) Some snapshots of the temperature in the rod of Example 12.9, where heat is lost through equal radiation at both ends, (b) (right) Snapshots for the analogous problem of Exercise for the Reader 12.14. The latter problem has a greater radiation heat loss on the left end rather than on the right, perhaps due to differences in insulation. }}
+	\label{pfig:ch12_28}
+\end{figure}
+EXERCISE FOR THE READER 12.14: (a) Redo the Example 12.9 when the left BC is changed to $u_x(x,t)=u(0,t)^{1.5}$; your plots should look similar to those of Figure 12.28(b). 
+\\
+(b) Will the temperature on the right end eventually be lower than that on the left end? Try to answer this question on physical grounds first, then attempt to use MATLAB to back up your answer. Does the BC of this example have any physical models? 
+\\
+(c) If instead the left BC of the BVP of Example 12.9 was changed to $u_x(0,t)=-u(0,t)$ , what do you think would eventually happen to the temperature in the rod? Try to answer this question on physical grounds first, then attempt to use MATLAB to back up your answer. 
 
 
+Similar methods can be developed for any other kinds of boundary conditions, 
+and everything can be done likewise for the Crank-Nicolson or the purely implicit 
+method. There will be some exercises to give more practice with this. 
+\\
+EXERCISE FOR THE READER 12.15: (a) Write an M-file with the following 
+syntax: 
+\\
+\\
+\texttt{[x, t, U] = cranknicolsonRobinLR(phi, L, A, B, T, N, M, alpha,q)}
+\\
+\\
+that will numerically solve the following BVP: 
+
+$$\begin{cases} 
+	(PDE) u_t=\alpha(x,t,u) u_{xx}+q(x,t),
+	~~~~0<x<L, 0<t<\infty,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=\phi(x),\\
+		u(0,t)=\alpha u_x(0,t)+b, u_x(L,t) =cu(0,t)+d
+		\end{cases}
+		0 < x < 1, 0 \leqslant t < \infty 
+	\end{cases}$$
+where $a, b, c$, and $d$ are constants. The input variables and functionality are similar to those of Program 12.3, except here the input variables A and B represent the vectors [a b] and [b c], respectively.
+\\
+(b) Apply the program to re-solve the problem of Example 12.9 (using the same values for $M$ and $N)$ and compare plots of the corresponding numerical temperature profiles with thoseof Figure 12.28(a) (obtained using the explicit method).
 
 
+We end this section with some theoretical developments for a heat problem and 
+ finite difference methods. For simplicity, we work with a basic Dirichlet problem for the one-dimensional heat equation of the following theorem. Many of the results, ideas, and concepts generalize to other parabolic BVPs.
+
+\subsubsection{THEOREM 12.2:}
+(\textit{Existence and Uniqueness for a Heat Problem}) Suppose that L and T are positive numbers and $A(t)9 B(t)$, and $\phi(x)$ are continuous functions. The following BVP (42) has a unique solution 
+
+$$\begin{cases} 
+	(PDE) u_t=\alpha u_{xx}+q(x,t),
+	~~~~0<x<L, 0<t<\infty,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=\phi(x),\\
+		u(0,t)=A(t),~~u(L,t) =B(t)
+		\end{cases}
+		0 < x < 1, 0 \leqslant t < \infty 
+	\end{cases}$$
+Elements of the proof of this result can be found in the exercises; see also [Asm00] (in particular, see Sections 3.5 and 3.10 therein). We now give a formal definition of stability of a finite difference scheme for this (BVP) (42).
+\\
+\\
+\textbf{Definition:} A finite difference scheme for the BVP (42) that satisfies the hypotheses of Theorem 12.2 is \textbf{unconditionally stable} if there exists a constant $C > 0$ (depending only on the data $\alpha,q,A,B$ of the BVP) such that for any initial profile function $\phi(x)$, any grid of the space interval $[0, L]$ and any grid of the time interval $[0, T]$, we have
+
+\begin{equation}
+ \stackrel{max}{_{i,j}} |u_i^j|\leqslant C \stackrel{max}{_{0\leqslant x \leqslant L}} |\phi(x)|
+\end{equation}
+In words, this roughly states that the numerical values do not get too much larger than the initial data. The method is \textbf{conditionally stable} if (54) holds provided that the uniform time step size $(k)$ and space step size $(h)$ satisfy some specified relationship.
 
 
+Note that if we used a stable finite difference method to solve the problem (42) with perturbed initial heat profile $\bar{\phi}(x)$ with $|\bar{\phi}(x) - \phi(x)| < \varepsilon$ where $\varepsilon$ is a very small number, and if $ \bar{u}_i^j$¡ denotes the resulting numerical values, then $|\bar{u}_i^j-u_i^j|<C \varepsilon$. (Proof: Apply the stability inequality (55) to the BVP (42)with initial heat profile changed to $\bar{\phi}(x) - \phi(x)$.) The advantage of stable schemes is that any roundoff errors propagate only in an additive fashion. In unstable schemes, as we have seen, the errors usually propagate exponentially. 
 
 
+Using the so-called von Neumann approach, we will establish the stability results that have been stated thus far in the section as well as others in the context of the (42).
+\footnote{This approach was used in the exercises of the last section. There we used complex notation which afforded a more efficient analysis; the approach in the text above will use only real numbers, but the exercises will revisit the complex number approach.}
+To help make the ideas more transparent, we assume the equation and the boundary conditions are homogeneous: $q(x,t) = 0, A(t), B(t) = 0$. Let us begin with the (homogeneous) explicit method (45):
+
+$$u_{i,j+1}=(1-2\mu)u_{i,j}+\mu[u_{i+1,j}+u_{i-1,j}]$$
+
+For the homogeneous problem, in addition to the guaranteed existence and uniqueness from the above theorem, we also have the \textbf{maximum principle}: The solution satisfies 
+$|u(x,t)|\leqslant $max$ |\phi(x)| $. 
+Physically, this simply says that the maximum temperature of the rod is attained initially.
+\footnote{The maximum principle holds more generally in the presence of time-dependent Dirichlet boundary conditions $u(0,t)=A(t),~~u(L,t) =B(t)$, in which case the inequality changes to $|u(x,t)|  M$ where $M$ is the largest of max | $|\phi(x)|$, max $|A(t)|$, and max $| B(i) |$ (if thesemaxima exist). For a proof, se Section 3.10 of [Asm-00]. The maximum principle for the heat equation ceases to be valid in case of heat sources; see Exercise 21.}
+(discrete) solution of the finite difference method has the following separated form: 
+
+\begin{equation}
+u_{i,j}=X_iT_j
+\end{equation}
+Substitution of (56) into the above finite difference scheme and dividing by $X_iT_j$ produces: 
+
+\begin{equation}
+\dfrac{T_{j+1}}{T_j}=1-2\mu+\mu \dfrac{X_{i+1}T_{j-1}}{X_i}
+\end{equation}
+Since the left sequence depends only on $j$ while that on the right depends only on $i$, it follows that both sides must equate to the same constant. Calling this constant $\xi$, the temporal (time) portion of (57) yields$T_{j+1} = \xi T_j$ and hence
+
+\begin{equation}
+T_j = \xi^jT_0
+\end{equation}
+The spatial portion of (57): $1-2 \mu \dfrac{X_{i+1}T_{j-1}}{X_i}=\xi$, will take a bit more effort 
+X¡ 
+to solve. We assume that $X_1$. takes the form: $X_i = Acosi\theta + ßsin i\theta,$
+\footnote{Here $i$ is an index (not a complex number). For readers who are familiar with the analytic theory of ODE, the choice of the form of $X_i$ was motivated by viewing the spatial equation$\dfrac{X_{i+1} - X_{j-1}}{X_i}  + 1-2\mu = \xi$ as a discretization of the second-order ODE: $\mu X^n (s) +1 -2 \mu = \xi$.}
+where the parameters $A$ and $B$ and $\theta$ are to be determined. The left (homogeneous) boundary condition forces $A = 0$. The right (homogeneous) boundary condition now implies that $(N +1)\theta = n\pi$ for some positive integer $n$. Combining this with the relation $(N + 1)h = L$ ($h$  = spatial step size), produces $\theta = n\pi h/L$ . The(nonzero) value of the parameter B may now be arbitrarily specified (since it cancels out of the spatial equation and the boundary conditions are already guaranteed, note that we have not yet dealt with the boundary condition). Using $B = 1$ gives the following candidate solution to the spatial equation: 
+
+\begin{equation}
+X_i=sin(in\pi h/L).
+\end{equation}
+Substituting this into the spatial equation gives: 
+$$1-2\mu+\mu \dfrac{sin((i+1)n \pi h/L) + sin((i-1)n\pi h.L)}{sin(in\pi h/2)}$$
+If we apply the trig addition formulas (e.g.,  $sin((i+1)n \pi h/L)= sin(in \pi h/L)cos(n\pi h/L) +sin(in \pi h/L)cos(n\pi h/L)$ we can convert the above equation to the following form: 
+
+\begin{equation}
+\xi = \xi(n)=1-2\mu (1-cos(n\pi h/L)).
+\end{equation}
+Since the resulting separated solutions $\xi^j T_0 sin(in\pi h/L)$ of the finite difference scheme exist for any integer n, and since we know (from the maximum principle) the actual solution to the BVP is bounded, it follows that we must have $| \xi(n)| \leqslant 1$ because otherwise this finite difference solution will grow exponentially. Since n can be arbitrary (because for stability h can be arbitrary) the $cos(n\pi h/L)$ can get arbitrarily close to $-1$ , so (59) shows us that in order for $| \xi(n) | \leqslant 1$, we must have $2\mu \leqslant 1 $ or $\mu \leqslant 1 / 2$, which is the stability condition (46)
 
 
+This von Neumann method can be applied to obtain stability results for many finite difference schemes for a wide range of BVPs. For example, the following finite difference scheme (for the same homogeneous problem considered above):
+\begin{equation}
+\dfrac{u_{i,j+1}-u_{j,k}}{k}=\dfrac{\alpha}{2}[(1-\sigma)\dfrac{u_{i+1,j}-2u_{i,j}+u_{i-1,j}}{h^2}+
+\sigma\dfrac{u_{i+1,j+1}-2u_{i,j+1}+u_{i-1,j+1}}{h^2}]
+\end{equation}
+where $0 \leqslant \sigma \leqslant 1$ , includes as special cases the explicit method $(\sigma = 0)$, the backward-time central-space method (49) $( \sigma= 1)$, and the Crank-Nicolson  $( \sigma= l/2)$. Note that this method is always implicit when $\sigma> 0$ . The von Neumann method can be used to show this method is unconditionally stable whenever $1/2\leqslant sigma \leqslant 1$ and when 0 $\leqslant \sigma \leqslant 1/ 2$ the method will be stable if the following condition holds:
+\begin{equation}
+\mu=\alpha k/h^2 <1/(2-5\sigma).
+\end{equation}
+There are other approaches to stability theory of finite difference methods. One of these, known as the spectral method, looks at eigenvalues of matricesassociated with the finite difference methods. The exercises will delve deeper into stability theory. Some references include [Smi-85], [RiMo-67], and [IsKe-66] and the more elementary [DuCZa-89].
 
+\line(1,0){\textwidth}
+\subsubsection{EXERCISES 12.3 }
 
+\textit{NOTE: For convenience in these exercises, we will refer to the forward-time central-space method (44) simply as the "explicit method" and the backward-time central-space method as the "implicit method."} 
 
+\begin{enumerate}
+	\item
+		Use the explicit method to solve the following BVP on $0\leqslant t \leqslant 1$ using the indicated grids:
+$$\begin{cases} 
+	(PDE) u_t=u_{xx},
+	~~~~0<x<L, 0<t<\infty,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=sin(\pi x)(1+2cos(\pi x)),\\
+		u(0,t)=0, u(1,t)=0
+		\end{cases}
+		0 < x < 1, 0 \leqslant t < \infty 
+	\end{cases}$$
+In each case, compare the results with the actual solution $ u(x,t)=sin(\pi x)e^{-\pi^2t}+sin(2\pi x)e^{-4\pi^2t}$ at the indicated time levels. 
+\\
+(a) $N = 19, M = 39$. Note that this set of parameters violates the stability condition, by (P8), 
+ $\mu= 1$ . Compare the numerical solution with the exact solution at time levels $t = .25, t = .5,  t=.75, t= 1$. 
+\\
+(b) $N= 39, M= 99$. Note that this set of parameters satisfies the stability condition with $mu = 0.4$ . 
+Compare numerical solution with exact solution at time levels $t = .5, t = 1, t = 1.5, t = 2$
+	\item
+	a) Re-solve the BVP of Exercise 1 using the Crank-Nicolson method with $N = 39$ and $M=99$ 
+\\
+and give a mesh plot of the error of this numerical solution. 
+(b) Repeat part (a) this time using the implicit method. 
+	\item
+	For each of the following BVPs, do the following: (i) Use the explicit method to solve the problem on the indicated time interval. Begin with 10 interior space node values and a corresponding number of interior time node values that results in a stable scheme, (ii) Continue halving the space step size and using a smaller (stable) time step that evenly divides into the previous time step. Compare common temperature profiles of adjacent numerical solutions. Keep track of the maximum discrepancy. Continue until the maximum discrepancy is smaller than $10^{-3}$ or the numerical computations take more than two minutes on MATLAB. (iii) For your final numerical solution, plot a (three-dimensional) mesh plot of the solution, (iv) For your final numerical solution, plot (and label) several two-dimensional temperature profiles in the same graph.
+\\
+\\	
+$(a)\begin{cases} 
+	(PDE) u_t=u_{xx},
+	~~~~0<x<1, 0<t\leqslant 1,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=50,\\
+		u(0,t)=0, u(1,t)=100
+		\end{cases}
+		0 < x < 1, 0 \leqslant t \leqslant 1 
+	\end{cases}$
+\\
+\\	
+$(b)\begin{cases} 
+	(PDE) u_t=u_{xx},
+	~~~~0<x<1, 0<t\leqslant 1,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=
+			\begin{cases}
+				2x, ~~~~$if$~~0\leqslant x \leqslant 1/2\\
+				1,~~~~~~$if$~~1/2 \leqslant x \leqslant 1
+			\end{cases}
+		,\\
+		u(0,t)=0, u(1,t)=0 ,!0\leqslant t \leqslant1 
+		
+		\end{cases}
+	\end{cases}$
+\\
+\\
+$(a)\begin{cases} 
+	(PDE) u_t=u_{xx},
+	~~~~0<x<pi, 0<t\leqslant 1,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=100x(\pi-1)(,\\
+		u(0,t)=50sin(\pi x), u(\pi,t)=0
+		\end{cases}
+		0 < x < \pi, 0 \leqslant t \leqslant 1 
+	\end{cases}$
+\\
+\\	
+$(d)\begin{cases} 
+	(PDE) u_t=2u_{xx},
+	~~~~0<x<\pi, 0<t\leqslant 1,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=
+			\begin{cases}
+				100\pi x,\\
+				100\pi^2-100\pi x
+			\end{cases}
+			0<x<\pi, 0\leqslant t \leqslant 1,\\
+		u(0,t)=50 sin (\pi x), u(\pi,t)=0
+		\end{cases}
+	\end{cases}$
 
+	\item
+		Parts (a) through (d): For each of the BVPs Exercise 3, repeat the directions of that problem, this time using the Crank-Nicolson method. Try using your temporal step size k to satisfy $h/2\leqslant k\leqslant h$, where $h$ is the spatial step. Try redoing some of these numerical solutions using a much smaller temporal step size (as stipulated by the stability condition (46) for the explicit method). Does this seem like a better strategy than using roughly the same step sizes? In answering this latter question, you should, of course, weigh in the extra work needed for a given spatial step size. 
+		\item
+			Parts (a) through (d): For each of the BVPs of the Exercise 3, repeat the directions of that problem, this time using the implicit method. Try using your temporal step size k to satisfy $h/2 \leqslant k \leqslant h$, where h is the spatial step. Try redoing some of these numerical solutions using a much smaller temporal step size (as stipulated by the stability condition (46) for the explicit method). Does this seem like a better strategy than using roughly the same step sizes? In answering this latter question, you should, of course, weigh in the extra work needed for a given spatial step size. 
+			\item
+			Consider the following heat problem:
+$$\begin{cases} 
+	(PDE) u_t=u_{xx},
+	~~~~0<x<1, 0<t<\infty,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=sin(\pi x)\\
+		u(0,t)=t, u(1,t)=0
+		\end{cases}
+		0 < x < 1, 0 \leqslant t < \infty 
+	\end{cases}$$
+This can be interpreted as the modeling of a rod of length one with initial heat distribution as specified, right end being maintained at temperature zero, and left end being constantly heated up so has to have a temperature of / at time t. 
+\\
+(a) Modify the explicit method to estimate the time $t*$ it takes for the temperature at the midpoint $t = 1/2$ to first reach a value of $u = 2$. Run the new program toestimate the time /* by 
+trying out several different grid choices. 
+\\
+(b) Repeat part (a), this time using the implicit method. 
+\\
+(c) Repeat part (a), this time using the Crank-Nicolson method.
+	\item 
+		For each of the following BVPs, do the following: (i) Use the explicit method to solve the problem on the indicated time interval. Begin with 10 interior space node values and a corresponding number of interior time node values that results in a stable scheme, (ii) Continue halving the space step size and using a smaller (stable) time step that evenly divides into the previous time step. Compare common temperature profiles of adjacent numerical solutions. Keep track of the maximum discrepancy. Continue until the maximum discrepancy is smaller than $10^{-3}$ or the numerical computations take more than two minutes on MATLAB. (iii) For your final numerical solution, plot a (three-dimensional) mesh plot of the solution, (iv) For your final numerical solution, plot (and label) several two-dimensional temperature profiles in the same graph. 
+\\
+\\
+$(a)\begin{cases} 
+	(PDE) u_t=\alpha(x) u_{xx},
+	~~~~0<x<1, 0<t\leqslant 1,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=50,\\
+		u(0,t)=0, u(1,t)=100
+		\end{cases}
+		0 < x < 1, 0 \leqslant t \leqslant 1 
+	\end{cases}$
+\\
+\\
+where
+$\alpha(x)\begin{cases}
+	1, ~~ $if$~~ x\leqslant 1/2\\
+	4, ~~ $if$~~ x> 1/2
+		\end{cases}$
+\\
+\\
+$(b)\begin{cases} 
+	(PDE) ~~~~u_t=\alpha(x) u_{xx},
+	~~~~0<x<1, 0<t\leqslant 1,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=
+			\begin{cases}
+			100,~~~$if$~~1/4 \leqslant x \leqslant 3/4\\
+			0, ~~~~~~~~otherwise
+			\end{cases}\\
+		u(0,t)=0, u(1,t)=0, 0\leqslant t \leqslant 1
+		\end{cases}
+	\end{cases}$
+	\\
+where $\alpha(x)$ is as in part (a). 
+\\
+(c) Same BVP as (a) but change $\alpha(x)$ to $\alpha(u)=(1/25)\sqrt{u^2+1}$. 
+\\
+(d) Same BVP as (b) but change the PDE to $u_t=\alpha(x)u_{xx}+1(x,t)$, where	
+$$q(x,t)=\begin{cases}
+200sin(3\pi t/2), ~~$if$~~0\leqslant t \leqslant 2/3 $and$ x \in [1,1/8]~\cup~[7/8,1]\\
+0, ~~~~~~~~~~~~~~~~~~~~~~~~otherwise
+		\end{cases}$$
+		\item 
+			Parts (a) through (d): For each of the BVPs of Exercise 8, repeat the directions of that problem, this time using the Crank-Nicolson method. Try using your temporal step size $k$ to satisfy $h 1/2 \leqslant k \leqslant h$, where $h$ is the spatial step. Try redoing some of these numerical solutions using a much smaller temporal step size (as stipulated by the stability condition (46) for the explicit method). Does this seem like a better strategy than using roughly the same step sizes? In answering this latter question, you should, of course, weigh in the extra work needed for a given spatial step size.
+		\item
+			Parts (a) through (d): For each of the BVPs of Exercise 7, repeat the directions ofthat problem, this time using the implicit method. Try using your temporal step size k to satisfy $h/2 \leqslant k \leqslant h$ , where $h$ is the spatial step. Try redoing some of these numerical solutions using a much smaller temporal step size (as stipulated by the stability condition (46) for the explicit method). Does this seem like a better strategy than using roughly the same step sizes? In answering this latter question, you should, of course, weigh in the extra work needed for a given spatial step size. 
+		\item
+			Rewrite Program 12.3 (for the Crank-Nicolson method) so that it avoids the creation of any square matrices, but is otherwise the same program; in particular, the input and output variables and functionality of the two programs should be identical. Find a problem and corresponding input parameters where your modified program noticeably outperforms Program 12.3.
+		\item 
+			(\textit{Some Related Neumann Problems}) For each of the following BVPs, set up an appropriate finite difference scheme and numerically solve the problem. Continue to re-solve the problem with a decreasing set of space steps and corresponding decreasing time steps (in a stable way), compare consecutive numerical solutions (at common grid values), and continue until the maximum error becomes less than 0.001 or the computations take more than two minutes. Comment on the stability (or lack thereof) of your method on the problem. In case of stability, plot your final solution, both as a three-dimensional surface plot and as a two-dimensional plot of several superimposed time level profiles. 
+\\
+\\
+$(a)\begin{cases} 
+	(PDE) u_t= u_{xx},
+	~~~~0<x<1, 0<t\leqslant 1,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=sin(x),\\
+		u(0,t)=0, u(1,t)=0
+		\end{cases}
+		0 < x < 1, 0 \leqslant t \leqslant 1 
+	\end{cases}$
+\\
+\\
+$(b)\begin{cases} 
+	(PDE) u_t= u_{xx}+u,
+	~~~~0<x<1, 0<t\leqslant 1,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=sin(x),\\
+		u_x(0,t)=0, u(1,t)=0
+		\end{cases}
+		0 < x < 1, 0 \leqslant t \leqslant 1 
+	\end{cases}$
+\\
+\\
+$(c)\begin{cases} 
+	(PDE) u_t= u_{xx}+2y,
+	~~~~0<x<1, 0<t\leqslant 1,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=sin(x),\\
+		u_x(0,t)=0, u(1,t)=0
+		\end{cases}
+		0 < x < 1, 0 \leqslant t \leqslant 1 
+	\end{cases}$
+\\
+\\
+$(d)\begin{cases} 
+	(PDE) u_t= u_{xx}+u_x,
+	~~~~0<x<1, 0<t\leqslant 1,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=sin(x),\\
+		u_x(0,t)=0, u(1,t)=0
+		\end{cases}
+		0 < x < 1, 0 \leqslant t \leqslant 1 
+	\end{cases}$
+		\item
+			For each of the following BVPs, set up an appropriate finite difference scheme and numerically solve the problem. Continue to re-solve the problem with a decreasing set of space steps and corresponding decreasing time steps (in a stable way), compare consecutive numerical solutions (at common grid values), and continue until the maximum error becomes less than 0.001 or the computations take more than two minutes. Comment on the stability (or lack thereof) of your method on the problem. In case of stability, plot your final solution, both as a three-dimensional surface plot and as a two-dimensional plot of several superimposed time level profiles. 
+\\
+\\
+$(a)\begin{cases} 
+	(PDE) u_t= u_{xx},
+	~~~~0<x<1, 0<t\leqslant 1,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=100,\\
+		u(0,t)=-20, u(1,t)=0
+		\end{cases}
+		0 < x < 1, 0 \leqslant t \leqslant 1 
+	\end{cases}$
+\\
+\\
+$(b)\begin{cases} 
+	(PDE) u_t= u_{xx},
+	~~~~0<x<1, 0<t\leqslant 1,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=100,\\
+		u(0,t)=-20, u(1,t)=u-90
+		\end{cases}
+		0 < x < 1, 0 \leqslant t \leqslant 1 
+	\end{cases}$
+\\
+\\
+$(c)\begin{cases} 
+	(PDE) u_t= 2xu_{xx},
+	~~~~0<x<1, 0<t\leqslant 1,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=100,\\
+		u(0,t)=-20, u(1,t)=u-90
+		\end{cases}
+		0 < x < 1, 0 \leqslant t \leqslant 1 
+	\end{cases}$
+\\
+\\
+$(c)\begin{cases} 
+	(PDE) u_t= xu_{xx},
+	~~~~0<x<1, 0<t\leqslant 2,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=100,\\
+		u(0,t)=-20, u(1,t)=u-90
+		\end{cases}
+		0 < x < 1, 0 \leqslant t \leqslant 1 
+	\end{cases}$
+	
+		\item 
+			(\textit{Richardson's Method-Experimental Instability}) Recall that Richardson's method for the heat 
+equation $u_t = au_{xx}$ uses centered difference approximations for both the time and space derivative terms. Thus it takes the following form:
 
+$$
+\dfrac{u(x_i,t_{j+1})-2(u_i,t_j)-u(x_i,t_{j-1})}{k^2}=
+\dfrac{u(x_{i+1},t_{j+1})-2(u_i,t_j)-u(x_i,t_{j-1})}{k^2}
+$$
+Richardson's method turns out to be unstable for any choice of space and time steps (therefore it is an unconditionally unstable method).
+\\
+(a) Perform Richardson's method on a BVP (of your choice) to demonstrate this instability for  values of $mu =\alpha k/h^24$.
+\\
+(b) Write an M-file that will perform Richardson's method on the BVP of Program 12.3; the syntax, and input and output variables should be just as in Program 12.3, i.e., 
+\\
+\\
+\texttt{[ x, t , U] = richardson(phi , L, A, B, T, N, M, alpha , q) .}
+\\
+\\
+Run your program to reproduce the results of part (a). Also, run your program on the BVP of Example 12.7 (with similar step sizes) and compare the performance with that witnessed for the Crank-Nicolson method in that example.
+		\item
+			(\textit{Richardson's Method-Theoretical Instability}) (a) Perform a von Neumann stability analysis 
+using real numbers (as in this section) or complex arithmetic to show that Richardson's method 
+(Exercise 13) is always unstable for the BVP: 
+$$\begin{cases} 
+	(PDE) u_t=\alpha u_{xx},
+	~~~~0<x<L, 0<t<\infty,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=\phi(x),\\
+		u(0,t)=0, u(L,t)=0
+		\end{cases}
+		0 < x < L, 0 \leqslant t < \infty 
+	\end{cases}$$
+	
+\textbf{Suggestion}: Although the real number notation used in the text will work, complex notation, as 
+used in the exercises of the last section, will yield a more succinct proof	
 
+		\item
+			In this exercise we will consider the BVP
+$$\begin{cases} 
+	(PDE) u_t=\alpha u_{xx},
+	~~~~0<x<L, 0<t<\infty,u=(x,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=\phi(x),\\
+		u(0,t)=0, u(L,t)=0
+		\end{cases}
+		0 < x < L, 0 \leqslant t < \infty 
+	\end{cases}$$			
+along with the following finite difference scheme: 			 
+$$
+\dfrac{u(x_i,t_{j+1})-2(u_i,t_j)-u(x_i,t_{j-1})}{k^2}=
+\alpha \dfrac{u(x_{i+1,t}+u(x_{i-1,t}-u(x_{i,t+1}-u(x_{i,t-1}),}{h^2}
+$$
+Like Richardson's method (Problem 13), this one used a centered difference approximation for the time derivative, but a different sort of space derivative approximation.
+\\
+(a) Use this method to solve the BVP of Example 12.8 using the same step sizes that were used in that example (with the Crank-Nicolson method), and compare errors using the "exact" solution given in that example.
+\\
+(b) Show that the local truncation error of this method is $0(h^2 + k^2)$. 
+\\
+(c) Perform a von Neumann stability analysis to show that thismethod is unconditionally stable. 
+		\item
+			(a) Show that with the general formulation of the Crank-Nicolson method given in the footnote for Program 12.3, equation (50) takes on the following form:
+$$
+-\mu_{i,j+1}\mu_{i-1,j+1}+2(+1\mu_{i,j+1})\mu_{i,j+1}-\mu_{i,j+1}\mu_{i+1,j+1}
+=\mu_{i,j}\mu_{i-1,j}+2(l-\mu_{i,j}\mu_{i,j}+\mu_{i,j}\mu_{i+1,j}+(k/2)[q_{i,j}+q_{i,j+1}]
+$$
+where $\mu_{i,j}= \alpha_{i,j}  k/h2$
+\\
+\\
+(b) In cases where a depends on w (and/or wx), the approximation on which our \texttt{cranknicolso} n program is based is rather Spartan. Experiment with some particular BVPs where $\alpha = \alpha (u)$ and modify this program to incorporate the first-order (rather than zeroth-order) approximation, until you find one in which the latter method gives improved results. 
 
+$$
+\alpha_{i,j+1}\approx \alpha ((x_i,t_{j+1},u(x_i,t_j),[u(x_{i-1},t_j)]/2h)+\partial \alpha/\partial u\alpha ((x_i,t_{j+1},u(x_i,t_j)[u(x_{i-1},t_j)]/2h)[u(x_i,t_j)-u(x_i,t_{j-1})]
+$$
 
+\textbf{Suggestion}: Unless you can find such a problem with a known analytic solution, you should judge the success of the two methods by checking to see how much the numerical results change when both temporal and spatial steps are cut in half. 
+		\item
+			{\textit(Finite Difference Schemes for Heat Flow in Two Space Dimensions}) As was done with hyperbolic equations in Section 12.2, the finite difference methods of this section can be extended to deal with the heat equation (and other parabolic equations) in two-space variables. This exercise outlines the procedure for the following Dirichlet problem on a rectangle: 
+			
+$$\begin{cases} 
+	(PDE) u_t=\alpha (u_{xx}+u_{yy}),
+	~~~~0<x<a, 0<y<b, 0<t<\infty,u=(x,y,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=\phi(x,y),
+		~~~~0\leqslant x \leqslant a, 0 \leqslant y \leqslant b, 0 \leqslant t <\infty\\
+		u(0,t)=A(x,y), ~~~~$for all$ (x,y) $ on the boundary of the rectangle: $ \\
+		~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~R=\lbrace 0\leqslant x \leqslant a,0\leqslant y \leqslant b  \rbrace
+		\end{cases} 
+	\end{cases}$$	
+(a) For a fixed time interval $0\leqslant t\leqslant T$ introducing a grid as in (40) and letting $u_{i,j}^t=u(x_i,u_j,t_t)$ derive the following forward-time central-space finite difference approximation of the PDE: 
+
+$$u_{i,j}^{t+1}=\mu(1-\sigma)[u_{i+1,j}^{t}+u_{i-1,j}^{t}u_{i,j+1}^{t}+u_{i,j-1}^{t}]
++\mu \sigma [u_{i+1,j+1}^{t}+u_{i-1,j}^{t+1}u_{i,j+1}^{t+1}+u_{i,j-1}^{t+1}] + (1-4\mu)u_{i,j}^t.$$
+This scheme is uniformly stable if $i/2\leqslant \sigma \leqslant 1$ and otherwise the stability condition becomes  $\mu = ak/h^2 < 1/(4-8\sigma)$. When $\sigma = 1 / 2$, it is referred to as the Crank-Nicolson method since it naturally generalizes the method in one space variable.
+\\
+\textbf{Note}: The stability assertions can be established by the von Neumann method; see [RiMo-67] or [IsKe-66].
+		\item
+			(\textit{Cooling of a Uniformly Heated Slab}) Consider the following heat problem: 
+
+$$\begin{cases} 
+	(PDE) u_t=\alpha (u_{xx}+u_{yy}),
+	~~~~0<x<a, 0<y<b, 0<t<\infty,u=(x,y,t)\\
+(BCs)
+		\begin{cases}
+		u(x,,y,0)=T_o,
+		~~~~0\leqslant x \leqslant a, 0 \leqslant y \leqslant b, 0 \leqslant t <\infty\\
+		u(x,y,t)=0, ~~~~~~~~$for all$ (x,y) $ on the boundary of$   		\lbrace 0\leqslant x \leqslant a,0\leqslant y \leqslant b  \rbrace\\
+		\end{cases} 
+	\end{cases}$$
+
+Physically, this problem can be thought of as the cooling of a thin rectangular slab with insulated lateral surfaces and whose edges are maintained at temperature of 0. Initially, the temperature is $T_0$ . We have left the diffusivity as variable.
+\\  
+(a) Use the forward-time, central-space explicit method of Exercise 17(a) to numerically solve this problem on the time interval $0 \leqslant t \leqslant 1$ using 10 interior space grid nodes in both the $x-$ and $y-$directions. Use the following data: $a = b = 1, T_0 = 100, \alpha = 1$ and perform your solution on the time interval $0 \leqslant t \leqslant 1$ . Give three-dimensional snapshots of temperature profiles at the times (in the time grid as close as possible to) $t = 0, .2, A, .6, .8, 1$.
+\\
+(b) Repeat part (a), this time using the Crank-Nicolson method of Exercise 17(c). Do it first with the grid that would be suitable for part (b), then repeat with a grid with approximately the same total number of internal nodes (spatial-temporal) but where the step sizes are the same for each of the three variables ($x, y$, and $t$).
+\\
+(c) The exact solution of this BVP can be expressed as:
+
+$$
+u(x,y,t)=\dfrac{16T_0}{\pi^2} \left\{ \sum_{n=0}^{\infty} \dfrac{1}{2m+1}sin((2n+1)\pi x/a ) exp(-\pi^2(2n+1)^2\alpha t/a^2)\right\} x
+$$
+$$
+\left\{ \sum_{n=0}^{\infty} \dfrac{1}{2m+1}sin((2m+1)\pi y/b ) exp(-\pi^2(2m+1)^2\alpha t/b^2)\right\},
+$$
+see Section 3.7 of [Asm-00]. Find a positive integer N so that the partial sum product: 
+$$
+u(x,y,t)=
+\dfrac{16T_0}{\pi^2} \left\{ \sum_{n=0}^{\infty} \dfrac{1}{2n+1} \cdots \right\}~x~
+\dfrac{16T_0}{\pi^2} \left\{ \sum_{n=0}^{\infty} \dfrac{1}{2m+1} \cdots \right\}
+$$
+approximates the exact solution with an error less than $10^6$ uniformly for all $x, y$ and $t$ between O and 1. 
+\\
+How much better will the accuracy of this approximation be for each of the temperature profiles corresponding to the time values (in the time grid as close as possible to) $t = .2, .4., .6, .8,1$? 
+\\
+(d) Use the "exact" solution of part (c) to obtain three-dimensional mesh plots of the errors of each of the snapshots obtained in part (a), and then for each of those obtained in part (b).
+\\
+(e) Using the numerical solution of part (a), estimate the time it takes for the \underline{maximum temperature} on the slab to decrease to 50. Repeat with the numerical solutions of part (b) and finally with the "exact" solution of part (c). 
+\\
+(f) For a particular grid on the x- and y-axes, the \underline{average temperature} on the plate at time level
+t0 can be discretely defined by 
+$\dfrac{1}{n_x N_y} \sum_{i=1}^{N_x} \sum_{j=1}^{N_y} u(x_i,y_j,t)$
+Using the numerical solution of part (a), estimate the time it takes for the average temperature on the plate to decrease to 50. Repeat with the numerical solutions of part (b) and finally with the "exact" solution of part (c).
+\\
+\textbf{Suggestions}: For parts (a) and (b) use some of the MATLAB techniques introduced in Example 12.7, Program 12.2 and the development that precedes it. In part (b), to find (approximately) the correct step size $h_h$ solve the equation $h_b^3=h_a^2k_a$, where ha and *e denote the spatial and temporal step sizes, respectively, that were used in part (a). For part (c), use the ideas from Example 12.8(b). For part (d), much computation can be saved by making use of the separated nature of the exact solution. 
+
+		\item
+			Repeat all parts of Exercise 18, keeping everything the same, except now use the value $\alpha = 2$ . 
+		\item
+			Repeat all parts of Exercise 18, keeping everything the same, except now use the value $\alpha = 4$ . 
+		\item
+			(\textit{Cooling of a Half-Heated Slab}) Consider the following heat problem:
+
+$$\begin{cases} 
+	(PDE) u_t=u_{xx}+u_{yy},
+	~~~~0<x<a, 0<y<b, 0<t<\infty,u=(x,y,t)\\
+(BCs)
+		\begin{cases}
+		u(x,y,0)=\phi(x,y),
+		~~~~0\leqslant x \leqslant a, 0 \leqslant y \leqslant b, 0 \leqslant t <\infty\\
+		u(x,y,t)=0, ~~~~~~~~$for all$ (x,y) $ on the boundary of$   		\lbrace 0\leqslant x \leqslant a,0\leqslant y \leqslant b  \rbrace\\
+		\end{cases} 
+	\end{cases}$$
+where $\phi(x,y) \begin{cases} 
+				100, ~~~~~$if$~~y\leqslant x\\
+				0 ~~~~~~~~~~~otherwise
+				\end{cases},$
+\\
+(a) Use the backward-time, central-space purely implicit method of Exercise 17(c) with $\sigma = 1$ to numerically solve this problem on the time interval $0 \leqslant t \leqslant 1$ using 25 interior grid values in each of the $x-$ and $y-$ and $t$-directions. Give three-dimensional snapshots of temperature profiles at the times (in the time grid as close as possible to) $t = 0, .2, .4., .6, .8, 1$. Repeat using 50 interior grid values for each variable. 
+\\
+(b) Repeat part (a), this time using the Crank-Nicolson method of Exercise 17(c). 
+\\
+(c) The exact solution of this BVP can be expressed as:
+
+$$u(x,y,t)=100 \sum_{n=1}^{\infty} \sum_{m=1}^{\infty}
+C_{m,m}sin(n\pi x)sin(m\pi x)exp(-\pi^2(n^2+m^2)t)
+$$
+
+where $   C_{x,m}= 
+		\begin{cases}
+			2((-1)^n((-1)^m-1)n^2+((-1)m^2)/[nm(n^2-m^2)\pi^2], ~~ $if$~~ n\neq m\\
+			2((-1)^n-1)^2/[n^2 \pi^2],
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~$if$~~ n=m
+		\end{cases}
+$
+\\
+(see Section 3.7 of [Asm-00]). Find a positive integer N so that the partial sum:
+
+$$
+u(x,y,t)=100 \sum_{n=1}^{\infty} \sum_{m=1}^{\infty} C_{n,m} \cdots
+$$
+approximates the exact solution with an error less than 10"* uniformly for all $x, $y, and $t$ between O and 1. 
+\\
+How much better will the accuracy of this approximation be for each of the temperature profiles corresponding to the time values $t = .2, .4., .6, .8, 1$?
+\\
+(d) Use the "exact" solution of part (c) to obtain three-dimensional mesh plots of the errors of each of the snapshots obtained in part (a), and then for each of those obtained in part (b). 
+\\
+(e) Repeat part (e) of Exercise 18 for the BVP of this problem. 
+\\
+(f) Repeat part (f) of Exercise 18 for the BVP of this problem. 
+		\item
+Repeat all parts of Exercise 21, keeping everything the same, except now change the PDE $to u_t =2(u_{xx} u_{yy})$.
+		\item
+			Repeat all parts of Exercise 21, keeping everything the same, except now change the PDE to u$to u_t =4(u_{xx} u_{yy})$. 
+		\item
+			(\textit{Failure of the Maximum Principle for Heat Problems with Sources}) Consider the following heat problem: 
+
+$$\begin{cases} 
+	(PDE) u_t=u_{xx}+2(t+1)+x(1-x),
+	~~~~0<x<a, 0<y<b, 0<t<\infty,u=(x,y,t)\\
+(BCs)
+		\begin{cases}
+		u(x,0)=x(x,0)=x(1-x),\\
+		u(0,t)=0, u(1,t)=0
+		\end{cases}
+		 0 < x< 1, 0 \leqslant t< \infty 
+	\end{cases}$$
+
+(a) Show that $u(x,t) = (t + 1)x(1-x)$ solves this BVP and violates the maximum principle stated in the section in that the internal temperature of the rod can exceed the boundary and initial temperature values. 
+\\
+(b) Apply each of the three methods, implicit, explicit, and Crank-Nicolson, to this problem with comparable grids and compare the numerical results with the solution of part (a). 
+\end{enumerate}
 
 \end{document}
