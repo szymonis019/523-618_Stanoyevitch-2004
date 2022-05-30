@@ -29,6 +29,7 @@ The FEM methods basically split up the domain of the problem into small pieces, 
 	\caption{\textsf{A triangulation of a planar domain consisting of a rectangle with two circles deleted. The circular boundary portions are thus approximated by polygons (as shown). This triangulation was created using MATLAB's PDE Toolbox. }}
 	\label{pfig:ch13_2}
 \end{figure}
+
 Even in two dimensions, of course, there are numerous ways to perform such a triangulation. We point out some important features of the triangulation in Figure 13.2. First, notice that the triangles in the mesh all seem to be roughly the same size. This uniformity is not necessary, but for a general problem on a given domain it is usually the best generic triangulation scheme. Another important property is that none of the sidelengths of any triangle in the mesh is much shorter than the other two sides of the same triangle. Another way to describe this property is that the area of the inscribed circle of any of thesetriangles is not much smaller than the area of the triangle. This feature is essential in order that the finite element method be stable. 
 \\
 

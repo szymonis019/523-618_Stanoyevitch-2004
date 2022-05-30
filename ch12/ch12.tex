@@ -282,7 +282,7 @@ snapshots of the wave profiles for each of the seven times starting with time $t
 and advancing to $t = 3$ in increments of 0.5. 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.6\linewidth]{ch12_4}
+	\includegraphics[width=0.8\textwidth]{ch12_4}
 	\caption{\textsf{ Initial profile for the plucked string of Example 12.1.}}
 	\label{pfig:ch12_4}
 \end{figure}
@@ -302,18 +302,18 @@ written to produce snapshots and/or movies of this and more complicated waves.
 Since an inline function construction is not appropriate for functions whose
 formulas change, we first construct an M-file for the function $\phi(x):$
 
-\begin{verbatim}
+\begin{lstlisting}[numbers=none,frame=none]
 function y = EX121(x)
 if abs(x)<l, y=2-2*abs(x);
 else y=0;
 end
-\end{verbatim}
+\end{lstlisting}
 Using this M-file in the following code, we create relevant vectors to produce the
 snapshots, and we use the \textit{subplot} command to conveniently collect all of the
 profiles in a single figure. The resulting MATLAB plot window is reproduced in
 Figure 12.5. 
 \begin{lstlisting}[numbers=none,frame=none]
->> x=-5:.01:5; 
+>> x= -5:.01:5; 
 >> counter =1; 
 >> for t=0:.5:3; 
 xl=x+t; x2=x-t; 
@@ -1311,7 +1311,7 @@ the previous chapter. Program 12.1 provides an example of such a feature.}
 \end{equation}
 This program uses the improved approximation (29) for the level-one time values that work better under greater differentiability hypotheses on the initial data. A more basic program, which uses (27) in place of (29), is left to the following exercise for the reader; it is recommended over this one in case the initial conditions possess singularities. The program assumes that the Courant-Friedrichs-Levy condition has been checked to be satisfied in the region under consideration. 
 
-\begin{lstlisting}
+\begin{lstlisting}[numbers=none,frame=none]
 function [x, t, U] = onedimwave(phi, nu, L, A, B, T, N, M, c) 
 solves the one-dimensional wave problem u tt - c(t,x,u,u x)N2*u 
 Input variables: phi-phi(x) - initial wave profilo function 
@@ -1334,7 +1334,7 @@ condition should hold: c(x,t,u,u x)(T/L)(N+l)/(M+l)<1
 h = L/(N+1); k = T/(M+1); 
 \end{lstlisting}
 
-\begin{lstlisting}
+\begin{lstlisting}[numbers=none,frame=none]
 U=zeros(M+2,N+2); x=0:h:L; t=0:k:T; 
 	 Recall matrix indices must start at 1. Thus the 
 	 matrix will always be one more than the corrospcn 
@@ -1504,7 +1504,7 @@ Physically this wave problem can be thought of as that of a string of length 5 t
 SOLUTION: In cases where the wave speed c is nonconstant, we must replace c with its maximum value (worst-case scenario) in the CFL condition (33). This tells us that we should have 
 $$M+1\geq 2(N+1)$$
 We create M-files for $c(x)$ and $A(t)$, and inline functions for the remaining data: 
-\begin{lstlisting}
+\begin{lstlisting}[numbers=none,frame=none]
 function y =c EG12 5(t,x,u,ux) 
   for i = 1:length(x) 
 	if (0<=x(i))&(x(i)<=3) 
@@ -1517,7 +1517,7 @@ function y =c EG12 5(t,x,u,ux)
 end 
 \end{lstlisting}
 
-\begin{lstlisting}
+\begin{lstlisting}[numbers=none,frame=none]
 function y = Apulse_EG12_5 (t) , 
   for i * 1:length(t) 
 	if (0<=t(i))&(t(i)<=pi/5) 
@@ -1692,7 +1692,7 @@ by the finite difference method:
 		\end{cases} 
 	\end{cases}
 \end{equation}
-\begin{lstlisting}[numbers=none] 
+\begin{lstlisting}[numbers=none,frame=none]
  function [x, y, t, U]=twodimwavedirbc(phi, nu ,a ,b, T,h ,c)
  	solves the two-dimensional wave probl;em u_tt = c^2(u_xx, u_yy)
  	on the rectangle (0<= x <= a, 0<= y <= b), with u(x,y)=0
@@ -2435,7 +2435,7 @@ where $\alpha_{i,j} = \alpha(x_j,t_j,u(x_i t_j))$. The obvious problem, of cours
 
 The Thomas algorithm is used to solve the tridiagonal systems which arise. 
 
-\begin{lstlisting}[numbers=none]
+\begin{lstlisting}[numbers=none,frame=none]
 function [x, t, U] = cranknicolson(phi, L, A, B, T, N, M, alpha, q)
 	solves the one-dimens heat problem
 	u_t = alpha(t,x,u)*u_xx+q(x,t) 
