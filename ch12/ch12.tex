@@ -26,7 +26,7 @@ recently in such fields as superconductivity and string theory. In general, the
 wave equation has a time variable t and any number of space variables JC, y, z,...
 and takes the form
 
-\begin{equation}
+\begin{equation} \label{eqa1}
 u_u=c^2 \vartriangle u=c^2(u_{xx}+u_{yy}+...) 
 \end{equation}
 
@@ -84,7 +84,7 @@ $\triangle s\thickapprox \triangle x$
  $sin(\theta) \thickapprox \theta \thickapprox u_x (x,t)$
   In the limit as As -» 0, this brings us to
 
-\begin{equation}
+\begin{equation}\label{eqa2}
 Tu_{xx}+q =\rho u_u ,u=u()x,t 
 \end{equation}
 
@@ -105,7 +105,7 @@ strings under more general hypotheses we refer to the article by S. Antman [Ant8
    \caption{\textsf{Jean Le Rond
 D'Alembert (1717-1783),
 French mathematician.}}
-   \label{fig:ch12_2}
+   \label{pfig:ch12_2}
 \end{wrapfigure}
 
 
@@ -133,7 +133,7 @@ the solution will give many insights into qualitative
 aspects of wave equations. It begins by
 introducing the new variables: 
 
-\begin{equation}
+\begin{equation} \label{eqa3}
 \xi=x-ct, \eta=x+ct 
 \end{equation}
 
@@ -146,7 +146,7 @@ extremely easy to solve for the general solution. Applied using (3), the chain r
 gives the following: 
 
 $$u_x = u_\xi \xi_x + u_\eta \eta_x = u_\xi u_\eta$$
-\begin{equation}
+\begin{equation} \label{eqa4}
 u_t =u_\xi \xi_t +u_\eta \eta_t =-cu_\xi+cu_\eta
 \end{equation}
 \\
@@ -154,13 +154,13 @@ u_t =u_\xi \xi_t +u_\eta \eta_t =-cu_\xi+cu_\eta
 \\
 \\
 In the same fashion, if we differentiate once again, we arrive at
-\begin{equation}
+\begin{equation}\label{eqa5}
 u_{xx} =u_{\xi \xi}+2u_{\xi \eta}+u_{\eta \eta} , u_u = c^2(u{\xi \xi}-2u_{\xi \eta}+ u_{\eta \eta})  
-\end{equation}
+\end{equation} 
 When we substitute equations (5) into the one-dimensional wave equation (1), we
 obtain the following version of the wave equation in the new variables $(\xi ,\eta)$ : 
 
-\begin{equation}
+\begin{equation}\label{eqa6}
 u_{\xi \eta}=0.
 \end{equation}
 This PDE is very easy to solve, by "integrating" twice. Since it says that $\partial /\partial \eta(u_\xi)=0,$ we can integrate with respect to $\eta$ to get $u_\xi=(F\xi)$,where
@@ -169,13 +169,12 @@ This PDE is very easy to solve, by "integrating" twice. Since it says that $\par
 $F(\xi)$  is an arbitrary function of $\xi$ Next we integrate again, this time with respect
 to $\xi$ , to conclude that
 
-\begin{equation}
+\begin{equation} \label{eqa7}
 u(\xi,\eta)=f(\xi)+g(\eta),
 \end{equation}
 where $f(\xi)$ and $g(\eta)$ are arbitrary functions of the indicated variables. (Note  $f(\xi)$ is an antiderivative of $F(\xi)$) Translating back to the original variables
 using (3) gives us the following general solution of the wave equation:
-
-\begin{equation}
+\begin{equation}\label{eqa8}
 u(x,t)=f(x-ct)+g(x + ct),
 \end{equation}
 where $f$ and $g$ are arbitrary functions (with continuous second derivatives). We
@@ -213,7 +212,7 @@ posed problem. These initial boundary conditions are often referred to as \textb
 boundary conditions}  (or \textbf{Cauchy boundary data}) Thus the \textbf{Cauchy problem
 for the wave equation} is summarized as follows: 
 
-\begin{equation}
+\begin{equation} \label{eqa9}
 \left\{\begin{array}{ll}
 (PDE) u_\eta=c^2u_{xx}, -\infty<x<\infty, 0<t<\infty, u=u(x,t)\\
 (BC's) u(x,0)=\phi(x), u_t(x,0)=v(x)-\infty<x<\infty ,=\leqslant \infty
@@ -246,7 +245,7 @@ Suppose that
 the function $\phi(x)$ has a continuous second derivative and $v(x)$ has a continuous
 first derivative on the whole real line. Then the Cauchy problem (9) for the onedimensional wave equation has the unique solution given by 
 
-\begin{equation}
+\begin{equation} \label{eqa10}
 u(x,t)=\dfrac{1}{2} \phi(x+ct)+\phi(x-ct)+\dfrac{1}{2c} \int_{x-ct}^{x+ct} v(s)ds
 \end{equation}
 Proof: Substitution of the general solution (8) into the BCs of (9) produces (put /
@@ -383,7 +382,7 @@ variation of a Cauchy problem for the one-dimensional wave equation that we
 consider will give rise to analytical formulas that are extremely complicated and
 intractable. We now study the wave equation on a string of finite length, which is
 fixed at both ends. The precise Cauchy problem that we work with is as follows:
-\begin{equation}
+\begin{equation} \label{eqa11}
 V(x)
 	\begin{cases} 
 (PDE) u_n=c^2 u_{xx}, &  ,0 < x < L, 0< t< \infty ,  u=u(x,t)\\
@@ -410,7 +409,7 @@ extensions as $\hat{\phi}(x) and \hat{V}(x)$ ), respectively, they will be creat
 odd functions across both of the boundary values $x = 0 and x = L$. Analytically,
 this means that
 
-\begin{equation}
+\begin{equation}\label{eqa12}
 \hat{\phi}(-x)= -\hat{\phi}(x) ~~~and~~~ \hat{\phi}(2L - x) = -\hat{\phi}(x),~~~ -\infty < x<\infty
 \end{equation}
 and the corresponding identities for $\hat{V}$ It can be easily verified (Exercise 14)
@@ -422,7 +421,7 @@ being fixed would force   $\phi(0) = \phi(L)$ = 0 so we extend the definition $\
 specifying $\hat{\phi}$ for $\hat{\phi}(0)=\hat{\phi} (\pm L) =\hat{\phi}(\pm L) = \cdots =0.$  The resulting function will be continuous (otherwise the
 string would be broken). }
 
-\begin{equation}
+\begin{equation} \label{eqa13}
 \hat{\phi}(x)
 	\begin{cases} 
 \phi (x)   ~~~ if~~~ 0< x< L\\
@@ -560,7 +559,7 @@ principle that is very important in physics. We demonstrate this principle for t
 one-dimensional wave equation written in physical form: $\rho u_u = Tu_{ss}$, where, we recall, $ \rho $ is the mass density of the string and $T$ is the tension. From physics, the 
 \textbf{kinetic energy} of a mass m, which is moving at a velocity $v$, is defined to be $\dfrac{1}{2}mv^2$. Breaking the wave into infinitesimal segments, this gives rise to the 
 definition: 
-\begin{equation}
+\begin{equation} \label{eqa14}
 KE(t)=\dfrac{1}{2} \rho \int_a^b u_t (x,t)^2 dx ~~~~~~~~~~~~ t\geq 0, 
 \end{equation}
 for the kinetic energy of the string at time /. This improper integral will converge 
@@ -578,7 +577,7 @@ the integral can be evaluated over a finite interval and the theorem can be appl
 even be extended to certain improper integral settings and in cases where the continuity assumptions 
 break down at isolated singularities. See any good book on advanced calculus for details on this 
 theorem and related results, for example, [Rud-64], [Ros-96], or [Apo-74]. } 
-\begin{equation}
+\begin{equation}\label{eqa15}
 \frac{d}{dt} KE(t)=\rho \int_{-\infty}^{\infty} u_t u_u dx ~~~~~~~~~~~~ t\geq 0
 \end{equation}
 Using the PDE to substitute $Tu_{xx} for \rho u_u$ in the above integral, and then 
@@ -588,7 +587,7 @@ $$
 $$
 the last equation being valid since the integrated term vanishes off a finite interval. Since $u_{tx} u_x = \partial / \partial t \frac{1}{2} u_x^2$ we may write (again using the differentiation under the 
 integral sign rule):
-\begin{equation}
+\begin{equation} \label{eqa16}
 \dfrac{d}{dt} KE(t)= -\dfrac{d}{dt}  \dfrac{1}{•2} Tu_{x}^{2} dx, ~~~~~~t\geq 0.
 \end{equation}
 In basic physics, the \textbf{potential energy} of an object of mass m located at height h is 
@@ -599,11 +598,11 @@ energy remains constant. (Think of when an object falls, its velocity increases 
 its kinetic energy increases and its height decreases so its potential energy 
 decreases.) The analogue for the potential energy for the string is the following 
 integral: 
-\begin{equation}
+\begin{equation}\label{eqa17}
 PE(t)=\dfrac{1}{2} T \int_{-\infty}^{\infty} u_x (x,t)^2 dx ~~~~~~t\geq 0
 \end{equation}
 and, correspondingly, the \textbf{total energy} is defined to be
-\begin{equation}
+\begin{equation} \label{eqa18}
 E(t)=KE(t)+PE(t)=\dfrac{1}{2} \int_{-\infty}^{\infty} [\rho u_t^2 + Tu_x^2] dx ~~~~~~t\geq 0
 \end{equation}
 The identity (16) states that $\dfrac{d}{dt} KE(t)=-\dfrac{d}{dt} KE(t),$ and it follows from (18) that E'(t) = 0 (i.e., the total energy in the wave remains constant). This is the 
@@ -988,31 +987,31 @@ in Chapter 11 (see Figure 11.11), we begin by introducing a grid of equally spac
 x- and /-coordinates for the rectangular region $0\leqslant x\leqslant L, 0\leqslant t \leqslant T$ :
 
 $$0=x_0 < x_1 <x_2< \cdots<x_{N+1} ~~~~\bigtriangleup x_i \equiv x_i-x_{i-1}=h $$
-\begin{equation}
+\begin{equation}\label{eqa19}
 	0=t_0 < t_1 <t_2< \cdots<t_{M+1} ~~~~\bigtriangleup x_i \equiv t_i-t_{i-1}=k
 \end{equation}
 By using the central difference formulas (see Lemma 10.3) in the wave equation, 
 we get the following discretization of it: 
-\begin{equation}
+\begin{equation}\label{eqa20}
 	\dfrac{u(x_i,t_{j+1})-2u(x_i,t_j)+u(x_i,t_{j-1})}{k^2}=
 	c^2 \dfrac{u(x_i,t_{j+1})-2u(x_i,t_j)+u(x_i,t_{j-1})}{h^2}
 \end{equation}
 We recall that the truncation errors here are 0($k^2$) and 0($h^2$), respectively. Using the notation: 
 $$u_{i,j}=u(x_i, t_j),$$
 and introducing the parameter
-\begin{equation}
+\begin{equation}\label{eqa21}
 	\mu =ck/h,
 \end{equation}
 we may express (20) in the following simplified form:
- \begin{equation}
+ \begin{equation}\label{eqa22}
 	u_{i,j+1}-2u_{i,j}+u_{i,j-1}-\mu^2[u_{i,j+1}-2u_{i,j}+u_{i,j-1}]=0
 \end{equation}
 We next solve this equation for the unique term corresponding to the highest time value to obtain: 
- \begin{equation}
+ \begin{equation}\label{eqa23}
 	u_{i,j+1}=2(l- \mu^2)u_{i,j}+ \mu^2[u_{i+l,j}+u_{i-l,j}]-u_{u,j-1}
 \end{equation}
 for $i = 1,2, ...,N,$ and $y = 1, 2, ..., M$. The endpoint boundary conditions tell us that: 
- \begin{equation}
+ \begin{equation}\label{eqa24}
 	.u_{0.j}=0=u_{N,j}, ~~~~ for ~all~j
 \end{equation}
 It follows from (22) and (23) that we may represent the time level j + 1 functional values in terms of the previous two time level functional values by means of the following tridiagonal linear system: 
@@ -1025,7 +1024,7 @@ finite difference method will solve for it using the values of the solution at t
 found lower time grid points. }}
 	\label{pfig:ch12_11}
 \end{figure}
-\begin{equation}
+\begin{equation}\label{eqa25}
 \left[\begin{array}{c}
 u_{1,j+1}\\
 u_{2,j+1}\\
@@ -1063,7 +1062,7 @@ over three time levels $(t = (J -1)k,jk, (j + 1)k)$. This scheme will progress b
 iterating as we march upward in time. In order to start this recursion, we will 
 need the functional values at the first two time levels $t = 0$ and $t = k( = t_1)$. These 
 are the two column vectors on the right when j = 1. At time / = 0, these values are specified by the initial condition $u(x,0) = \phi(x)$ (initial wave profile) of (11) and this gives us:
- \begin{equation}
+ \begin{equation}\label{eqa26}
 	u_{i,0} =\phi(x_1) ~~for ~~i=1,2,\cdots,N.
 \end{equation}
 In order to get the required next time level functional values we will need to make 
@@ -1076,7 +1075,7 @@ formula implies that:
 $$v(x)=u_t(x,0)\thickapprox (u(x,k)-u(x,0))/k\Rightarrow u(x,k) \thickapprox u(x,0)+kv(x)$$
 (this is nothing more than the usual tangent line approximation). In terms of our 
 grid functional values this translates to: 
-\begin{equation}
+\begin{equation}\label{eqa27}
 	u_{i,t} \thickapprox u{i,0}+kv(x_i) ~~for~~i=1,2,\cdots,N.
 \end{equation}
 Note that (viz. Lemma 11.5) the error of this approximation is $0(k)$, which is of lower order and hence potentially much greater than the $0(h^2+k^2)$ local truncation error for (23). Thus, this lower quality estimate for the / = k time level values (needed to start (23)) could contaminate the overall quality of (23). This problem can be avoided since the approximation can be improved to have error $0(k^2)$ (thus matching those in the foregoing development) if we furthermore assume that the wave equation is valid on the initial line and is sufficiently differentiate. Indeed, based on the differentiability assumption, (the onevariable) Taylor's theorem from Chapter 2 allows us to write: 
@@ -1085,7 +1084,7 @@ u(x,k)=u(x_1,0)+ku_t(x_1,0)+\dfrac{k^2}{6}u_u(x_i,0)+\dfrac{k^3}{6} u_{ttt}(x_i,
 $$
 where $\hat{k}$ is a number between 0 and k. The assumption that the wave equation is 
 valid on the initial line tells us that$ u_u(x,0)=c^2u_{xx}(x,0)=c^2\phi^n(x) $and we are led to the following approximation
-\begin{equation}
+\begin{equation}\label{eqa28}
 	u_{i,l}\thickapprox u_{i,0}+kv(x_i)+\dfrac{c^2k^2}{2}\phi^2(x_i) ~~for ~~~i=1,2,\cdots,N,
 \end{equation}
 with error bound $0(k^2)$.
@@ -1096,7 +1095,7 @@ To avoid computation of derivatives, we may approximate
 $\phi(x_i)$ using the central difference formula: 
 $\phi^n(x_i)[\phi (x_{j+l} ) -2\phi(x_i)+\phi(x_{i-1})]/h^2$
 (with error $0(h^))$. Installing this approximation into (28) produces the following practical approximating formula for the time level $t = 1$ functional values: 
-\begin{equation}
+\begin{equation}\label{eqa29}
 	u_{i,l}=(l-\mu^2)\phi(x_1)+\dfrac{\mu^2}{2}[\phi(x_{i-1})]+kv(x_1)
 	 ~~for ~~~i=1,2,\cdots,N,
 \end{equation}
@@ -1104,7 +1103,7 @@ which has local truncation error $0(h^2+k^2)$. The next exercise for the reader 
 \\
 \\
 EXERCISE FOR THE READER 12.6: (a) Use Taylor's theorem to establish the following \textbf{centered difference approximation}: Suppose that $f(x)$ is a function having a continuous third derivative in the interval$ a-h\leqslant x \leqslant a + h$ then the following approximation for $f'(x)$ is valid: 	
-\begin{equation}
+\begin{equation}\label{eqa30}
 	f'(x)\dfrac{f(x+h)-f(x-h)}{2h}+O(h^2).
 \end{equation}
 Note that this is a second-order approximation to $f'(x)$, whereas the forward and backward difference approximation are only first-order approximations. (b) Using the artifice of ghost nodes (introduced in Section 11.4), obtain estimate (29) (with local truncation error $0(h^2 +k^2))$ under the assumption that the solution $u(x,t)$ of the Cauchy problem (11)extends to have a continuous third order time derivative for $t \geq -k$.
@@ -1263,7 +1262,7 @@ The finite difference methods shown above can be proved to converge to the
 exact solution of the wave problem (11) (as the partitions become more and more 
 refined) provided that, in addition to the required differentiability assumptions, 
 the following Courant-Friedrichs-Levy (CFL) condition holds: 
-\begin{equation}
+\begin{equation} \label{eqa31}
 	\mu \equiv ck/h\leqslant1.
 \end{equation}
 If this condition is violated (i.e., if $\mu > 1$), examples can be constructed where (as in Example 12.4), although all other differentiability assumptions are satisfied, the finite difference approximations will not converge to the exact solution, even as the mesh sizes of both variables tend to zero! In fact when $\mu > 1$, the method is unstable in the sense that errors made at each time stage of the process can significantly affect the subsequent time numerical values. For complete details and proofs on these matters we refer to Section 9.3.1 of [IsKe-66]. The exercises will include an outline of the proof and in the next section we will give some 
@@ -1275,7 +1274,7 @@ We give here a nontechnical explanation of why such instability can arise. From 
     \centering
     \includegraphics[width=0.6\textwidth]{ch12_12}
    \caption{Illustration of the problem when the Courant-Friedrichs-Levy (CFL) condition is violated}
-   \label{fig:ch12_12}
+   \label{pfig:ch12_12}
 \end{figure}In both parts (a) and (b) of Example 12.4, we had $h = k$, so that (since $c = 2$),  $\mu= $ and the Courant-Friedrichs-Levy conditionis violated. We can see that the numerical wave profiles propagate at only $h$ units (to left and right) for each k unit time level increase. Thus, the numerical profiles cannot keep up with the actual wave propagation (two A units left and right of space for each k unit of time) and the scheme goes haywire. In part (c), however,$ k = h/2$ and now the numerical scheme can keep up, and it does so quite well in that example. It turns out that when the problem is a smooth one, taking step sizes so that $\mu = 1$ can greatly enhance the accuracy of the scheme. It seems quite surprising that for a given (stable) choice of A and $k$, fixing $h$ and decreasing $k$ can sometimes have a detrimental effect on the numerical solution. Shortly, we will introduce an implicit scheme that has better stability properties. 
 \\
 
@@ -1298,7 +1297,7 @@ difference method,
 finite difference schemes for the wave equation, this is a rather obvious extension of ideas presented in 
 the previous chapter. Program 12.1 provides an example of such a feature.}
 
-\begin{equation}
+\begin{equation}\label{eqa32}
 	\begin{cases} 
 	(PDE) u_n=c(t,x,u,u_x)^2 u_{xx}, ~~0<x<L,~0<t< \infty, ~~u=u(x,t) \\ 
 	(BCs)
@@ -1369,7 +1368,7 @@ end
 end 
 \end{lstlisting}
 As was implicit in Program 12.1, we point out that the Courant-Friedrichs-Levy (CFL) condition can be expressed using the input parameters in the above M-flle in the following way: 
-\begin{equation}
+\begin{equation}\label{eqa33}
 	\mu=c(t,x,u,u_x)\dfrac{T}{•L}(\dfrac{N+1}{M+1})\leqslant 1
 \end{equation}
 The actual M-file is quite short. In the next example we will test both the accuracy  runtime of this program with a wave problem with nicely smooth input data and whose exact solution is available to compute errors. It will also demonstrate some interesting pathologies when played against the Courant-Friedrichs-Levy condition. 
@@ -1564,17 +1563,17 @@ identical to those of the above example.
 
 
 We turn now to briefly describe implicit finite difference methods. For simplicity, we describe them only for the basic wave equation $u_u = c^2u_{xx}$ of (11). Their main advantage of allowing a more flexible choice of time step sizes is not so crucial here since the Courant-Friedrichs-Levy condition does not pose too stringent (small) a step size requirement on t. When we move on to parabolic equations in the next section, however, we will see that the stability of explicit methods requires a much smaller time step and so implicit methods will be a more attractive alternative. A family of such methods can be obtained by approximating utl with the centered difference:$u_u(x,t)\approx[u_{i,j}+2u_{i,j}+u_{i,j-1}]/k^2$  but for $u_{xx}$ we 558 use a weighted average of the centered difference approximations at the three levels: $t=t_{j-1},t_{j},t_{j+1}$
-\begin{equation}
+\begin{equation}\label{eqa34}
 u_{xx}(x_i,t_j)\approx \omega[u_{i+1,j-1}-2u_{i,j-1}+u_{i-1,j-1}]/h^2 +(1-2 \omega)[u_{i+1,j}-2u_{i,j}+u_{i-1,j}]/h^2+ \omega [u_{i+1,j+1}-2u_{i,j+1}+u_{i-1,j+1}]/h^2
 \end{equation}
 \\
 where the parameter $\omega$ satisfies $0 < \omega< 1$. The choices $\omega= 1/2$ and $\omega = 1 / 4$ are the most popular since they lead to symmetric stencils. It can be shown that this scheme is unconditionally stable as long as $\omega> 1/4$ . We caution the reader that  the unconditional stability, the scheme may produce poor results if we use too large a time step size (relative to the space step size). For brevity, it is helpful to use the following notations for centered difference approximations: 
-\begin{equation}
+\begin{equation}\label{eqa35}
 \delta_{x}^2 u_{i,j} \equiv \dfrac{u_{i+1,j}-2u_{i,j}+u_{i-1,j}}{h^2},
 \delta_{l}^2 u_{i,j} \equiv \dfrac{u_{i,j+1}-2u_{i,j}+u_{i,j-1}}{k^2},
 \end{equation}
 Thus with these notations, the general \textbf{implicit (three-level) finite difference scheme} for the wave equation $u_u = c^2 u_{xx}$ can be expressed as:
-\begin{equation}
+\begin{equation}\label{eqa36}
 \delta_{x}^2 u_{i,j} =c^2 [\omega \delta_x^2 u_{i,j-1}+(1-2\omega) \delta_x^2 u_{i,j}+\omega \delta_x^2 u_{i,j+1}]
 \end{equation}
 \begin{figure}[H]
@@ -1605,7 +1604,7 @@ A wave problem, or for that matter, any PDE problem with two space variables (an
 
 We consider the following two-dimensional wave problem on a rectangular 
 domain:
-\begin{equation}
+\begin{equation}\label{eqa37}
 	\begin{cases} 
 	(PDE) u_u=c^2 (u_{xx}+u_{yy}),~~~~0<x<a, 0<y<b,0<t<\infty,u=(x,y,t)\\
 (BC's)
@@ -1628,14 +1627,14 @@ and $\rho$ is the mass per unit area of the membrane.
 \\
 We restrict time to be bounded on some fixed interval: $Q \leqslant t \leqslant T$ (apologies for using the letter T for two different purposes; the distinction should be clear from the context). We introduce a grid for each variable under thefollowing notation: 
 $$0 = x_0 < x_1 < x_2< \cdots <x_{N_x +1}=a, ~~~~\bigtriangleup x_i-x_{i-1}=h$$
-\begin{equation}
+\begin{equation}\label{eqa38}
 	0 =yx_0 < y_1 < y_2< \cdots <y_{N_x +1}=b, ~~~~\bigtriangleup y_i-y_{i-1}=h
 \end{equation}
 $$0= t_0 < t_1 < t_2 <t<_{M+1}=T, \bigtriangleup t_i \equiv t_i-t_{i-1}=k$$
 We have specialized to using the same step size $h$ for $x-$ and y-coordinates. This, of course, is not always possible, depending on the dimensions of the rectangle $R$, but it will keep the notation more manageable. To keep the notation somewhat streamlined, we use superscripts to denote indices for time levels, and subscripts to indicate indices of space variables: 
 $$U_{i,j}^t=u(x_i,y_j,t_t).$$
 Using this notation and applying the central difference formulas for approximating the PDE in (37), as we did in the one-dimensional case, we arrive at the following discretization of the two-dimensional wave equation:
-\begin{equation}
+\begin{equation}\label{eqa39}
 	u_{i,j}^{t+l}=2(l-2 \mu^2)u_{i,j}^t+\mu^2[u_{i+1,j}^2+u_{i-1,j}^2+u_{i,j+1}^2+u_{i+1,j-1}^2]-u_{i,j}^{t-1},
 \end{equation}
 We are now faced with a new difficulty. Namely, in order to store all of the functional values of our numerical solution, standard matrices are no longer feasible. Fortunately, MATLAB can handle higher-dimensional arrays or matrices. We digress momentarily to introduce them. A three-dimensional matrix will have three coordinates that specify each of its entries. For example, to create a three-dimensional matrix of size $2\times 2 \times 2$ all of whose entries are zeros, we 
@@ -1665,7 +1664,7 @@ As in the one-dimensional case, the Courant-Friedrichs-Levy condition now takes 
 $\mu^2 \equiv (ck/h)^2\leqslant 1/2$.
 \footnote{In general, if we wanted to allow different step sizes $h_x,h_y$ for the x- and y-grids, the Courant-Friedrichs-Levy stability condition takes the form: $\mu^2 \equiv c^2k^2(h_x^{-2}+h_y^{-2})\leqslant t$ , see [IsKe-6].}
 Under the sufficient differentiability assumptions, Taylor's theorem (Chapter 2) can be used, once again, to produce the following $0(h^2 + k^2)$ approximation for the time level $t = k$ values: 
-\begin{equation}
+\begin{equation}\label{eqa40}
 u_{i,j}\equiv(1-2\mu^2) \phi(x_i, y_j)+\dfrac{\mu^2}{2}[\phi(x_{i+1},y_j)+\phi(x_{i-1},y_j)+\phi(x_{i},y_j+1)]
 \end{equation}
 $$
@@ -1680,7 +1679,7 @@ In order to turn the above formulas into an M-file, it is not feasible to incorp
 \\
 \subsubsection{PROGRAM 12.2:} Function M-file for solution of the two-dimensional wave problem (37) 
 by the finite difference method:
-\begin{equation}
+\begin{equation}\label{eqa41}
 	\begin{cases} 
 	(PDE) u_u=c^2 (u_{xx}+u_{yy}),~~~~0<x<a, 0<y<b,0<t<\infty,u=(x,y,t)\\
 (BC's)
@@ -2226,7 +2225,7 @@ $	(a)\begin{cases}
 	\caption{\textsf{The shock-wave phenomena of the nonlinear wave equation of Exercise 18. Higher 
 parts of the wave propagate faster than lower parts, eventually causing the wave profile to "break" from 
 being a function of x.}}
-	\label{pfig:ch12_21=}
+	\label{pfig:ch12_21}
 \end{figure}
 NOTE: A general mathematical principle of partial differential equations roughly states that if the "data" of a boundary value problem has a certain amount of "smoothness," then the solution of the problem will enjoy the same amount of "smoothness."
 \footnote{The language here is admittedly quite vague, since it is not feasible to rigorously state a general result. To clarify things a bit: "Data" simply refers to the known functions in the problem, i.e., functions appearing as coefficients in the PDE or in the boundary conditions. "Smoothness" has to do with the order of differentiability of a given function. Such theorems are referred to as \textbf{regularity theorems}, and often require quite advanced mathematical methods to prove (and even to precisely state). }
@@ -2290,7 +2289,7 @@ text (with $\mu = 1 / 2$ ) to demonstrate that the scheme is not exact
 
 As a prototypical problem for this section, we will use the one-dimensional heat equation on a finite interval with (possible) internal heat source and (possibly time-dependent) Dirichlet boundary conditions at both ends:
 \footnote{Notice that we have changed the notation a bit from Chapter 11. The diffusivity constant used to be labeled as "£", but we have changed this parameter to " $\alpha$ " so that we may continue to use $"k"$ as the time step for finite difference methods. }
-\begin{equation}
+\begin{equation}\label{eqa42}
 \begin{cases} 
 	(PDE) u_t=\alpha u_{xx}+q(x,t),~~~~0<x<L,0, 0<t<\infty,u=(x,t)\\
 (BCs)
@@ -2308,11 +2307,11 @@ As was explained in Section 11.2, this boundary value problem models the heat di
 Following the notation of our previous finite difference schemes, we introduce grids of equally spaced $x$- and $t$-coordinates for the rectangular region $0 \leqslant x \leqslant L, 0\leqslant t \leqslant T$:
 
 $$0 = x_0 < x_1 < x_2 < \cdots < x_{N+1} =L,~~  \bigtriangleup x_i \equiv x_i - x_{i-1} = h,  $$
-\begin{equation}
+\begin{equation}\label{eqa43}
 0 = t_0 < t_1 < t_2 < \cdots < t_{N+1} =T,~~  \bigtriangleup t_i \equiv t_i - t_{i-1} = k.
 \end{equation}
 If we discretize the PDE of (42) by using the forward difference formula (Lemma 11.5) for ut and the central difference formulas (Lemma 10.3) for $_{xx}$, we get the \textbf{forward-time central-space scheme}: 
-\begin{equation}
+\begin{equation}\label{eqa44}
 \dfrac{u(x_i,t_{j+1})-u(x_i,t_{j})}{k•}=\alpha 
  \dfrac{u(x_{i+1},t_{j}-2u(x_{i},t_{j})+u(x_{i-1},t_{j})}{h^2}+q(x_,t_j)
 \end{equation}
@@ -2321,24 +2320,24 @@ $$u_{i,j}=u(x_i,t_j), ~~q_{i,j}=q(x_i, t_j)$$
 and introducing the parameter 
 $$\mu=\alpha k/h^2$$
 allows us to express (44) in the following simplified form: 
-\begin{equation}
+\begin{equation}\label{eqa45}
 u_{i,j+1}=(1/2\mu)u_{i,j}+\mu[u_{i+1,j}+u_{i-1,j}]+kq_{i,j}
 \end{equation}
 For $i= 1,2, ...,N$, and $j= 1,2, ...M$ The stencil for (45) is shown in Figure 12.23(a). It can be shown that the forward-time central-space method is stable, 
 provided that the following \textbf{stability condition} is met:
-\begin{equation}
+\begin{equation}\label{eqa46}
 \mu=\alpha \dfrac{k}{h^2}\leqslant\dfrac{1}{2}.
 \end{equation}
 Recall that stability means that any errors introduced in any particular stage of (44) (e.g., truncation errors) remain under control in all future iterations and that if the initial data is sufficiently differentiable, then the global error of the method will have the same quality bound as the local truncation error: $0(k + h^2)$. A complete proof of this stability result can be found in Section 9.4 of [KeIs-66]; some elements will be given in the exercises. To see that (46) often makes the method impractical, for example, with $\alpha = 1$, if we wanted to use a space step size of $h= 0.05$, the stability condition (46) would force us to take a much smaller time step 
 size $k\leqslant 0.00125$. 
 
 By using instead the backward-time discretization (Lemma 11.5), we get the following \textbf{backward-time central-space scheme} (see Figure 12.23(b)), which is implicit but unconditionally stable:
-\begin{equation}
+\begin{equation}\label{eqa47}
 \dfrac{u(x_i,t_{j+1})-u(x_i,t_{j})}{k•}=\alpha 
  \dfrac{u(x_{i+1},t_{j}-2u(x_{i},t_{j})+u(x_{i-1},t_{j})}{h^2}+q(x_,t_j)
 \end{equation}
 Using the parameter $\mu \alpha k.h^2$ this scheme can be expressed as:
-\begin{equation}
+\begin{equation}\label{eqa48}
 -\mu u_{i-1,j+1}+(1+2\mu)u_{i,j+1}-\mu u_{u+1,j+1}=u_{i,j}+kq_{i,j}
 \end{equation}
 By the underlying finite difference approxim-ations, both of the above schemes have local truncation errors of order $0(k + h^2)$ so unless $k$ is $0(h^2)$ (i.e., small enough so that the stability condition (46) holds), then the local truncation error  be first-order $( \approx O(k))$. Experience might lead us to believe using a centered  difference (second-order) discretization of w, would lead to a more effective scheme. The resulting finite difference method, known as \textbf{Richardson's method} (see Exercises 12 and 13), indeed has local truncation order $0(k^2+h^2)$ but unfortunately has serious stability problems. 
@@ -2347,7 +2346,8 @@ An interesting second order implicit scheme can be obtained by averaging the for
 \footnote{The English school was quite involved with finite difference methods for evolution equations. Back in 1910, Lewis Richardson (1881-1953) had introduced his method andused it and other finite difference methods in numerous applications ranging from meteorology to eddy-diffusion in the atmosphere, and even (at the start of the Cold War) foreign policy and arms control. The stability problems with Richardson's method were not really recognized until the 1940s, when Crank, Nicolson, and others, with the aid of simple mechanical desk computing machines, performed lengthy computations. Crank and Nicolson's work culminated in a 1947 paper [CrNi-47] in which they introduced their unconditionally stable second-order method. This history brings up an important point regarding finite difference methods. It is easy to invent finite difference methods for any PDE. Getting efficient methods which actually converge with good stability and small truncation errors often requires a much more detailed investigation.}
 and runs follows:
 
-\begin{equation}\dfrac{u_{i,j+1}-u_{i,j}}{k}
+\begin{equation}\label{eqa49}
+\dfrac{u_{i,j+1}-u_{i,j}}{k}
 \dfrac{\alpha}{2}[\dfrac{u_{i,j+1}-2u_{i,j}-u_{i-1,j}}{h^2}]
 +[\dfrac{u_{+1i,j+1}-2u_{i,j+1}-u_{i-1,j+1}}{h^2}]
  +\dfrac{1}{2}[q(x_i,t_j)+q(x_i,t_{j+1})]
@@ -2359,7 +2359,7 @@ oriented readers.}
 \\
 \\
 The stencil for the method is shown in Figure 12.23(c). As before, we let  $\mu- ak/h^2$,, which allows us to rewrite (51) in the form:
-\begin{equation}
+\begin{equation}\label{eqa50}
 -\mu u_{i-1,j+1}+2(1+\mu)u_{i,j+1}-\mu u_{i+1,j+1}=
 \mu u_{i-1,j}+2(1+\mu)u_{i,j}+\mu u_{u+1,j}+k[q_{i,j+1}]
 \end{equation}
@@ -2383,7 +2383,7 @@ $$
 
 Borrowing from MATLAB's notation by letting U$/(:, j)$ denote the y'th column vector of $U: [u_{1,j}~~u_{2,j}~~\cdots~~u_{N,j}]'$ the equation (50) can be written in the form: 
 
-\begin{equation}
+\begin{equation}\label{eqa51}
 TU(:,j+1)= SU(:,j)+\mu V_j +Qk_j,
 \end{equation}
 
@@ -2420,7 +2420,7 @@ $\dfrac{u_{i,j+1}-u_{i,j}}{k}=
 +\dfrac{1}{2}[q(x_i,y_j)+q(x_i,t_{j+1})],$
 where $\alpha_{i,j} = \alpha(x_j,t_j,u(x_i t_j))$. The obvious problem, of course, is that we will not be able to evaluate the coefficients $\alpha{i,j+}$, in cases where $\alpha$ depends on u (or $u_x$ ). We circumvent this problem in such cases by setting $\alpha_{i,j+1} \approx \alpha(x_j,t_{j+1},u(x_i t_j))$. The other formulas are modified accordingly, and this is how the M-file is constructed; see Exercise 16. }
 
-\begin{equation}
+\begin{equation}\label{eqa52}
 	\begin{cases} 
 	(PDE) u_t= \alpha(x,t,u) u_{xx}+q(x,t),
 	~~~~0<x<L, 0<t<\infty,u=(x,t)\\
@@ -2615,7 +2615,7 @@ The result is shown in Figure 12.25.
 
 Part (d): For future reference, we first rewrite the stability condition (46) in terms of the input variables for our M-file solvers:
 
- \begin{equation}
+ \begin{equation}\label{eqa53}
 \mu \equiv \dfrac{T(N+1)^2}{L^2(M+1)}\leq\dfrac{1}{2}.
 \end{equation}
 
@@ -2659,7 +2659,7 @@ where $\phi(x)\begin{cases}
 \end{figure}
 We next move on to boundary conditions involving derivatives. Previously we have separated these sorts of boundary conditions into two kinds: Neumann and Robin. For a physical interpretation in terms of our heated-rod problem, it is helpful to consider both of these conditions as special cases of the following general condition: 
 
-\begin{equation}
+\begin{equation}\label{eqa54}
 \partial u/\partial n= -\gamma(u-\eta).
 \end{equation}
 
@@ -2780,7 +2780,7 @@ Elements of the proof of this result can be found in the exercises; see also [As
 \\
 \textbf{Definition:} A finite difference scheme for the BVP (42) that satisfies the hypotheses of Theorem 12.2 is \textbf{unconditionally stable} if there exists a constant $C > 0$ (depending only on the data $\alpha,q,A,B$ of the BVP) such that for any initial profile function $\phi(x)$, any grid of the space interval $[0, L]$ and any grid of the time interval $[0, T]$, we have
 
-\begin{equation}
+\begin{equation}\label{eqa55}
  \stackrel{max}{_{i,j}} |u_i^j|\leqslant C \stackrel{max}{_{0\leqslant x \leqslant L}} |\phi(x)|
 \end{equation}
 In words, this roughly states that the numerical values do not get too much larger than the initial data. The method is \textbf{conditionally stable} if (54) holds provided that the uniform time step size $(k)$ and space step size $(h)$ satisfy some specified relationship.
@@ -2801,17 +2801,17 @@ Physically, this simply says that the maximum temperature of the rod is attained
 \footnote{The maximum principle holds more generally in the presence of time-dependent Dirichlet boundary conditions $u(0,t)=A(t),~~u(L,t) =B(t)$, in which case the inequality changes to $|u(x,t)|  M$ where $M$ is the largest of max | $|\phi(x)|$, max $|A(t)|$, and max $| B(i) |$ (if thesemaxima exist). For a proof, se Section 3.10 of [Asm-00]. The maximum principle for the heat equation ceases to be valid in case of heat sources; see Exercise 21.}
 (discrete) solution of the finite difference method has the following separated form: 
 
-\begin{equation}
+\begin{equation}\label{eqa56}
 u_{i,j}=X_iT_j
 \end{equation}
 Substitution of (56) into the above finite difference scheme and dividing by $X_iT_j$ produces: 
 
-\begin{equation}
+\begin{equation}\label{eqa57}
 \dfrac{T_{j+1}}{T_j}=1-2\mu+\mu \dfrac{X_{i+1}T_{j-1}}{X_i}
 \end{equation}
 Since the left sequence depends only on $j$ while that on the right depends only on $i$, it follows that both sides must equate to the same constant. Calling this constant $\xi$, the temporal (time) portion of (57) yields$T_{j+1} = \xi T_j$ and hence
 
-\begin{equation}
+\begin{equation}\label{eqa58}
 T_j = \xi^jT_0
 \end{equation}
 The spatial portion of (57): $1-2 \mu \dfrac{X_{i+1}T_{j-1}}{X_i}=\xi$, will take a bit more effort 
@@ -2820,26 +2820,26 @@ to solve. We assume that $X_1$. takes the form: $X_i = Acosi\theta + ßsin i\the
 \footnote{Here $i$ is an index (not a complex number). For readers who are familiar with the analytic theory of ODE, the choice of the form of $X_i$ was motivated by viewing the spatial equation$\dfrac{X_{i+1} - X_{j-1}}{X_i}  + 1-2\mu = \xi$ as a discretization of the second-order ODE: $\mu X^n (s) +1 -2 \mu = \xi$.}
 where the parameters $A$ and $B$ and $\theta$ are to be determined. The left (homogeneous) boundary condition forces $A = 0$. The right (homogeneous) boundary condition now implies that $(N +1)\theta = n\pi$ for some positive integer $n$. Combining this with the relation $(N + 1)h = L$ ($h$  = spatial step size), produces $\theta = n\pi h/L$ . The(nonzero) value of the parameter B may now be arbitrarily specified (since it cancels out of the spatial equation and the boundary conditions are already guaranteed, note that we have not yet dealt with the boundary condition). Using $B = 1$ gives the following candidate solution to the spatial equation: 
 
-\begin{equation}
+\begin{equation}\label{eqa59}
 X_i=sin(in\pi h/L).
 \end{equation}
 Substituting this into the spatial equation gives: 
 $$1-2\mu+\mu \dfrac{sin((i+1)n \pi h/L) + sin((i-1)n\pi h.L)}{sin(in\pi h/2)}$$
 If we apply the trig addition formulas (e.g.,  $sin((i+1)n \pi h/L)= sin(in \pi h/L)cos(n\pi h/L) +sin(in \pi h/L)cos(n\pi h/L)$ we can convert the above equation to the following form: 
 
-\begin{equation}
+\begin{equation}\label{eqa60}
 \xi = \xi(n)=1-2\mu (1-cos(n\pi h/L)).
 \end{equation}
 Since the resulting separated solutions $\xi^j T_0 sin(in\pi h/L)$ of the finite difference scheme exist for any integer n, and since we know (from the maximum principle) the actual solution to the BVP is bounded, it follows that we must have $| \xi(n)| \leqslant 1$ because otherwise this finite difference solution will grow exponentially. Since n can be arbitrary (because for stability h can be arbitrary) the $cos(n\pi h/L)$ can get arbitrarily close to $-1$ , so (59) shows us that in order for $| \xi(n) | \leqslant 1$, we must have $2\mu \leqslant 1 $ or $\mu \leqslant 1 / 2$, which is the stability condition (46)
 
 
 This von Neumann method can be applied to obtain stability results for many finite difference schemes for a wide range of BVPs. For example, the following finite difference scheme (for the same homogeneous problem considered above):
-\begin{equation}
+\begin{equation}\label{eqa61}
 \dfrac{u_{i,j+1}-u_{j,k}}{k}=\dfrac{\alpha}{2}[(1-\sigma)\dfrac{u_{i+1,j}-2u_{i,j}+u_{i-1,j}}{h^2}+
 \sigma\dfrac{u_{i+1,j+1}-2u_{i,j+1}+u_{i-1,j+1}}{h^2}]
 \end{equation}
 where $0 \leqslant \sigma \leqslant 1$ , includes as special cases the explicit method $(\sigma = 0)$, the backward-time central-space method (49) $( \sigma= 1)$, and the Crank-Nicolson  $( \sigma= l/2)$. Note that this method is always implicit when $\sigma> 0$ . The von Neumann method can be used to show this method is unconditionally stable whenever $1/2\leqslant sigma \leqslant 1$ and when 0 $\leqslant \sigma \leqslant 1/ 2$ the method will be stable if the following condition holds:
-\begin{equation}
+\begin{equation}\label{eqa62}
 \mu=\alpha k/h^2 <1/(2-5\sigma).
 \end{equation}
 There are other approaches to stability theory of finite difference methods. One of these, known as the spectral method, looks at eigenvalues of matricesassociated with the finite difference methods. The exercises will delve deeper into stability theory. Some references include [Smi-85], [RiMo-67], and [IsKe-66] and the more elementary [DuCZa-89].

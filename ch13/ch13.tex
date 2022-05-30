@@ -18,7 +18,7 @@ The Finite Element Method (FEM) is actually a large collection of numerical meth
     \centering
     \includegraphics[width=0.2\textwidth]{ch13_1}
    \caption{\textsf{Richard Courant (1888-1972), German mathematician }}
-   \label{fig:ch13_2}
+   \label{fig:ch13_1}
 \end{wrapfigure}
 
 The FEM methods basically split up the domain of the problem into small pieces, called \textbf{elements}, that have simple structure. There are many different ways to perform such decompositions and the geometry certainly changes with the dimension of the space. A common approach for two-dimensional domains is to \textbf{triangulate} the domain into small triangles. The \textbf{triangulation} must be done in such a way that whenever two triangles touch, they will have either an entire common edge (and thus two common vertices) or just a common vertex. The reason for this is that the FEM approximate solution for the PDE will be made up of separate "pieces" on the various elements and they need to connect up (interpolate) together in a neat fashion. When a domain has a curved boundary, the sizes of the triangles can be made small enough so that the triangulation approximates the domain reasonably well. An example of such a triangulation is shown in Figure 13.2. In three dimensions, tetrahedra (pyramids) are commonly used; but the process is still known as triangulation.
@@ -71,7 +71,7 @@ a linear system to determine the best candidate to solve the variational problem
 (Rayleigh-Ritz or Galerkin) and this will be the approximation to the actual solution. This approximation turns out to be simply theprojection of the actual solution onto the finite-dimensional space of admissible functions or, informally, the best admissible function for solving the variational problem. Figure 13.3 shows the FEM solution for the following PDE problem on the domain $\Omega$ of 
 Figure 13.2: 
 
-\begin{equation}
+\begin{equation} \label{eqa1}
 \begin{cases}
 \bigtriangleup u=0~~on~~\Omega, ~~~~u=u(x,y)\\
 		\partial u/\partial n=0 ~~$on outer rectangle$\\
@@ -197,7 +197,7 @@ The eight rows of $N$ give the coordinates of the corresponding numbered nodes, 
 \\
 SOLUTION: From its piecewise linearity, on each of the eight triangles $T_t (1\leqslant \mathfrak{l} \leqslant 8)\Phi_4(x,y), $ will be a linear function and so can be written as
 
-\begin{equation}
+\begin{equation}\label{eqa2}
 \Phi_4(x,y)=a_t^4x+b_t^4y+c_t^4=a_tx+b_ty+c_t,~~(x,y) \in T_t,
 \end{equation}
 where $a_t^4x+b_t^4y+c_t^4=c_t$ are real constants to be determined.
@@ -205,7 +205,7 @@ where $a_t^4x+b_t^4y+c_t^4=c_t$ are real constants to be determined.
 basis function under consideration. }
 We now fix an index $\mathfrak{l}$ and let the three nodes of $T_t$ be denoted by $(x_r,y_r), (x_s,y_s)$> and $(x_t>y_t)$ where $t = 4$. The graph of such a linear function $z = \Phi_4(x,y)$ is a plane in three-dimensional space determined by the three nodal values $\Phi_4(x_r ,y_r ) = 0, \Phi_4(x_s,s_s) = 0$, and $\Phi_4(x_t,y_t) = 1$. These nodal equations may be expressed as the following linear system: 
 
-\begin{equation}
+\begin{equation}\label{eqa3}
 	\begin{cases}
 		a_t x_r+b_t y_r+c_t=0\\
 		a_t x_s+b_t y_s+c_t=0\\
@@ -215,7 +215,7 @@ We now fix an index $\mathfrak{l}$ and let the three nodes of $T_t$ be denoted b
 Putting (3) in matrix notation gives:
 
 
-\begin{equation}
+\begin{equation}\label{eqa4}
 MA~=~Z, ~~where~~M=
 	\begin{bmatrix} 
 		  x_r&y_r&1\\
@@ -236,11 +236,11 @@ MA~=~Z, ~~where~~M=
 \end{equation}
 Geometrically, since three noncollinear points determine a unique plane, it follows that the linear system (3)/(4) will have a unique solution as long as the three nodes are not collinear. This is certainly the case for any triangulation. We mention one further important point that the system will be well conditioned provided that the area of the triangle $T_t$ is not much greater than that of the inscribed circle. This is a quantitive way of saying that the three nodes of Tt should not be close to being collinear (convince yourself of this!). This can be analytically verified using the following explicit formulas for the determinant of $M$ and $M^{-1}$ : 
 
-\begin{equation}
+\begin{equation}\label{eqa5}
 	|det(M)|=2 \cdot area(T_t),
 \end{equation}
 
-\begin{equation}
+\begin{equation}\label{eqa6}
 	M^{-1}=\dfrac{1}{det(M)}
 	\begin{bmatrix} 
 		  (y_s-y_t) & (y_t-y_r) & (y_r-y_s)\\
@@ -370,7 +370,7 @@ We point out that the graph of this interpolant is most easily obtained by simpl
 We stress that in the determination of the hat functions $\Phi_j$ , we really split up the problem into determining $\Phi_j$, on each element (triangle). On each element $T_t, \Phi_j(x,y)=a_t^j+b_t^j+c_t^j$ is a linear combination of the three functions $x,y$, and 1. These three functions are a basis for the set of all linear functions on $T_t$.We refer to them as a \textbf{local basis}, to distinguish them from the (global) basis functions $\Phi_j$ . Although these local basis functions are quite natural and have simple formulas, there is another local basis that often has theoretical advantages. To simplify notation, we fix an element $T = T_n$ and denote its three vertices by 
 $v_1,v_2$, and $v_3$ (the exact ordering is unimportant, but let's assume they are numbered in counterclockwise order). The corresponding three standard \textbf{local basis functions} $\Phi _1,\Phi_2$, and $\Phi_3$ are the linear functions determined (exactly) by the following conditions: 
 
-\begin{equation}
+\begin{equation}\label{eqa7}
 	\Phi_i(V_j)=\delta_{ij}\equiv 
 			\begin{cases}
 				1~~~~if~i=j.\\
@@ -379,7 +379,7 @@ $v_1,v_2$, and $v_3$ (the exact ordering is unimportant, but let's assume they a
 \end{equation}
 (The symbol $\delta_{ij}$ is called the \textbf{Kronecker delta symbol}.) It was described earlier how each of these functions can be expressed using the original local basis functions. In terms of these local basis functions, any linear function $\Phi(x,y)$ can be conveniently expressed as:
 
-\begin{equation}
+\begin{equation}\label{eqa8}
 \Phi(x,y)=\Phi(V_1)\Phi(x,y)+\Phi(V_2)+\Phi_2(x,y)+\Phi(V_3)\Phi(x,y)
 \end{equation}
 
@@ -410,7 +410,7 @@ Figure 13.8 illustrates the Delaunay triangulation for a very small set of four 
 
 \textbf{Definitions}: Suppose that we have a set of distinct points $P=\left\{ p_1,p_2, \cdots,p_n \right\}$ in the plane $\mathbb{R}^2$ (write $p_i=(x_i,y_i))$. Relative to this set, for each $p_i(\leqslant i \leqslant n)$ we define the \textbf{Voronoi region} $V(p_i)$ as: 
 
-\begin{equation}
+\begin{equation}\label{eqa9}
 V(p_i)= \left\{ p \in \mathbb{R}^2 : |p-p_i| \leqslant |p-p_t|~~for~~each~~p_t \in P, \mathfrak{l} \neq i  \right\}
 \end{equation}
 
